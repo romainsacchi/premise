@@ -1,9 +1,6 @@
 from . import DATA_DIR
 import wurst
-<<<<<<< HEAD
-=======
 from prettytable import PrettyTable
->>>>>>> b1fadadf8818f8d95667b29363b9d5e5c4f64f5f
 
 from wurst import searching as ws
 from bw2io import ExcelImporter, Migration

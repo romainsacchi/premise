@@ -41,13 +41,11 @@ def get_db():
     version = 3.5
     return db, version
 
-
 def test_file_exists():
     db, version = get_db()
     with pytest.raises(FileNotFoundError) as wrapped_error:
         BaseInventoryImport(db, version, "testfile")
     assert wrapped_error.type == FileNotFoundError
-
 
 def test_biosphere_dict():
     db, version = get_db()
@@ -63,7 +61,6 @@ def test_biosphere_dict():
                )] == '38a622c6-f086-4763-a952-7c6b3b1c42ba'
 
     testpath.unlink()
-
 
 def test_biosphere_dict_2():
     db, version = get_db()
@@ -83,11 +80,10 @@ def test_biosphere_dict_2():
 
     testpath.unlink()
 
-
 def test_load_carma():
     db, version = get_db()
     carma = CarmaCCSInventory(db, version, FILEPATH_CARMA_INVENTORIES)
-    assert len(carma.import_db.data) == 138
+    assert len(carma.import_db.data) == 148
 
 
 def test_load_biofuel():
@@ -98,5 +94,5 @@ def test_load_biofuel():
 
 def test_load_carculator():
     db, version = get_db()
-    carc = CarculatorInventory(db, 2015)
-    assert len(carc.import_db.data) == 242
+    carc = CarculatorInventory(db, 2015, "3.7", ["EUR"])
+    assert len(carc.import_db.data) == 335

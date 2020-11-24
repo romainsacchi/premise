@@ -25,13 +25,14 @@ before_install:
       conda config --append channels conda-forge;
       conda config --append channels cmutel;
       conda config --append channels konstantinstadler;
+      conda config --append channels romainsacchi/label/nightly;
       conda update conda;
       conda info -a;
       echo $(python --version);
     fi
 install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      conda create -n test-environment python=$TRAVIS_PYTHON_VERSION numpy pandas pytest pytest-cov coveralls bw2io bw2data wurst xarray;
+      conda create -n test-environment python=$TRAVIS_PYTHON_VERSION numpy pandas pytest pytest-cov coveralls bw2io bw2data wurst xarray prettytable carculator>=1.2.8 pycountry;
       source activate test-environment;
       pip3 install -e .;
     else
@@ -47,7 +48,6 @@ script:
       if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
         conda install conda-build anaconda-client;
         bash ci/conda_upload.sh;
-        
       fi
     else
       pytest -m "not ecoinvent";

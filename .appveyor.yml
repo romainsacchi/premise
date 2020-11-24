@@ -17,7 +17,7 @@ install:
   - python --version
   - conda config --set always_yes yes
   - conda update -y conda
-  - conda install -y -c conda-forge -c cmutel numpy pandas bw2io bw2data wurst xarray pytest pytest-cov coveralls
+  - conda install -y -c conda-forge -c cmutel numpy pandas bw2io bw2data wurst xarray pytest pytest-cov coveralls prettytable carculator
   - pip install -e .
 
 test_script:

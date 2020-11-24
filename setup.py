@@ -26,7 +26,7 @@ def package_files(directory):
 
 setup(
     name='rmnd-lca',
-    version="0.1.4",
+    version="0.1.6",
     packages=packages,
     author="Alois Dirnaichner <dirnaichner@pik-potsdam.de>, Chris Mutel <chris.mutel@psi.ch>, Tom Terlouw <tom.terlouw@psi.ch>, Romain Sacchi <romain.sacchi@psi.ch>",
     # author_email="cmutel@gmail.com",
@@ -35,16 +35,15 @@ setup(
     include_package_data=True,
     install_requires=[
         'numpy',
-        'pytest-cov',
-        'coveralls',
         'wurst>=0.2',
         'bw2io',
         'pandas',
         'bw2data',
         'brightway2',
         'xarray>0.15.0',
-        'carculator>1.1.4',
-        'prettytable'
+        'carculator>=1.2.8',
+        'prettytable',
+        'pycountry'
     ],
     url="https://github.com/romainsacchi/rmnd-lca",
     description='Coupling REMIND output to ecoinvent LCA database ecoinvent for prospective LCA',

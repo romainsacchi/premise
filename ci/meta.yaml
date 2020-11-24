@@ -36,9 +36,6 @@ requirements:
     - bw2io
     - bw2data
     - xarray
-    - pytest
-    - pytest-cov
-    - coveralls
     - prettytable
     - carculator
 

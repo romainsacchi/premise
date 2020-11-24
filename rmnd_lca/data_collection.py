@@ -26,6 +26,8 @@ class RemindDataCollection:
         self.year = year
         self.filepath_remind_files = filepath_remind_files
         self.data = self.get_remind_data()
+        self.regions = [r for r in self.data.region.values if r != "World"]
+
         self.gains_data = self.get_gains_data()
         self.gnr_data = self.get_gnr_data()
         self.electricity_market_labels = self.get_remind_electricity_market_labels()
@@ -145,7 +147,7 @@ class RemindDataCollection:
 
         """
         filename = "GAINS emission factors.csv"
-        filepath = Path(self.filepath_remind_files) / filename
+        filepath = (DATA_DIR / "remind_output_files" / filename)
 
         gains_emi = pd.read_csv(
             filepath,
@@ -278,7 +280,7 @@ class RemindDataCollection:
         ]
         others = data.loc[:, other_techs]
         others.coords["variables"] = others.coords["variables"]\
-                                       .str.replace("FE\|Transport\|Liquids\|", "")
+                                       .str[21:]
         others = others / others.sum(dim="variables")
 
         # concat

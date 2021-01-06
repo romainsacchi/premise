@@ -151,6 +151,48 @@ class InventorySet:
         "Solar PV": {"fltr": "electricity production, photovoltaic"},
         "Wind": {"fltr": "electricity production, wind"},
     }
+    
+    heatplant_filters = {
+        "Biomass": {
+            "fltr": [
+                    "heat production, wood chips from industry, at furnace 1000kW",
+            ]
+        },
+        "Biomass CHP": {
+            "fltr": [
+                    "heat and power co-generation, wood chips",
+                    "heat and power co-generation, biogas",
+            ],
+            "mask":{"reference product": "electricity"}
+        },
+        "Coal": {
+            "fltr": [
+                    "heat production, at hard coal industrial furnace 1-10MW",
+                    "heat production, hard coal coke, stove 5-15kW",
+            ]
+        },
+        "Coal CHP": {
+            "fltr": [
+                    "heat and power co-generation, hard coal",
+                    "heat and power co-generation, lignite",
+            ],
+            "mask":{"reference product":"electricity"}
+        },
+        "Gas": {
+            "fltr": [
+                    "heat production, natural gas, at boiler modulating >100kW",
+                    "heat production, natural gas, at industrial furnace >100kW",
+            ]
+        },
+        "Gas CHP": {
+            "fltr": [
+                    "heat and power co-generation, natural gas, combined cycle power plant, 400MW electrical",
+                    "heat and power co-generation, natural gas, conventional power plant, 100MW electrical",
+            ],
+            "mask":{"reference product":"electricity"}
+        },
+        "Geothermal": {"fltr": "heat production, deep geothermal"},
+    }
 
     def __init__(self, db):
         self.db = db
@@ -177,6 +219,17 @@ class InventorySet:
 
         """
         return self.generate_sets_from_filters(self.powerplant_filters)
+        
+    def generate_heatplant_map(self):
+        """
+        Filter ecoinvent processes related to heat production.
+
+        :return: dictionary with heat prod. techs as keys (see below) and
+            sets of related ecoinvent activities as values.
+        :rtype: dict
+
+        """
+        return self.generate_sets_from_filters(self.heatplant_filters)
 
     def generate_fuel_map(self):
         """

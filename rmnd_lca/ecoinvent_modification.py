@@ -18,6 +18,7 @@ from .inventory_imports import CarmaCCSInventory, \
 from .cement import Cement
 from .steel import Steel
 from .cars import Cars
+from .heat import Heat
 
 from .export import Export
 from .utils import eidb_label
@@ -186,6 +187,11 @@ class NewDatabase:
         electricity = Electricity(self.db, self.rdc, self.scenario, self.year)
         self.db = electricity.update_electricity_markets()
         self.db = electricity.update_electricity_efficiency()
+        
+    def update_heat_to_remind_data(self):
+        heat = Heat(self.db, self.rdc, self.scenario, self.year)
+        self.db = heat.update_heat_markets()
+        self.db = heat.update_heat_efficiency()
 
     def update_cement_to_remind_data(self):
         if len([v for v in self.rdc.data.variables.values
@@ -219,6 +225,7 @@ class NewDatabase:
 
     def update_all(self):
         self.update_electricity_to_remind_data()
+        self.update_heat_to_remind_data()
         self.update_cement_to_remind_data()
         self.update_steel_to_remind_data()
         if self.add_vehicles:

@@ -14,7 +14,7 @@ from datetime import date
     # DATA_DIR / "electricity" / "electricity_production_volumes_per_tech.csv"
 # )
 # LOSS_PER_COUNTRY = DATA_DIR / "electricity" / "losses_per_country.csv"
-# LHV_FUELS = DATA_DIR / "fuels_lower_heating_value.txt"
+LHV_FUELS = DATA_DIR / "fuels_lower_heating_value.txt"
 
 
 class Heat:
@@ -30,14 +30,14 @@ class Heat:
         self.db = db
         self.rmd = rmd
         self.geo = Geomap()
-        self.production_per_tech = self.get_production_per_tech_dict()
-        self.losses = self.get_losses_per_country_dict()
+        #self.production_per_tech = self.get_production_per_tech_dict()
+        #self.losses = self.get_losses_per_country_dict()
         self.scenario = scenario
         self.year = year
         self.fuels_lhv = self.get_lower_heating_values()
         mapping = InventorySet(self.db)
         self.emissions_map = mapping.get_remind_to_ecoinvent_emissions()
-        self.powerplant_map = mapping.generate_powerplant_map()
+        self.heatplant_map = mapping.generate_heatplant_map()
 
     @staticmethod
     def get_lower_heating_values():
@@ -78,49 +78,49 @@ class Heat:
             ]
         )
 
-    @staticmethod
-    def get_losses_per_country_dict():
-        """
-        Create a dictionary with ISO country codes as keys and loss ratios as values.
-        :return: ISO country code to loss ratio dictionary
-        :rtype: dict
-        """
+    # @staticmethod
+    # def get_losses_per_country_dict():
+        # """
+        # Create a dictionary with ISO country codes as keys and loss ratios as values.
+        # :return: ISO country code to loss ratio dictionary
+        # :rtype: dict
+        # """
 
-        if not LOSS_PER_COUNTRY.is_file():
-            raise FileNotFoundError(
-                "The production per country dictionary file could not be found."
-            )
+        # if not LOSS_PER_COUNTRY.is_file():
+            # raise FileNotFoundError(
+                # "The production per country dictionary file could not be found."
+            # )
 
-        with open(LOSS_PER_COUNTRY) as f:
-            csv_list = [[val.strip() for val in r.split(";")] for r in f.readlines()]
+        # with open(LOSS_PER_COUNTRY) as f:
+            # csv_list = [[val.strip() for val in r.split(";")] for r in f.readlines()]
 
-        (_, *header), *data = csv_list
-        csv_dict = {}
-        for row in data:
-            key, *values = row
-            csv_dict[key] = {key: float(value) for key, value in zip(header, values)}
+        # (_, *header), *data = csv_list
+        # csv_dict = {}
+        # for row in data:
+            # key, *values = row
+            # csv_dict[key] = {key: float(value) for key, value in zip(header, values)}
 
-        return csv_dict
+        # return csv_dict
 
-    @staticmethod
-    def get_production_per_tech_dict():
-        """
-        Create a dictionary with tuples (technology, country) as keys and production volumes as values.
-        :return: technology to production volume dictionary
-        :rtype: dict
-        """
+    # @staticmethod
+    # def get_production_per_tech_dict():
+        # """
+        # Create a dictionary with tuples (technology, country) as keys and production volumes as values.
+        # :return: technology to production volume dictionary
+        # :rtype: dict
+        # """
 
-        if not PRODUCTION_PER_TECH.is_file():
-            raise FileNotFoundError(
-                "The production per technology dictionary file could not be found."
-            )
-        csv_dict = {}
-        with open(PRODUCTION_PER_TECH) as f:
-            input_dict = csv.reader(f, delimiter=";")
-            for row in input_dict:
-                csv_dict[(row[0], row[1])] = row[2]
+        # if not PRODUCTION_PER_TECH.is_file():
+            # raise FileNotFoundError(
+                # "The production per technology dictionary file could not be found."
+            # )
+        # csv_dict = {}
+        # with open(PRODUCTION_PER_TECH) as f:
+            # input_dict = csv.reader(f, delimiter=";")
+            # for row in input_dict:
+                # csv_dict[(row[0], row[1])] = row[2]
 
-        return csv_dict
+        # return csv_dict
 
     def get_production_weighted_share(self, supplier, suppliers):
         """
@@ -240,389 +240,19 @@ class Heat:
             distr_loss /= cumul_prod
             return transf_loss, distr_loss
 
-    def create_new_markets_low_voltage(self):
+
+    def create_new_heat_markets(self):
         """
-        Create low voltage market groups for electricity, by receiving medium voltage market groups as inputs
-        and adding transformation and distribution losses.
-        Contribution from solar power is added here as well.
-        Does not return anything. Modifies the database in place.
-        """
-        # Loop through REMIND regions
-
-        for region in self.rmd.electricity_markets.coords["region"].values:
-            created_markets = []
-            # Create an empty dataset
-            new_dataset = {
-                "location": region,
-                "name": ("market group for electricity, low voltage"),
-                "reference product": "electricity, low voltage",
-                "unit": "kilowatt hour",
-                "database": self.db[1]["database"],
-                "code": str(uuid.uuid4().hex),
-                "comment": "Dataset produced from REMIND scenario output results",
-            }
-
-            # First, add the reference product exchange
-            new_exchanges = [
-                {
-                    "uncertainty type": 0,
-                    "loc": 1,
-                    "amount": 1,
-                    "type": "production",
-                    "production volume": 0,
-                    "product": "electricity, low voltage",
-                    "name": "market group for electricity, low voltage",
-                    "unit": "kilowatt hour",
-                    "location": region,
-                },
-                {
-                    "uncertainty type": 0,
-                    "loc": 2.99e-9,
-                    "amount": 2.99e-9,
-                    "type": "technosphere",
-                    "production volume": 0,
-                    "product": "sulfur hexafluoride, liquid",
-                    "name": "market for sulfur hexafluoride, liquid",
-                    "unit": "kilogram",
-                    "location": "RoW",
-                },
-                {
-                    "uncertainty type": 0,
-                    "loc": 2.99e-9,
-                    "amount": 2.99e-9,
-                    "type": "biosphere",
-                    "input": ("biosphere3", "35d1dff5-b535-4628-9826-4a8fce08a1f2"),
-                    "name": "Sulfur hexafluoride",
-                    "unit": "kilogram",
-                    "categories": ("air", "non-urban air or from high stacks"),
-                },
-                {
-                    "uncertainty type": 0,
-                    "loc": 8.74e-8,
-                    "amount": 8.74e-8,
-                    "type": "technosphere",
-                    "production volume": 0,
-                    "product": "distribution network, electricity, low voltage",
-                    "name": "distribution network construction, electricity, low voltage",
-                    "unit": "kilometer",
-                    "location": "RoW",
-                },
-            ]
-
-            # Second, add an input to of sulfur hexafluoride emission to compensate the transformer's leakage
-            # And an emission of a corresponding amount
-
-            # Third, transmission line
-
-            # Fourth, add the contribution of solar power
-            solar_amount = 0
-            gen_tech = list(
-                (
-                    tech
-                    for tech in self.rmd.electricity_markets.coords["variables"].values
-                    if "Solar" in tech
-                )
-            )
-            for technology in gen_tech:
-                # If the solar power technology contributes to the mix
-                if self.rmd.electricity_markets.loc[region, technology] != 0.0:
-                    # Fetch ecoinvent regions contained in the REMIND region
-                    ecoinvent_regions = self.geo.remind_to_ecoinvent_location(region)
-
-                    # Contribution in supply
-                    amount = self.rmd.electricity_markets.loc[region, technology].values
-                    solar_amount += amount
-
-                    # Get the possible names of ecoinvent datasets
-                    ecoinvent_technologies = self.powerplant_map[
-                        self.rmd.rev_electricity_market_labels[technology]
-                    ]
-
-                    # Fetch electricity-producing technologies contained in the REMIND region
-                    suppliers = list(
-                        self.get_suppliers_of_a_region(
-                            ecoinvent_regions, ecoinvent_technologies
-                        )
-                    )
-
-                    suppliers = self.check_for_production_volume(suppliers)
-
-                    # If no technology is available for the REMIND region
-                    if len(suppliers) == 0:
-                        # We fetch European technologies instead
-                        suppliers = list(
-                            self.get_suppliers_of_a_region(
-                                ["RER"], ecoinvent_technologies
-                            )
-                        )
-
-                    suppliers = self.check_for_production_volume(suppliers)
-
-                    # If, after looking for European technologies, no technology is available
-                    if len(suppliers) == 0:
-                        # We fetch RoW technologies instead
-                        suppliers = list(
-                            self.get_suppliers_of_a_region(
-                                ["RoW"], ecoinvent_technologies
-                            )
-                        )
-
-                    suppliers = self.check_for_production_volume(suppliers)
-
-                    for supplier in suppliers:
-                        share = self.get_production_weighted_share(supplier, suppliers)
-
-                        new_exchanges.append(
-                            {
-                                "uncertainty type": 0,
-                                "loc": (amount * share),
-                                "amount": (amount * share),
-                                "type": "technosphere",
-                                "production volume": 0,
-                                "product": supplier["reference product"],
-                                "name": supplier["name"],
-                                "unit": supplier["unit"],
-                                "location": supplier["location"],
-                            }
-                        )
-                        created_markets.append(
-                            [
-                                "low voltage, " + self.scenario + ", " + str(self.year),
-                                "n/a",
-                                region,
-                                0,
-                                0,
-                                supplier["name"],
-                                supplier["location"],
-                                share,
-                                (share * amount),
-                            ]
-                        )
-            # Fifth, add:
-            # * an input from the medium voltage market minus solar contribution, including distribution loss
-            # * an self-consuming input for transformation loss
-
-            transf_loss, distr_loss = self.get_production_weighted_losses("low", region)
-
-            new_exchanges.append(
-                {
-                    "uncertainty type": 0,
-                    "loc": 0,
-                    "amount": (1 - solar_amount) * (1 + distr_loss),
-                    "type": "technosphere",
-                    "production volume": 0,
-                    "product": "electricity, medium voltage",
-                    "name": "market group for electricity, medium voltage",
-                    "unit": "kilowatt hour",
-                    "location": region,
-                }
-            )
-
-            new_exchanges.append(
-                {
-                    "uncertainty type": 0,
-                    "loc": 0,
-                    "amount": transf_loss,
-                    "type": "technosphere",
-                    "production volume": 0,
-                    "product": "electricity, low voltage",
-                    "name": "market group for electricity, low voltage",
-                    "unit": "kilowatt hour",
-                    "location": region,
-                }
-            )
-
-            created_markets.append(
-                [
-                    "low voltage, " + self.scenario + ", " + str(self.year),
-                    "n/a",
-                    region,
-                    transf_loss,
-                    distr_loss,
-                    "low voltage, " + self.scenario + ", " + str(self.year),
-                    region,
-                    1,
-                    (1 - solar_amount) * (1 + distr_loss),
-                ]
-            )
-
-            with open(
-                DATA_DIR
-                / "logs/log created markets {} {}-{}.csv".format(
-                    self.scenario, self.year, date.today()
-                ),
-                "a",
-            ) as csv_file:
-                writer = csv.writer(csv_file, delimiter=";", lineterminator="\n")
-                for line in created_markets:
-                    writer.writerow(line)
-
-            new_dataset["exchanges"] = new_exchanges
-            self.db.append(new_dataset)
-
-    def create_new_markets_medium_voltage(self):
-        """
-        Create medium voltage market groups for electricity, by receiving high voltage market groups as inputs
-        and adding transformation and distribution losses.
-        Contribution from solar power is added in low voltage market groups.
+        Create market groups for heat, based on heat mixes given by REMIND.
         Does not return anything. Modifies the database in place.
         """
         # Loop through REMIND regions
         gen_region = (
-            region for region in self.rmd.electricity_markets.coords["region"].values
-        )
-
-        created_markets = []
-
-        for region in gen_region:
-            # Create an empty dataset
-            new_dataset = {
-                "location": region,
-                "name": ("market group for electricity, medium voltage"),
-                "reference product": "electricity, medium voltage",
-                "unit": "kilowatt hour",
-                "database": self.db[1]["database"],
-                "code": str(uuid.uuid1().hex),
-                "comment": "Dataset produced from REMIND scenario output results",
-            }
-
-            # First, add the reference product exchange
-            new_exchanges = [
-                {
-                    "uncertainty type": 0,
-                    "loc": 1,
-                    "amount": 1,
-                    "type": "production",
-                    "production volume": 0,
-                    "product": "electricity, medium voltage",
-                    "name": "market group for electricity, medium voltage",
-                    "unit": "kilowatt hour",
-                    "location": region,
-                }
-            ]
-
-            # Second, add:
-            # * an input from the high voltage market, including transmission loss
-            # * an self-consuming input for transformation loss
-
-            transf_loss, distr_loss = self.get_production_weighted_losses(
-                "medium", region
-            )
-            new_exchanges.append(
-                {
-                    "uncertainty type": 0,
-                    "loc": 0,
-                    "amount": 1 + distr_loss,
-                    "type": "technosphere",
-                    "production volume": 0,
-                    "product": "electricity, high voltage",
-                    "name": "market group for electricity, high voltage",
-                    "unit": "kilowatt hour",
-                    "location": region,
-                }
-            )
-
-            new_exchanges.append(
-                {
-                    "uncertainty type": 0,
-                    "loc": 0,
-                    "amount": transf_loss,
-                    "type": "technosphere",
-                    "production volume": 0,
-                    "product": "electricity, medium voltage",
-                    "name": "market group for electricity, medium voltage",
-                    "unit": "kilowatt hour",
-                    "location": region,
-                }
-            )
-
-            # Third, add an input to of sulfur hexafluoride emission to compensate the transformer's leakage
-            # And an emission of a corresponding amount
-            new_exchanges.append(
-                {
-                    "uncertainty type": 0,
-                    "loc": 5.4e-8,
-                    "amount": 5.4e-8,
-                    "type": "technosphere",
-                    "production volume": 0,
-                    "product": "sulfur hexafluoride, liquid",
-                    "name": "market for sulfur hexafluoride, liquid",
-                    "unit": "kilogram",
-                    "location": "RoW",
-                }
-            )
-            new_exchanges.append(
-                {
-                    "uncertainty type": 0,
-                    "loc": 5.4e-8,
-                    "amount": 5.4e-8,
-                    "type": "biosphere",
-                    "input": ("biosphere3", "35d1dff5-b535-4628-9826-4a8fce08a1f2"),
-                    "name": "Sulfur hexafluoride",
-                    "unit": "kilogram",
-                    "categories": ("air", "non-urban air or from high stacks"),
-                }
-            )
-
-            # Fourth, transmission line
-            new_exchanges.append(
-                {
-                    "uncertainty type": 0,
-                    "loc": 1.8628e-8,
-                    "amount": 1.8628e-8,
-                    "type": "technosphere",
-                    "production volume": 0,
-                    "product": "transmission network, electricity, medium voltage",
-                    "name": "transmission network construction, electricity, medium voltage",
-                    "unit": "kilometer",
-                    "location": "RoW",
-                }
-            )
-
-            new_dataset["exchanges"] = new_exchanges
-
-            created_markets.append(
-                [
-                    "medium voltage, " + self.scenario + ", " + str(self.year),
-                    "n/a",
-                    region,
-                    transf_loss,
-                    distr_loss,
-                    "medium voltage, " + self.scenario + ", " + str(self.year),
-                    region,
-                    1,
-                    1 + distr_loss,
-                ]
-            )
-
-            self.db.append(new_dataset)
-
-        with open(
-            DATA_DIR
-            / "logs/log created markets {} {}-{}.csv".format(
-                self.scenario, self.year, date.today()
-            ),
-            "a",
-        ) as csv_file:
-            writer = csv.writer(csv_file, delimiter=";", lineterminator="\n")
-            for line in created_markets:
-                writer.writerow(line)
-
-    def create_new_markets_high_voltage(self):
-        """
-        Create high voltage market groups for electricity, based on electricity mixes given by REMIND.
-        Contribution from solar power is added in low voltage market groups.
-        Does not return anything. Modifies the database in place.
-        """
-        # Loop through REMIND regions
-        gen_region = (
-            region for region in self.rmd.electricity_markets.coords["region"].values
+            region for region in self.rmd.heat_markets.coords["region"].values
         )
         gen_tech = list(
             (
-                tech
-                for tech in self.rmd.electricity_markets.coords["variables"].values
-                if "Solar" not in tech
+                tech for tech in self.rmd.heat_markets.coords["variables"].values
             )
         )
 
@@ -636,8 +266,8 @@ class Heat:
             # Create an empty dataset
             new_dataset = {
                 "location": region,
-                "name": ("market group for electricity, high voltage"),
-                "reference product": "electricity, high voltage",
+                "name": ("market group for heat"),
+                "reference product": "heat",
                 "unit": "kilowatt hour",
                 "database": self.db[1]["database"],
                 "code": str(uuid.uuid4().hex),
@@ -651,8 +281,8 @@ class Heat:
                     "amount": 1,
                     "type": "production",
                     "production volume": 0,
-                    "product": "electricity, high voltage",
-                    "name": "market group for electricity, high voltage",
+                    "product": "heat",
+                    "name": "market group for heat",
                     "unit": "kilowatt hour",
                     "location": region,
                 }
@@ -1225,13 +855,13 @@ class Heat:
             },
         }
 
-    def update_electricity_efficiency(self):
+    def update_heat_efficiency(self):
         """
         This method modifies each ecoinvent coal, gas,
-        oil and biomass dataset using data from the REMIND model.
+        geothermal and biomass dataset using data from the REMIND model.
         Return a wurst database with modified datasets.
 
-        :return: a wurst database, with rescaled electricity-producing datasets.
+        :return: a wurst database, with rescaled heat-producing datasets.
         :rtype: list
         """
 
@@ -1308,26 +938,20 @@ class Heat:
 
         return self.db
 
-    def update_electricity_markets(self):
+    def update_heat_markets(self):
         """
-        Delete electricity markets. Create high, medium and low voltage market groups for electricity.
-        Link electricity-consuming datasets to newly created market groups for electricity.
+        Delete existing heat markets. Create new markets for heat.
+        Link heat-consuming datasets to newly created market groups for heat.
         Return a wurst database with modified datasets.
 
-        :return: a wurst database with new market groups for electricity
+        :return: a wurst database with new market groups for heat
         :rtype: list
         """
-        # We first need to delete 'market for electricity' and 'market group for electricity' datasets
-        print("Remove old electricity datasets")
+        # We first need to delete 'market for heat' and 'market group for heat' datasets
+        print("Remove old markets datasets")
         list_to_remove = [
-            "market group for electricity, high voltage",
-            "market group for electricity, medium voltage",
-            "market group for electricity, low voltage",
-            "market for electricity, high voltage",
-            "market for electricity, medium voltage",
-            "market for electricity, low voltage",
-            "electricity, high voltage, import",
-            "electricity, high voltage, production mix",
+            "market for heat,",
+            "market group for heat,",
         ]
 
         # Writing log of deleted markets
@@ -1357,12 +981,8 @@ class Heat:
         ]
 
         # We then need to create high voltage REMIND electricity markets
-        print("Create high voltage markets.")
-        self.create_new_markets_high_voltage()
-        print("Create medium voltage markets.")
-        self.create_new_markets_medium_voltage()
-        print("Create low voltage markets.")
-        self.create_new_markets_low_voltage()
+        print("Create heat markets.")
+        self.create_new_heat_markets()
 
         # Finally, we need to relink all electricity-consuming activities to the new electricity markets
         print("Link activities to new electricity markets.")

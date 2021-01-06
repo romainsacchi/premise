@@ -8,6 +8,9 @@ import numpy as np
 REMIND_ELEC_MARKETS = (DATA_DIR / "electricity" / "remind_electricity_markets.csv")
 REMIND_ELEC_EFFICIENCIES = (DATA_DIR / "electricity" / "remind_electricity_efficiencies.csv")
 REMIND_ELEC_EMISSIONS = (DATA_DIR / "electricity" / "remind_electricity_emissions.csv")
+REMIND_HEAT_MARKETS = (DATA_DIR / "heat" / "remind_heat_markets.csv")
+REMIND_HEAT_EFFICIENCIES = (DATA_DIR / "heat" / "remind_heat_efficiencies.csv")
+REMIND_HEAT_EMISSIONS = (DATA_DIR / "heat" / "remind_heat_emissions.csv")
 GAINS_TO_REMIND_FILEPATH = (DATA_DIR / "GAINStoREMINDtechmap.csv")
 GNR_DATA = (DATA_DIR / "cement" / "additional_data_GNR.csv")
 
@@ -44,6 +47,18 @@ class RemindDataCollection:
         self.electricity_emissions = self.get_gains_electricity_emissions()
         self.cement_emissions = self.get_gains_cement_emissions()
         self.steel_emissions = self.get_gains_steel_emissions()
+        self.heat_market_labels = self.get_remind_heat_market_labels()
+        self.heat_efficiency_labels = (
+            self.get_remind_heat_efficiency_labels()
+        )
+        self.heat_emission_labels = self.get_remind_heat_emission_labels()
+        self.rev_heat_market_labels = self.get_rev_heat_market_labels()
+        self.rev_heat_efficiency_labels = (
+            self.get_rev_heat_efficiency_labels()
+        )
+        self.heat_markets = self.get_remind_heat_markets()
+        self.heat_efficiencies = self.get_remind_heat_efficiencies()
+        self.heat_emissions = self.get_gains_heat_emissions()
 
 
     @staticmethod
@@ -58,6 +73,20 @@ class RemindDataCollection:
         with open(REMIND_ELEC_EMISSIONS) as f:
             return dict(filter(None, csv.reader(f, delimiter=";")))
 
+
+    @staticmethod
+    def get_remind_heat_emission_labels():
+        """
+        Loads a csv file into a dictionary. This dictionary contains labels of heat emissions
+        in Remind.
+
+        :return: dictionary that contains emission names equivalence
+        :rtype: dict
+        """
+        with open(REMIND_HEAT_EMISSIONS) as f:
+            return dict(filter(None, csv.reader(f, delimiter=";")))
+
+
     @staticmethod
     def get_remind_electricity_market_labels():
         """
@@ -69,6 +98,20 @@ class RemindDataCollection:
         """
         with open(REMIND_ELEC_MARKETS) as f:
             return dict(filter(None, csv.reader(f, delimiter=";")))
+    
+    
+    @staticmethod
+    def get_remind_heat_market_labels():
+        """
+        Loads a csv file into a dictionary. This dictionary contains labels of heat markets
+        in Remind.
+
+        :return: dictionary that contains market names equivalence
+        :rtype: dict
+        """
+        with open(REMIND_HEAT_MARKETS) as f:
+            return dict(filter(None, csv.reader(f, delimiter=";")))
+
 
     @staticmethod
     def get_remind_electricity_efficiency_labels():
@@ -82,11 +125,31 @@ class RemindDataCollection:
         with open(REMIND_ELEC_EFFICIENCIES) as f:
             return dict(filter(None, csv.reader(f, delimiter=";")))
 
+
+    @staticmethod
+    def get_remind_heat_efficiency_labels():
+        """
+        Loads a csv file into a dictionary. This dictionary contains labels of heat technologies efficiency
+        in Remind.
+
+        :return: dictionary that contains market names equivalence
+        :rtype: dict
+        """
+        with open(REMIND_HEAT_EFFICIENCIES) as f:
+            return dict(filter(None, csv.reader(f, delimiter=";")))
+            
+            
     def get_rev_electricity_market_labels(self):
         return {v: k for k, v in self.electricity_market_labels.items()}
 
     def get_rev_electricity_efficiency_labels(self):
         return {v: k for k, v in self.electricity_efficiency_labels.items()}
+        
+    def get_rev_heat_market_labels(self):
+        return {v: k for k, v in self.heat_market_labels.items()}
+
+    def get_rev_heat_efficiency_labels(self):
+        return {v: k for k, v in self.heat_efficiency_labels.items()}
 
     def get_remind_data(self):
         """
@@ -95,11 +158,9 @@ class RemindDataCollection:
         * variable
         * year
 
-        :return: an multi-dimensional array with Remind data
+        :return: a multi-dimensional array with Remind data
         :rtype: xarray.core.dataarray.DataArray
-
         """
-
         filename = self.scenario + ".mif"
 
         filepath = Path(self.filepath_remind_files) / filename
@@ -133,7 +194,8 @@ class RemindDataCollection:
             .groupby(["region", "variables", 'year'])["value"].mean().to_xarray()
 
         return array
-    
+
+
     def get_gains_data(self):
         """
         Read the GAINS emissions csv file and return an `xarray` with dimensions:
@@ -142,7 +204,7 @@ class RemindDataCollection:
         * sector
         * year
 
-        :return: an multi-dimensional array with GAINS emissions data
+        :return: a multi-dimensional array with GAINS emissions data
         :rtype: xarray.core.dataarray.DataArray
 
         """
@@ -181,6 +243,7 @@ class RemindDataCollection:
 
         return array / 8760  # per TWha --> per TWh
 
+
     def get_gnr_data(self):
         """
         Read the GNR csv file on cement production and return an `xarray` with dimensions:
@@ -188,7 +251,7 @@ class RemindDataCollection:
         * year
         * variables
 
-        :return: an multi-dimensional array with GNR data
+        :return: a multi-dimensional array with GNR data
         :rtype: xarray.core.dataarray.DataArray
 
         :return:
@@ -204,6 +267,7 @@ class RemindDataCollection:
 
         return gnr_array
 
+
     def get_remind_electricity_markets(self, drop_hydrogen=True):
         """
         This method retrieves the market share for each electricity-producing technology, for a specified year,
@@ -212,7 +276,7 @@ class RemindDataCollection:
 
         :param drop_hydrogen: removes hydrogen from the region-specific electricity mix if `True`.
         :type drop_hydrogen: bool
-        :return: an multi-dimensional array with electricity technologies market share for a given year, for all regions.
+        :return: a multi-dimensional array with electricity technologies market share for a given year, for all regions.
         :rtype: xarray.core.dataarray.DataArray
 
         """
@@ -241,6 +305,34 @@ class RemindDataCollection:
                                   ] / self.data.loc[:, list_technologies, :].groupby("region").sum(dim="variables")
             return data_to_interp_from.interp(year=self.year)
 
+
+    def get_remind_heat_markets(self):
+        """
+        This method retrieves the market share for each heat-producing technology, for a specified year,
+        for each region provided by REMIND.
+
+        :return: a multi-dimensional array with heat technologies market share for a given year, for all regions.
+        :rtype: xarray.core.dataarray.DataArray
+
+        """
+        list_technologies = list(self.heat_market_labels.values())
+
+        # If the year specified is not contained within the range of years given by REMIND
+        if (
+                self.year < self.data.year.values.min()
+                or self.year > self.data.year.values.max()
+        ):
+            raise KeyError("year not valid, must be between 2005 and 2150")
+
+        # Finally, if the specified year falls in between two periods provided by REMIND
+        else:
+            # Interpolation between two periods
+            data_to_interp_from = self.data.loc[
+                                  :, list_technologies, :
+                                  ] / self.data.loc[:, list_technologies, :].groupby("region").sum(dim="variables")
+            return data_to_interp_from.interp(year=self.year)
+
+
     def get_remind_fuel_mix_for_ldvs(self):
         """
         This method retrieves the fuel production mix
@@ -250,11 +342,10 @@ class RemindDataCollection:
         Note that synthetic fuels are preferred by LDVs so the share is much larger
         compared to the general blend supplied to the transport sector.
 
-        :return: an multi-dimensional array with market share for a given year, for all regions.
+        :return: a multi-dimensional array with market share for a given year, for all regions.
         :rtype: xarray.core.dataarray.DataArray
 
         """
-
         # add fossil fuel entry
         data = xr.concat([
             self.data,
@@ -303,6 +394,7 @@ class RemindDataCollection:
             # Interpolation between two periods
             return full.interp(year=self.year).transpose()
 
+
     def get_remind_electricity_efficiencies(self, drop_hydrogen=True):
         """
         This method retrieves efficiency values for electricity-producing technology, for a specified year,
@@ -311,7 +403,7 @@ class RemindDataCollection:
 
         :param drop_hydrogen: removes hydrogen from the region-specific electricity mix if `True`.
         :type drop_hydrogen: bool
-        :return: an multi-dimensional array with electricity technologies market share for a given year, for all regions.
+        :return: a multi-dimensional array with electricity technologies market share for a given year, for all regions.
         :rtype: xarray.core.dataarray.DataArray
 
         """
@@ -340,12 +432,40 @@ class RemindDataCollection:
                     data_to_interp_from.interp(year=self.year) / 100
             )  # Percentage to ratio
 
+
+    def get_remind_heat_efficiencies(self):
+        """
+        This method retrieves efficiency values for heat-producing technology, for a specified year,
+        for each region provided by REMIND.
+
+        :return: a multi-dimensional array with heat technologies market share for a given year, for all regions.
+        :rtype: xarray.core.dataarray.DataArray
+
+        """
+        list_technologies = list(self.heat_efficiency_labels.values())
+
+        # If the year specified is not contained within the range of years given by REMIND
+        if (
+                self.year < self.data.year.values.min()
+                or self.year > self.data.year.values.max()
+        ):
+            raise KeyError("year not valid, must be between 2005 and 2150")
+
+        # Finally, if the specified year falls in between two periods provided by REMIND
+        else:
+            # Interpolation between two periods
+            data_to_interp_from = self.data.loc[:, list_technologies, :]
+            return (
+                    data_to_interp_from.interp(year=self.year) / 100
+            )  # Percentage to ratio
+            
+            
     def get_gains_electricity_emissions(self):
         """
         This method retrieves emission values for electricity-producing technology, for a specified year,
         for each region provided by GAINS.
 
-        :return: an multi-dimensional array with emissions for different technologies for a given year, for all regions.
+        :return: a multi-dimensional array with emissions for different technologies for a given year, for all regions.
         :rtype: xarray.core.dataarray.DataArray
 
         """
@@ -362,12 +482,36 @@ class RemindDataCollection:
             return self.gains_data.sel(sector=[v for v in self.electricity_emission_labels.values()]) \
                 .interp(year=self.year)
 
+                
+    def get_gains_heat_emissions(self):
+        """
+        This method retrieves emission values for heat-producing technology, for a specified year,
+        for each region provided by GAINS.
+
+        :return: a multi-dimensional array with emissions for different technologies for a given year, for all regions.
+        :rtype: xarray.core.dataarray.DataArray
+
+        """
+        # If the year specified is not contained within the range of years given by REMIND
+        if (
+                self.year < self.gains_data.year.values.min()
+                or self.year > self.gains_data.year.values.max()
+        ):
+            raise KeyError("year not valid, must be between 2005 and 2150")
+
+        # Finally, if the specified year falls in between two periods provided by REMIND
+        else:
+            # Interpolation between two periods
+            return self.gains_data.sel(sector=[v for v in self.heat_emission_labels.values()]) \
+                .interp(year=self.year)
+
+
     def get_gains_cement_emissions(self):
         """
         This method retrieves emission values for cement production, for a specified year,
         for each region provided by GAINS.
 
-        :return: an multi-dimensional array with emissions for different technologies for a given year, for all regions.
+        :return: a multi-dimensional array with emissions for different technologies for a given year, for all regions.
         :rtype: xarray.core.dataarray.DataArray
 
         """
@@ -383,12 +527,13 @@ class RemindDataCollection:
             # Interpolation between two periods
             return self.gains_data.sel(sector='CEMENT').interp(year=self.year)
 
+
     def get_gains_steel_emissions(self):
         """
         This method retrieves emission values for steel production, for a specified year,
         for each region provided by GAINS.
 
-        :return: an multi-dimensional array with emissions for different technologies for a given year, for all regions.
+        :return: a multi-dimensional array with emissions for different technologies for a given year, for all regions.
         :rtype: xarray.core.dataarray.DataArray
 
         """

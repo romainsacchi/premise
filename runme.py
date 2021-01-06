@@ -7,14 +7,15 @@ print("Existing databases in the project:")
 print(bw.databases)
 
 # Extract the ecoinvent database, clean it, add additional inventories
-ndb = NewDatabase(scenario = 'SSP2-Base',
+ndb = NewDatabase(scenario = 'REMIND_generic_SSP2-NDC',
           year = 2030,
-          source_db = 'cut-off36',
+          source_db = 'ecoinvent_cut-off36',
           source_version = 3.6,
-          #filepath_to_remind_files = r"C:\Users\siala\Documents\remind\output\testOneRegi"
+          filepath_to_remind_files = r"C:\Users\siala\Documents\REMIND\output\SSP2-NDC_2020-11-26_21.02.02"
          )
 
 # Transform
+ndb.update_heat_to_remind_data()
 ndb.update_all()
 
 # Export to Brightway2

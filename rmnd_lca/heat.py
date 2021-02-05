@@ -299,40 +299,28 @@ class Heat:
                     "amount": transf_loss,
                     "type": "technosphere",
                     "production volume": 0,
-                    "product": "electricity, high voltage",
-                    "name": "market group for electricity, high voltage",
+                    "product": "heat",
+                    "name": "market group for heat",
                     "unit": "kilowatt hour",
                     "location": region,
                 }
             )
 
-            # Fetch solar contribution in the mix, to subtract it
-            # as solar energy is an input of low-voltage markets
-
-            index_solar = [
-                ind
-                for ind in self.rmd.rev_electricity_market_labels
-                if "solar" in ind.lower()
-            ]
-            solar_amount = self.rmd.electricity_markets.loc[
-                region, index_solar
-            ].values.sum()
-
             # Loop through the REMIND technologies
             for technology in gen_tech:
 
                 # If the given technology contributes to the mix
-                if self.rmd.electricity_markets.loc[region, technology] != 0.0:
+                if self.rmd.heat_markets.loc[region, technology] != 0.0:
 
                     # Contribution in supply
-                    amount = self.rmd.electricity_markets.loc[region, technology].values
+                    amount = self.rmd.heat_markets.loc[region, technology].values
 
                     # Get the possible names of ecoinvent datasets
                     ecoinvent_technologies = self.powerplant_map[
-                        self.rmd.rev_electricity_market_labels[technology]
+                        self.rmd.rev_heat_market_labels[technology]
                     ]
 
-                    # Fetch electricity-producing technologies contained in the REMIND region
+                    # Fetch heat-producing technologies contained in the REMIND region
                     suppliers = list(
                         self.get_suppliers_of_a_region(
                             ecoinvent_regions, ecoinvent_technologies
@@ -444,7 +432,7 @@ class Heat:
 
     def relink_activities_to_new_markets(self):
         """
-        Links electricity input exchanges to new datasets with the appropriate REMIND location:
+        Links heat input exchanges to new datasets with the appropriate REMIND location:
         * "market for electricity, high voltage" --> "market group for electricity, high voltage"
         * "market for electricity, medium voltage" --> "market group for electricity, medium voltage"
         * "market for electricity, low voltage" --> "market group for electricity, low voltage"
@@ -454,7 +442,7 @@ class Heat:
         # Filter all activities that consume high voltage electricity
 
         for ds in ws.get_many(
-            self.db, ws.exclude(ws.contains("name", "market group for electricity"))
+            self.db, ws.exclude(ws.contains("name", "market group for heat"))
         ):
 
             for exc in ws.get_many(
@@ -462,29 +450,16 @@ class Heat:
                 *[
                     ws.either(
                         *[
-                            ws.contains("name", "market for electricity"),
-                            ws.contains("name", "electricity voltage transformation"),
-                            ws.contains("name", "market group for electricity"),
+                            ws.contains("name", "market for heat"),
+                            ws.contains("name", "market group for heat"),
                         ]
                     )
                 ]
             ):
                 if exc["type"] != "production" and exc["unit"] == "kilowatt hour":
                     if "high" in exc["product"]:
-                        exc["name"] = "market group for electricity, high voltage"
-                        exc["product"] = "electricity, high voltage"
-                        exc["location"] = self.geo.ecoinvent_to_remind_location(
-                            exc["location"]
-                        )
-                    if "medium" in exc["product"]:
-                        exc["name"] = "market group for electricity, medium voltage"
-                        exc["product"] = "electricity, medium voltage"
-                        exc["location"] = self.geo.ecoinvent_to_remind_location(
-                            exc["location"]
-                        )
-                    if "low" in exc["product"]:
-                        exc["name"] = "market group for electricity, low voltage"
-                        exc["product"] = "electricity, low voltage"
+                        exc["name"] = "market group for heat"
+                        exc["product"] = "heat, high voltage"
                         exc["location"] = self.geo.ecoinvent_to_remind_location(
                             exc["location"]
                         )
@@ -496,8 +471,8 @@ class Heat:
         This method calculates the efficiency value set initially, in case it is not specified in the parameter
         field of the dataset. In Carma datasets, fuel inputs are expressed in megajoules instead of kilograms.
 
-        :param ds: a wurst dataset of an electricity-producing technology
-        :param fuel_filters: wurst filter to to filter fule input exchanges
+        :param ds: a wurst dataset of an heat-producing technology
+        :param fuel_filters: wurst filter to to filter fuel input exchanges
         :return: the efficiency value set by ecoinvent
         """
 

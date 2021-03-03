@@ -1,0 +1,20 @@
+Biomass CHP;SE|Electricity|Biomass|CHP|w/o CCS
+Biomass IGCC CCS;SE|Electricity|Biomass|IGCCC|w/ CCS
+Biomass IGCC;SE|Electricity|Biomass|IGCC|w/o CCS
+Coal PC;SE|Electricity|Coal|PC|w/o CCS
+Coal IGCC;SE|Electricity|Coal|IGCC|w/o CCS
+Coal PC CCS;SE|Electricity|Coal|PCC|w/ CCS
+Coal IGCC CCS;SE|Electricity|Coal|IGCCC|w/ CCS
+Coal CHP;SE|Electricity|Coal|CHP|w/o CCS
+Gas OC;SE|Electricity|Gas|GT
+Gas CC;SE|Electricity|Gas|CC|w/o CCS
+Gas CHP;SE|Electricity|Gas|CHP|w/o CCS
+Gas CCS;SE|Electricity|Gas|w/ CCS
+Geothermal;SE|Electricity|Geothermal
+Hydro;SE|Electricity|Hydro
+Hydrogen;SE|Electricity|Hydrogen
+Nuclear;SE|Electricity|Nuclear
+Oil;SE|Electricity|Oil|w/o CCS
+Solar CSP;SE|Electricity|Solar|CSP
+Solar PV;SE|Electricity|Solar|PV
+Wind;SE|Electricity|Wind

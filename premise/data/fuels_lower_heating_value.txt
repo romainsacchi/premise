@@ -1,0 +1,40 @@
+hard coal;20.1
+lignite;9.9
+petroleum coke;31.3
+wood pellet;16.2
+natural gas, high pressure;47.1
+natural gas, low pressure;39.5
+heavy fuel oil;38.5
+light fuel oil;40.6
+biogas;21.5
+waste;14
+methane, fossil;35.8
+methane, biogenic;35.8
+diesel;48
+gasoline;42
+hydrogen;120
+bioethanol;26.8
+biodiesel;37.8
+liquified petroleum gas, natural;45.5
+liquified petroleum gas, synthetic;45.5
+heat, from hard coal;1
+heat, from lignite;1
+heat, from petroleum coke;1
+heat, from wood pellet;1
+heat, from natural gas, high pressure;1
+heat, from natural gas, low pressure;1
+heat, from heavy fuel oil;1
+heat, from light fuel oil;1
+heat, from biogas;1
+heat, from waste;1
+heat, from methane, fossil;1
+heat, from methane, biogenic;1
+heat, from diesel;1
+heat, from gasoline;1
+heat, from hydrogen;1
+heat, from bioethanol;1
+heat, from biodiesel;1
+heat, from liquified petroleum gas, natural;1
+heat, from liquified petroleum gas, synthetic;1
+heat, from underground;1
+

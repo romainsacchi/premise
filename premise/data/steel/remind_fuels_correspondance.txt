@@ -1,0 +1,21 @@
+SE|Solids|Coal;hard coal;market for hard coal;hard coal
+SE|Solids|Biomass;wood pellet;wood pellet production;wood pellet, measured as dry mass
+SE|Solids|Traditional Biomass;wood pellet;wood pellet production;wood pellet, measured as dry mass
+SE|Heat|Biomass;heat, from wood pellet;heat and power co-generation, wood chips, 6667 kW;heat, district or industrial, other than natural gas
+SE|Heat|Coal;heat, from hard coal;heat and power co-generation, hard coal;heat, district or industrial, other than natural gas
+SE|Heat|Gas;heat, from natural gas, high pressure;heat and power co-generation, natural gas, combined cycle power plant, 400MW electrical;heat, district or industrial, natural gas
+SE|Heat|Geothermal;heat, from underground;heat production, deep geothermal;heat, deep geothermal
+SE|Liquids|Biomass;bioethanol;Ethanol from wheat straw pellets;Ethanol from wheat straw pellets
+SE|Liquids|Coal;biodiesel;Diesel production, Fischer Tropsch process, from coal-based hydrogen;Diesel
+SE|Liquids|Hydrogen;biodiesel;Diesel production, Fischer Tropsch process;Diesel
+SE|Liquids|Oil;light fuel oil;market for light fuel oil;light fuel oil
+SE|Liquids|Gas;light fuel oil;Liquefied petroleum gas production, from methanol-to-gas process;Liquefied petroleum gas production
+SE|Hydrogen|Biomass;hydrogen;Hydrogen, from steam reforming of biomass gas, at reforming plant, no CCS/2025;Hydrogen, from steam reforming of biomass gas, at reforming plant, no CCS/2025
+SE|Hydrogen|Coal;hydrogen;Hydrogen, gaseous, 30 bar, from hard coal gasification and reforming, at coal gasification plant;Hydrogen, gaseous, 30 bar, from hard coal gasification and reforming, at coal gasification plant
+SE|Hydrogen|Gas;hydrogen;Hydrogen, gaseous, 25 bar, from SMR of natural gas;Hydrogen, gaseous, 25 bar, from SMR of natural gas
+SE|Hydrogen|Electricity;hydrogen;Hydrogen, gaseous, 25 bar, from electrolysis;Hydrogen, gaseous, 25 bar, from electrolysis
+SE|Gases|Biomass;biogas;biogas upgrading - sewage sludge - amine scrubbing - best;biogas upgrading - sewage sludge - amine scrubbing - best
+SE|Gases|Natural Gas;natural gas, high pressure;market for natural gas, high pressure;natural gas, high pressure
+SE|Gases|Coal;natural gas, high pressure;methane, from coal-based hydrogen, with carbon from atmospheric CO2 capture;methane, from coal-based hydrogen
+SE|Gases|Hydrogen;natural gas, high pressure;methane, from electrochemical methanation, with carbon from atmospheric CO2 capture;methane, from electrochemical methanation
+SE|Gases|Waste;waste;clinker production;waste plastic, mixture

@@ -1,0 +1,20 @@
+SE|Solids|Coal;market for hard coal
+SE|Solids|Biomass;wood pellet production
+SE|Solids|Traditional Biomass;wood pellet production
+SE|Heat|Biomass;heat and power co-generation, wood chips, 6667 kW
+SE|Heat|Coal;heat and power co-generation, hard coal
+SE|Heat|Gas;heat and power co-generation, natural gas, combined cycle power plant, 400MW electrical
+SE|Heat|Geothermal;heat production, deep geothermal
+SE|Liquids|Biomass;Ethanol from wheat straw pellets
+SE|Liquids|Coal;Diesel production, Fischer Tropsch process, from coal-based hydrogen
+SE|Liquids|Hydrogen;Diesel production, Fischer Tropsch process
+SE|Liquids|Oil;market for light fuel oil
+SE|Liquids|Gas;Liquefied petroleum gas production, from methanol-to-gas process
+SE|Hydrogen|Biomass;Hydrogen, from steam reforming of biomass gas, at reforming plant, no CCS/2025
+SE|Hydrogen|Coal;Hydrogen, gaseous, 30 bar, from hard coal gasification and reforming, at coal gasification plant
+SE|Hydrogen|Gas;Hydrogen, gaseous, 25 bar, from SMR of natural gas
+SE|Hydrogen|Electricity;Hydrogen, gaseous, 25 bar, from electrolysis
+SE|Gases|Biomass;biogas upgrading - sewage sludge - amine scrubbing - best
+SE|Gases|Natural Gas;market for natural gas, high pressure
+SE|Gases|Coal;methane, from coal-based hydrogen, with carbon from atmospheric CO2 capture
+SE|Gases|Hydrogen;methane, from electrochemical methanation, with carbon from atmospheric CO2 capture

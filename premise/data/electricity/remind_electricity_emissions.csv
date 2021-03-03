@@ -1,0 +1,13 @@
+Biomass IGCC CCS;Power_Gen_Bio_Trad
+Biomass IGCC;Power_Gen_Bio_Trad
+Biomass CHP;Power_Gen_Bio_Trad
+Coal IGCC;Power_Gen_Coal
+Coal IGCC CCS;Power_Gen_Coal
+Coal PC;Power_Gen_Coal
+Coal CHP;Power_Gen_Coal
+Coal PC CCS;Power_Gen_Coal
+Gas CCS;Power_Gen_NatGas
+Gas OC;Power_Gen_NatGas
+Gas CC;Power_Gen_NatGas
+Gas CHP;Power_Gen_NatGas
+Oil;Power_Gen_LLF

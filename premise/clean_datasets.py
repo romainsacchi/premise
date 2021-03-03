@@ -15,8 +15,13 @@ class DatabaseCleaner:
     """
     Class that cleans the datasets contained in the inventory database for further processing.
 
-    :ivar destination_db: name of the source database
-    :vartype destination_db: str
+
+    :ivar source_type: type of the database source. Can be ´brightway´ or 'ecospold'.
+    :vartype source_type: str
+    :ivar source_db: name of the source database if `source_type` == 'brightway'
+    :vartype source_db: str
+    :ivar source_file_path: filepath of the database if `source_type` == 'ecospold'.
+    :vartype source_file_path: str
 
     """
 
@@ -96,8 +101,7 @@ class DatabaseCleaner:
         Return a list of location names, given the filtering conditions given in `lookup_dict`.
         It is, for example, used to return a list of location names based on the name and the unit of a dataset.
 
-        :param db: wurst inventory database
-        :type db: list
+
         :param lookup_dict: a dictionary with filtering conditions
         :return: a list of location names
         :rtype: list
@@ -114,8 +118,7 @@ class DatabaseCleaner:
         Return a list of location names, given the filtering conditions given in `lookup_dict`.
         It is, for example, used to return a list of location names based on the name and the unit of a dataset.
 
-        :param db: wurst inventory database
-        :type db: list
+
         :param lookup_dict: a dictionary with filtering conditions
         :return: a list of location names
         :rtype: list
@@ -138,8 +141,8 @@ class DatabaseCleaner:
         for a in self.db:
             for e in a['exchanges']:
                 if e['type'] == 'technosphere':
-                    input = e['input']
-                    e['location'] = d_location[input]
+                    exc_input = e['input']
+                    e['location'] = d_location[exc_input]
 
     def add_product_field_to_exchanges(self):
         """Add the `product` key to the production and
@@ -169,7 +172,7 @@ class DatabaseCleaner:
             for y in x["exchanges"]:
                 if y["type"] == "technosphere":
                     # Check if the field 'product' is present
-                    if not 'product' in y:
+                    if 'product' not in y:
                         y['product'] = d_product[y['input'][1]][0]
 
                     # If a 'reference product' field is present, we make sure it matches with the new 'product' field
@@ -228,8 +231,7 @@ class DatabaseCleaner:
         Clean datasets for all databases listed in scenarios: fix location names, remove
         empty exchanges, etc.
 
-        :param write_changeset: indicates if changes in datasets should be logged.
-        :type write_changeset: bool
+
 
         """
 

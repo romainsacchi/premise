@@ -1,5 +1,5 @@
 # content of test_activity_maps.py
-from rmnd_lca.activity_maps import InventorySet
+from premise.activity_maps import InventorySet
 
 dummy_minimal_db = [{'name': 'electricity production, at BIGCC power plant 450MW, pre, pipeline 200km, storage 1000m'},
                     {'name': 'electricity production, at BIGCC power plant 450MW, no CCS'},

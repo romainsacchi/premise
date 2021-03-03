@@ -1,0 +1,2787 @@
+[
+  [
+    "natural resource",
+    "Energy, gross calorific value, in biomass",
+    "Energy, gross calorific value, in biomass"
+  ],
+    [
+    "air",
+    "1-Butanol",
+    "Butanol"
+  ],
+  [
+    "air",
+    "1-Propanol",
+    "Propanol"
+  ],
+  [
+    "air",
+    "2-Butene, 2-methyl-",
+    "2-Methyl-2-butene"
+  ],
+  [
+    "air",
+    "Benzene, 1,2-dichloro-",
+    "Benzene, dichloro"
+  ],
+  [
+    "air",
+    "Benzene, 1-methyl-2-nitro-",
+    "o-Nitrotoluene"
+  ],
+  [
+    "air",
+    "Benzene, dichloro-",
+    "Benzene, dichloro"
+  ],
+  [
+    "air",
+    "Benzo(g,h,i)perylene",
+    "Benzo(ghi)perylene"
+  ],
+  [
+    "air",
+    "Carbamic acid, butyl-, 3-iodo-2-propynyl ester",
+    "Butylcarbamate, iodopropynyl"
+  ],
+  [
+    "air",
+    "Carbon",
+    "Elemental carbon"
+  ],
+  [
+    "air",
+    "Carbon dioxide, biogenic",
+    "Carbon dioxide, non-fossil"
+  ],
+  [
+    "air",
+    "Carbon dioxide, land transformation",
+    "Carbon dioxide, from soil or biomass stock"
+  ],
+  [
+    "air",
+    "Carbon monoxide, biogenic",
+    "Carbon monoxide, non-fossil"
+  ],
+  [
+    "air",
+    "Carbon monoxide, land transformation",
+    "Carbon monoxide, from soil or biomass stock"
+  ],
+  [
+    "air",
+    "Dioxin, 2,3,7,8 Tetrachlorodibenzo-p-",
+    "Dioxins, measured as 2,3,7,8-tetrachlorodibenzo-p-dioxin"
+  ],
+  [
+    "air",
+    "Ethane, chloro-",
+    "Monochloroethane"
+  ],
+  [
+    "air",
+    "Ethanol, 2-ethoxy-",
+    "Ethylene glycol monoethyl ether"
+  ],
+  [
+    "air",
+    "Methane, biogenic",
+    "Methane, non-fossil"
+  ],
+  [
+    "air",
+    "Methane, land transformation",
+    "Methane, from soil or biomass stock"
+  ],
+  [
+    "air",
+    "Methane, tetrachloro-, CFC-10",
+    "Methane, tetrachloro-, R-10"
+  ],
+  [
+    "air",
+    "Methane, tetrafluoro-, CFC-14",
+    "Methane, tetrafluoro-, R-14"
+  ],
+  [
+    "air",
+    "Methylamine",
+    "Methyl amine"
+  ],
+  [
+    "air",
+    "Nitric oxide",
+    "Nitrogen monoxide"
+  ],
+  [
+    "air",
+    "Parathion, methyl",
+    "Methyl parathion"
+  ],
+  [
+    "air",
+    "Pentane, 2,2,4-trimethyl-",
+    "2,2,4-Trimethyl pentane"
+  ],
+  [
+    "air",
+    "Pentane, 2-methyl-",
+    "2-Methyl pentane"
+  ],
+  [
+    "air",
+    "Phenol, 2,4-dichloro-",
+    "Phenol, 2,4-dichloro"
+  ],
+  [
+    "air",
+    "Pyraclostrobin (prop)",
+    "Pyraclostrobin"
+  ],
+  [
+    "air",
+    "Quizalofop ethyl ester",
+    "Quizalofop-ethyl"
+  ],
+  [
+    "air",
+    "Sodium tetrahydroborate",
+    "Sodium tetrahydridoborate"
+  ],
+  [
+    "air",
+    "Toluene, 2-chloro-",
+    "Toluene, 2-chloro"
+  ],
+  [
+    "air",
+    "Water, AT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, AU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, BA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, BE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, BG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, BR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, CA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, CH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, CL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, CN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, CZ",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, DE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, DK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, ES",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, Europe without Switzerland",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, FI",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, FR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, GB",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, GLO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, GR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, HR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, HU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, ID",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, IE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, IN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, IR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, IT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, JP",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, KR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, LU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, MA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, MX",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, MY",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, NL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, NO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, NORDEL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, PE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, PG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, PH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, PL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, PT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RAF",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RAS",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RER",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RLA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RME",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RNA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RS",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, RoW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, SE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, SI",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, SK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, TH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, TR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, TW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, TZ",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, UA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, UCTE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, UCTE without Germany",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, US",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, WEU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, ZA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "air",
+    "Water, cooling, unspecified natural origin/m3",
+    "Water, cooling, unspecified natural origin"
+  ],
+  [
+    "air",
+    "x \"Wat",
+    "Benz(a)anthracene"
+  ],
+  [
+    "natural resource",
+    "Aluminium",
+    "Aluminium, in ground"
+  ],
+  [
+    "natural resource",
+    "Anhydrite",
+    "Anhydrite, in ground"
+  ],
+  [
+    "natural resource",
+    "Argon",
+    "Argon-40"
+  ],
+  [
+    "natural resource",
+    "Barite",
+    "Barite, 15% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Basalt",
+    "Basalt, in ground"
+  ],
+  [
+    "natural resource",
+    "Borax",
+    "Borax, in ground"
+  ],
+  [
+    "natural resource",
+    "Bromine",
+    "Bromine, 0.23% in water"
+  ],
+  [
+    "natural resource",
+    "Cadmium",
+    "Cadmium, 0.30% in sulfide, Cd 0.18%, Pb, Zn, Ag, In, in ground"
+  ],
+  [
+    "natural resource",
+    "Calcite",
+    "Calcite, in ground"
+  ],
+  [
+    "natural resource",
+    "Cerium",
+    "Cerium, 24% in bastnasite, 2.4% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Chromium",
+    "Chromium, 25.5% in chromite, 11.6% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Chrysotile",
+    "Chrysotile, in ground"
+  ],
+  [
+    "natural resource",
+    "Cinnabar",
+    "Cinnabar, in ground"
+  ],
+  [
+    "natural resource",
+    "Clay, bentonite",
+    "Clay, bentonite, in ground"
+  ],
+  [
+    "natural resource",
+    "Clay, unspecified",
+    "Clay, unspecified, in ground"
+  ],
+  [
+    "natural resource",
+    "Coal, brown",
+    "Coal, brown, in ground"
+  ],
+  [
+    "natural resource",
+    "Coal, hard",
+    "Coal, hard, unspecified, in ground"
+  ],
+  [
+    "natural resource",
+    "Cobalt",
+    "Cobalt, in ground"
+  ],
+  [
+    "natural resource",
+    "Colemanite",
+    "Colemanite, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, 0.52% in sulfide, Cu 0.27% and Mo 8.2E-3% in crude ore",
+    "Copper, 0.52% in sulfide, Cu 0.27% and Mo 8.2E-3% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, 0.59% in sulfide, Cu 0.22% and Mo 8.2E-3% in crude ore",
+    "Copper, 0.59% in sulfide, Cu 0.22% and Mo 8.2E-3% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, 0.97% in sulfide, Cu 0.36% and Mo 4.1E-2% in crude ore",
+    "Copper, 0.97% in sulfide, Cu 0.36% and Mo 4.1E-2% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, 0.99% in sulfide, Cu 0.36% and Mo 8.2E-3% in crude ore",
+    "Copper, 0.99% in sulfide, Cu 0.36% and Mo 8.2E-3% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, 1.13% in sulfide, Cu 0.76% and Ni 0.76% in crude ore",
+    "Copper, 1.13% in sulfide, Cu 0.76% and Ni 0.76% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, 1.18% in sulfide, Cu 0.39% and Mo 8.2E-3% in crude ore",
+    "Copper, 1.18% in sulfide, Cu 0.39% and Mo 8.2E-3% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, 1.42% in sulfide, Cu 0.81% and Mo 8.2E-3% in crude ore",
+    "Copper, 1.42% in sulfide, Cu 0.81% and Mo 8.2E-3% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, 2.19% in sulfide, Cu 1.83% and Mo 8.2E-3% in crude ore",
+    "Copper, 2.19% in sulfide, Cu 1.83% and Mo 8.2E-3% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, Cu 0.38%, Au 9.7E-4%, Ag 9.7E-4%, Zn 0.63%, Pb 0.014%, in ore",
+    "Copper, Cu 0.2%, in mixed ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, Cu 3.2E+0%, Pt 2.5E-4%, Pd 7.3E-4%, Rh 2.0E-5%, Ni 2.3E+0% in ore",
+    "Cu, Cu 3.2E+0%, Pt 2.5E-4%, Pd 7.3E-4%, Rh 2.0E-5%, Ni 2.3E+0% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Copper, Cu 5.2E-2%, Pt 4.8E-4%, Pd 2.0E-4%, Rh 2.4E-5%, Ni 3.7E-2% in ore",
+    "Cu, Cu 5.2E-2%, Pt 4.8E-4%, Pd 2.0E-4%, Rh 2.4E-5%, Ni 3.7E-2% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Diatomite",
+    "Diatomite, in ground"
+  ],
+  [
+    "natural resource",
+    "Dolomite",
+    "Dolomite, in ground"
+  ],
+  [
+    "natural resource",
+    "Europium",
+    "Europium, 0.06% in bastnasite, 0.006% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Feldspar",
+    "Feldspar, in ground"
+  ],
+  [
+    "natural resource",
+    "Fluorine",
+    "Fluorine, 4.5% in apatite, 1% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Fluorine, 4.5% in apatite, 3% in crude ore",
+    "Fluorine, 4.5% in apatite, 3% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Fluorspar",
+    "Fluorspar, 92%, in ground"
+  ],
+  [
+    "natural resource",
+    "Gadolinium",
+    "Gadolinium, 0.15% in bastnasite, 0.015% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gallium",
+    "Gallium, in ground"
+  ],
+  [
+    "natural resource",
+    "Gas, mine, off-gas, process, coal mining/m3",
+    "Gas, mine, off-gas, process, coal mining"
+  ],
+  [
+    "natural resource",
+    "Gas, natural/m3",
+    "Gas, natural, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold",
+    "Gold, Au 1.4E-4%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold, Au 1.1E-4%, Ag 4.2E-3%, in ore",
+    "Gold, Au 1.1E-4%, Ag 4.2E-3%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold, Au 1.3E-4%, Ag 4.6E-5%, in ore",
+    "Gold, Au 1.3E-4%, Ag 4.6E-5%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold, Au 2.1E-4%, Ag 2.1E-4%, in ore",
+    "Gold, Au 2.1E-4%, Ag 2.1E-4%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold, Au 4.3E-4%, in ore",
+    "Gold, Au 4.3E-4%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold, Au 4.9E-5%, in ore",
+    "Gold, Au 4.9E-5%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold, Au 6.7E-4%, in ore",
+    "Gold, Au 6.7E-4%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold, Au 7.1E-4%, in ore",
+    "Gold, Au 7.1E-4%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Gold, Au 9.7E-4%, Ag 9.7E-4%, Zn 0.63%, Cu 0.38%, Pb 0.014%, in ore",
+    "Gold, Au 9.7E-4%, in mixed ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Granite",
+    "Granite, in ground"
+  ],
+  [
+    "natural resource",
+    "Gravel",
+    "Gravel, in ground"
+  ],
+  [
+    "natural resource",
+    "Gypsum",
+    "Gypsum, in ground"
+  ],
+  [
+    "natural resource",
+    "Indium",
+    "Indium, 0.005% in sulfide, In 0.003%, Pb, Zn, Ag, Cd, in ground"
+  ],
+  [
+    "natural resource",
+    "Iodine",
+    "Iodine, 0.03% in water"
+  ],
+  [
+    "natural resource",
+    "Iron",
+    "Iron, 46% in ore, 25% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Kaolinite",
+    "Kaolinite, 24% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Kieserite",
+    "Kieserite, 25% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Krypton",
+    "Krypton, in air"
+  ],
+  [
+    "natural resource",
+    "Lanthanum",
+    "Lanthanum, 7.2% in bastnasite, 0.72% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Lead",
+    "Lead, 5.0% in sulfide, Pb 3.0%, Zn, Ag, Cd, In, in ground"
+  ],
+  [
+    "natural resource",
+    "Lead, Pb 0.014%, Au 9.7E-4%, Ag 9.7E-4%, Zn 0.63%, Cu 0.38%, in ore",
+    "Lead, Pb 0.014%, in mixed ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Lithium",
+    "Lithium, 0.15% in brine, in ground"
+  ],
+  [
+    "natural resource",
+    "Magnesite",
+    "Magnesite, 60% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Magnesium",
+    "Magnesium, 0.13% in water"
+  ],
+  [
+    "natural resource",
+    "Manganese",
+    "Manganese, 35.7% in sedimentary deposit, 14.2% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Metamorphous rock, graphite containing",
+    "Metamorphous rock, graphite containing, in ground"
+  ],
+  [
+    "natural resource",
+    "Molybdenum",
+    "Molybdenum, 0.11% in sulfide, Mo 4.1E-2% and Cu 0.36% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Molybdenum, 0.010% in sulfide, Mo 8.2E-3% and Cu 1.83% in crude ore",
+    "Molybdenum, 0.010% in sulfide, Mo 8.2E-3% and Cu 1.83% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Molybdenum, 0.014% in sulfide, Mo 8.2E-3% and Cu 0.81% in crude ore",
+    "Molybdenum, 0.014% in sulfide, Mo 8.2E-3% and Cu 0.81% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Molybdenum, 0.016% in sulfide, Mo 8.2E-3% and Cu 0.27% in crude ore",
+    "Molybdenum, 0.016% in sulfide, Mo 8.2E-3% and Cu 0.27% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Molybdenum, 0.022% in sulfide, Mo 8.2E-3% and Cu 0.22% in crude ore",
+    "Molybdenum, 0.022% in sulfide, Mo 8.2E-3% and Cu 0.22% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Molybdenum, 0.022% in sulfide, Mo 8.2E-3% and Cu 0.36% in crude ore",
+    "Molybdenum, 0.022% in sulfide, Mo 8.2E-3% and Cu 0.36% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Molybdenum, 0.025% in sulfide, Mo 8.2E-3% and Cu 0.39% in crude ore",
+    "Molybdenum, 0.025% in sulfide, Mo 8.2E-3% and Cu 0.39% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Neodymium",
+    "Neodymium, 4% in bastnasite, 0.4% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Nickel, 1.13% in sulfide, Ni 0.76% and Cu 0.76% in crude ore",
+    "Nickel, 1.13% in sulfide, Ni 0.76% and Cu 0.76% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Nickel, 1.98% in silicates, 1.04% in crude ore",
+    "Nickel, 1.98% in silicates, 1.04% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Nickel, Ni 2.3E+0%, Pt 2.5E-4%, Pd 7.3E-4%, Rh 2.0E-5%, Cu 3.2E+0% in ore",
+    "Ni, Ni 2.3E+0%, Pt 2.5E-4%, Pd 7.3E-4%, Rh 2.0E-5%, Cu 3.2E+0% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Nickel, Ni 3.7E-2%, Pt 4.8E-4%, Pd 2.0E-4%, Rh 2.4E-5%, Cu 5.2E-2% in ore",
+    "Ni, Ni 3.7E-2%, Pt 4.8E-4%, Pd 2.0E-4%, Rh 2.4E-5%, Cu 5.2E-2% in ore, in ground"
+  ],
+    [
+    "natural resource",
+    "Occupation, construction site",
+    "Occupation, construction site"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable",
+    "Occupation, annual crop"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable, greenhouse",
+    "Occupation, annual crop, greenhouse"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable, irrigated",
+    "Occupation, annual crop, irrigated"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable, irrigated, intensive",
+    "Occupation, annual crop, irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable, irrigated, intensive",
+    "Occupation, permanent crop, irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable, non-irrigated",
+    "Occupation, annual crop, non-irrigated"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable, non-irrigated, extensive",
+    "Occupation, annual crop, non-irrigated, extensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable, non-irrigated, intensive",
+    "Occupation, annual crop, non-irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, arable, non-irrigated, intensive",
+    "Occupation, permanent crop, non-irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, forest, intensive, clear-cutting",
+    "Occupation, forest, intensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, forest, intensive, normal",
+    "Occupation, forest, intensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, forest, intensive, short-cycle",
+    "Occupation, forest, intensive"
+  ],
+    [
+    "natural resource",
+    "Occupation, forest, extensive",
+    "Occupation, forest, extensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, grassland, not used",
+    "Occupation, grassland, natural (non-use)"
+  ],
+  [
+    "natural resource",
+    "Occupation, industrial area, benthos",
+    "Occupation, industrial area"
+  ],
+  [
+    "natural resource",
+    "Occupation, industrial area, built up",
+    "Occupation, industrial area"
+  ],
+  [
+    "natural resource",
+    "Occupation, industrial area, vegetation",
+    "Occupation, industrial area"
+  ],
+  [
+    "natural resource",
+    "Occupation, pasture and meadow",
+    "Occupation, pasture, man made"
+  ],
+  [
+    "natural resource",
+    "Occupation, pasture and meadow, extensive",
+    "Occupation, pasture, man made, extensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, pasture and meadow, intensive",
+    "Occupation, pasture, man made, intensive"
+  ],
+  [
+    "natural resource",
+    "Occupation, traffic area, rail embankment",
+    "Occupation, traffic area, rail/road embankment"
+  ],
+  [
+    "natural resource",
+    "Occupation, urban/industrial fallow",
+    "Occupation, urban/industrial fallow (non-use)"
+  ],
+  [
+    "natural resource",
+    "Occupation, water bodies, artificial",
+    "Occupation, lake, artificial"
+  ],
+  [
+    "natural resource",
+    "Occupation, water bodies, artificial",
+    "Occupation, river, artificial"
+  ],
+  [
+    "natural resource",
+    "Oil, crude",
+    "Oil, crude, in ground"
+  ],
+  [
+    "natural resource",
+    "Olivine",
+    "Olivine, in ground"
+  ],
+  [
+    "natural resource",
+    "Palladium, Pd 2.0E-4%, Pt 4.8E-4%, Rh 2.4E-5%, Ni 3.7E-2%, Cu 5.2E-2% in ore",
+    "Pd, Pd 2.0E-4%, Pt 4.8E-4%, Rh 2.4E-5%, Ni 3.7E-2%, Cu 5.2E-2% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Palladium, Pd 7.3E-4%, Pt 2.5E-4%, Rh 2.0E-5%, Ni 2.3E+0%, Cu 3.2E+0% in ore",
+    "Pd, Pd 7.3E-4%, Pt 2.5E-4%, Rh 2.0E-5%, Ni 2.3E+0%, Cu 3.2E+0% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Peat",
+    "Peat, in ground"
+  ],
+  [
+    "natural resource",
+    "Perlite",
+    "Perlite, in ground"
+  ],
+  [
+    "natural resource",
+    "Phosphorus",
+    "Phosphorus, 18% in apatite, 12% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Phosphorus, 18% in apatite, 4% in crude ore",
+    "Phosphorus, 18% in apatite, 4% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Platinum, Pt 2.5E-4%, Pd 7.3E-4%, Rh 2.0E-5%, Ni 2.3E+0%, Cu 3.2E+0% in ore",
+    "Pt, Pt 2.5E-4%, Pd 7.3E-4%, Rh 2.0E-5%, Ni 2.3E+0%, Cu 3.2E+0% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Platinum, Pt 4.8E-4%, Pd 2.0E-4%, Rh 2.4E-5%, Ni 3.7E-2%, Cu 5.2E-2% in ore",
+    "Pt, Pt 4.8E-4%, Pd 2.0E-4%, Rh 2.4E-5%, Ni 3.7E-2%, Cu 5.2E-2% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Potassium chloride",
+    "Sylvite, 25 % in sylvinite, in ground"
+  ],
+  [
+    "natural resource",
+    "Praseodymium",
+    "Praseodymium, 0.42% in bastnasite, 0.042% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Pumice",
+    "Pumice, in ground"
+  ],
+  [
+    "natural resource",
+    "Pyrite",
+    "Pyrite, in ground"
+  ],
+  [
+    "natural resource",
+    "Rhenium",
+    "Rhenium, in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Rhodium, Rh 2.0E-5%, Pt 2.5E-4%, Pd 7.3E-4%, Ni 2.3E+0%, Cu 3.2E+0% in ore",
+    "Rh, Rh 2.0E-5%, Pt 2.5E-4%, Pd 7.3E-4%, Ni 2.3E+0%, Cu 3.2E+0% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Rhodium, Rh 2.4E-5%, Pt 4.8E-4%, Pd 2.0E-4%, Ni 3.7E-2%, Cu 5.2E-2% in ore",
+    "Rh, Rh 2.4E-5%, Pt 4.8E-4%, Pd 2.0E-4%, Ni 3.7E-2%, Cu 5.2E-2% in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Samarium",
+    "Samarium, 0.3% in bastnasite, 0.03% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Sand",
+    "Sand, unspecified, in ground"
+  ],
+  [
+    "natural resource",
+    "Shale",
+    "Shale, in ground"
+  ],
+  [
+    "natural resource",
+    "Silver, 0.007% in sulfide, Ag 0.004%, Pb, Zn, Cd, In",
+    "Silver, 0.007% in sulfide, Ag 0.004%, Pb, Zn, Cd, In, in ground"
+  ],
+  [
+    "natural resource",
+    "Silver, 3.2ppm in sulfide, Ag 1.2ppm, Cu and Te, in crude ore",
+    "Silver, 3.2ppm in sulfide, Ag 1.2ppm, Cu and Te, in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Silver, Ag 2.1E-4%, Au 2.1E-4%, in ore",
+    "Silver, Ag 2.1E-4%, Au 2.1E-4%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Silver, Ag 4.2E-3%, Au 1.1E-4%, in ore",
+    "Silver, Ag 4.2E-3%, Au 1.1E-4%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Silver, Ag 4.6E-5%, Au 1.3E-4%, in ore",
+    "Silver, Ag 4.6E-5%, Au 1.3E-4%, in ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Silver, Ag 9.7E-4%, Au 9.7E-4%, Zn 0.63%, Cu 0.38%, Pb 0.014%, in ore",
+    "Silver, Ag 9.7E-4%, in mixed ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Sodium chloride",
+    "Sodium chloride, in ground"
+  ],
+  [
+    "natural resource",
+    "Sodium nitrate",
+    "Sodium nitrate, in ground"
+  ],
+  [
+    "natural resource",
+    "Sodium sulfate",
+    "Sodium sulphate, various forms, in ground"
+  ],
+  [
+    "natural resource",
+    "Spodumene",
+    "Spodumene, in ground"
+  ],
+  [
+    "natural resource",
+    "Stibnite",
+    "Stibnite, in ground"
+  ],
+  [
+    "natural resource",
+    "Sulfur",
+    "Sulfur, in ground"
+  ],
+  [
+    "natural resource",
+    "Talc",
+    "Talc, in ground"
+  ],
+  [
+    "natural resource",
+    "Tantalum",
+    "Tantalum, 81.9% in tantalite, 1.6E-4% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Tellurium",
+    "Tellurium, 0.5ppm in sulfide, Te 0.2ppm, Cu and Ag, in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "TiO2, 54% in ilmenite, 18% in crude ore",
+    "TiO2, 54% in ilmenite, 18% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "TiO2, 54% in ilmenite, 2.6% in crude ore",
+    "TiO2, 54% in ilmenite, 2.6% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "TiO2, 95% in rutile, 0.40% in crude ore",
+    "TiO2, 95% in rutile, 0.40% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Tin",
+    "Tin, 79% in cassiterite, 0.1% in crude ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Transformation, from arable",
+    "Transformation, from annual crop"
+  ],
+  [
+    "natural resource",
+    "Transformation, from arable",
+    "Transformation, from arable land, unspecified use"
+  ],
+  [
+    "natural resource",
+    "Transformation, from arable, greenhouse",
+    "Transformation, from annual crop, greenhouse"
+  ],
+  [
+    "natural resource",
+    "Transformation, from arable, irrigated, intensive",
+    "Transformation, from annual crop, irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from arable, non-irrigated",
+    "Transformation, from annual crop, non-irrigated"
+  ],
+  [
+    "natural resource",
+    "Transformation, from arable, non-irrigated, extensive",
+    "Transformation, from annual crop, non-irrigated, extensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from arable, non-irrigated, intensive",
+    "Transformation, from annual crop, non-irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from forest",
+    "Transformation, from forest, unspecified"
+  ],
+  [
+    "natural resource",
+    "Transformation, from forest, intensive, clear-cutting",
+    "Transformation, from forest, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from forest, intensive, normal",
+    "Transformation, from forest, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from forest, intensive, short-cycle",
+    "Transformation, from forest, intensive"
+  ],
+    [
+    "natural resource",
+    "Transformation, from forest, extensive",
+    "Transformation, from forest, extensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from forest, primary",
+    "Transformation, from forest, primary (non-use)"
+  ],
+  [
+    "natural resource",
+    "Transformation, from grassland, not used",
+    "Transformation, from grassland, natural (non-use)"
+  ],
+  [
+    "natural resource",
+    "Transformation, from industrial area, benthos",
+    "Transformation, from industrial area"
+  ],
+  [
+    "natural resource",
+    "Transformation, from industrial area, built up",
+    "Transformation, from industrial area"
+  ],
+  [
+    "natural resource",
+    "Transformation, from industrial area, vegetation",
+    "Transformation, from industrial area"
+  ],
+  [
+    "natural resource",
+    "Transformation, from pasture and meadow",
+    "Transformation, from pasture, man made"
+  ],
+  [
+    "natural resource",
+    "Transformation, from pasture and meadow, extensive",
+    "Transformation, from pasture, man made, extensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from pasture and meadow, intensive",
+    "Transformation, from pasture, man made, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from permanent crops, irrigated, intensive",
+    "Transformation, from permanent crop, irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from permanent crops, non-irrigated, intensive",
+    "Transformation, from permanent crop, non-irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, from sea and ocean",
+    "Transformation, from seabed, unspecified"
+  ],
+  [
+    "natural resource",
+    "Transformation, from traffic area, rail embankment",
+    "Transformation, from traffic area, rail/road embankment"
+  ],
+  [
+    "natural resource",
+    "Transformation, from unknown",
+    "Transformation, from unspecified"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable",
+    "Transformation, to annual crop"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable",
+    "Transformation, to arable land, unspecified use"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable, fallow",
+    "Transformation, to cropland fallow (non-use)"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable, greenhouse",
+    "Transformation, to annual crop, greenhouse"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable, irrigated, extensive",
+    "Transformation, to annual crop, irrigated, extensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable, irrigated, intensive",
+    "Transformation, to annual crop, irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable, non-irrigated",
+    "Transformation, to annual crop, non-irrigated"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable, non-irrigated, extensive",
+    "Transformation, to annual crop, non-irrigated, extensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to arable, non-irrigated, intensive",
+    "Transformation, to annual crop, non-irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to forest",
+    "Transformation, to forest, unspecified"
+  ],
+  [
+    "natural resource",
+    "Transformation, to forest, intensive, clear-cutting",
+    "Transformation, to forest, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to forest, intensive, normal",
+    "Transformation, to forest, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to forest, intensive, short-cycle",
+    "Transformation, to forest, intensive"
+  ],
+    [
+    "natural resource",
+    "Transformation, to forest, extensive",
+    "Transformation, to forest, extensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to industrial area, benthos",
+    "Transformation, to industrial area"
+  ],
+  [
+    "natural resource",
+    "Transformation, to industrial area, built up",
+    "Transformation, to industrial area"
+  ],
+  [
+    "natural resource",
+    "Transformation, to industrial area, vegetation",
+    "Transformation, to industrial area"
+  ],
+  [
+    "natural resource",
+    "Transformation, to pasture and meadow",
+    "Transformation, to pasture, man made"
+  ],
+  [
+    "natural resource",
+    "Transformation, to pasture and meadow, extensive",
+    "Transformation, to grassland, natural (non-use)"
+  ],
+  [
+    "natural resource",
+    "Transformation, to pasture and meadow, extensive",
+    "Transformation, to pasture, man made, extensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to pasture and meadow, intensive",
+    "Transformation, to pasture, man made, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to permanent crops, irrigated, intensive",
+    "Transformation, to permanent crop, irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to permanent crops, non-irrigated",
+    "Transformation, to permanent crop, non-irrigated"
+  ],
+  [
+    "natural resource",
+    "Transformation, to permanent crops, non-irrigated, intensive",
+    "Transformation, to permanent crop, non-irrigated, intensive"
+  ],
+  [
+    "natural resource",
+    "Transformation, to traffic area, rail embankment",
+    "Transformation, to traffic area, rail/road embankment"
+  ],
+  [
+    "natural resource",
+    "Transformation, to unknown",
+    "Transformation, to unspecified"
+  ],
+  [
+    "natural resource",
+    "Transformation, to urban/industrial fallow",
+    "Transformation, to urban/industrial fallow (non-use)"
+  ],
+  [
+    "natural resource",
+    "Transformation, to water bodies, artificial",
+    "Transformation, to lake, artificial"
+  ],
+  [
+    "natural resource",
+    "Transformation, to water bodies, artificial",
+    "Transformation, to river, artificial"
+  ],
+    [
+    "natural resource",
+    "Transformation, to heterogeneous, agricultural",
+    "Transformation, to heterogeneous, agricultural"
+  ],
+  [
+    "natural resource",
+    "Ulexite",
+    "Ulexite, in ground"
+  ],
+  [
+    "natural resource",
+    "Uranium",
+    "Uranium, in ground"
+  ],
+  [
+    "natural resource",
+    "Vermiculite",
+    "Vermiculite, in ground"
+  ],
+  [
+    "natural resource",
+    "Water, salt, sole",
+    "Water, salt, sole"
+  ],
+  [
+    "natural resource",
+    "Water, AT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, AU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, BA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, BE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, BG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, BR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, CA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, CH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, CL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, CN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, CZ",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, DE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, DK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, ES",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, Europe without Switzerland",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, FI",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, FR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, GB",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, GLO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, GR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, HR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, HU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, ID",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, IE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, IN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, IR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, IT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, JP",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, KR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, LU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, MA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, MX",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, MY",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, NL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, NO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, NORDEL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, PE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, PG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, PH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, PL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, PT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RAF",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RAS",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RER",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RLA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RME",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RNA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RS",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, RoW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, SE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, SI",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, SK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, TH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, TR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, TW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, TZ",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, UA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, UCTE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, UCTE without Germany",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, US",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, WEU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, ZA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, cooling, unspecified natural origin/m3",
+    "Water, cooling, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, AT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, BE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, BG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, CA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, CH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, CN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, CZ",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, DE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, DK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, ES",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, Europe without Switzerland",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, FI",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, FR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, GB",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, GLO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, HU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, IT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, JP",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, KR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, LU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, NL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, NO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, PL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, PT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, RER",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, RNA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, RU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, RoW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, SE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, SK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, TR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, TW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, lake, US",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, AT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, AU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, BE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, BG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, BR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, CA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, CH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, CN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, CZ",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, DE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, DK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, ES",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, Europe without Switzerland",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, FI",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, FR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, GB",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, GLO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, HU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, IN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, IT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, JP",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, KR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, LU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, MY",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, NL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, NO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, PE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, PH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, PL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, PT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, RAS",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, RER",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, RLA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, RNA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, RU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, RoW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, SE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, SK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, TR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, TW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, TZ",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, US",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, WEU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, river, ZA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, BA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, Europe without Switzerland",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, GLO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, HR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, NORDEL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, PG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, RAF",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, RER",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, RNA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, RoW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, TW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, unspecified natural origin, WEU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well",
+    "Water, well, in ground"
+  ],  
+  [
+    "natural resource",
+    "Water, well, in ground, AT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, AU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, BE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, BG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, BR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, CA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, CH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, CN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, CZ",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, DE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, DK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, ES",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, Europe without Switzerland",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, FI",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, FR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, GB",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, GLO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, HU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, ID",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, IN",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, IT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, JP",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, KR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, LU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, MA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, MY",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, NL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, NO",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, NORDEL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, PE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, PG",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, PH",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, PL",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, PT",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, RER",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, RLA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, RNA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, RU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, RoW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, SE",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, SK",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, TR",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, TW",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, US",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, WEU",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water, well, in ground, ZA",
+    "Water, unspecified natural origin"
+  ],
+  [
+    "natural resource",
+    "Water_3.1_m3",
+    "Water, unspecified natural origin"
+  ],
+    [
+    "natural resource",
+    "Wood, hard, standing",
+    "Wood, hard, standing"
+  ],
+  [
+    "natural resource",
+    "Wood, soft, standing",
+    "Wood, soft, standing"
+  ],
+  [
+    "natural resource",
+    "Wood, unspecified, standing/m3",
+    "Wood, unspecified, standing"
+  ],
+  [
+    "natural resource",
+    "Xenon",
+    "Xenon, in air"
+  ],
+  [
+    "natural resource",
+    "Zinc",
+    "Zinc, 9.0% in sulfide, Zn 5.3%, Pb, Ag, Cd, In, in ground"
+  ],
+  [
+    "natural resource",
+    "Zinc, Zn 0.63%, Au 9.7E-4%, Ag 9.7E-4%, Cu 0.38%, Pb 0.014%, in ore",
+    "Zinc, Zn 0.63%, in mixed ore, in ground"
+  ],
+  [
+    "natural resource",
+    "Zirconium",
+    "Zirconium, 50% in zircon, 0.39% in crude ore, in ground"
+  ],
+  [
+    "soil",
+    "2-Methyl-4-chlorophenoxyacetic acid",
+    "MCPA"
+  ],
+  [
+    "soil",
+    "Benzene, pentachloronitro-",
+    "Quintozene"
+  ],
+  [
+    "soil",
+    "Chlortoluron",
+    "Chlorotoluron"
+  ],
+  [
+    "soil",
+    "Dipropylthiocarbamic acid S-ethyl ester",
+    "EPTC"
+  ],
+  [
+    "soil",
+    "Dithianone",
+    "Dithianon"
+  ],
+  [
+    "soil",
+    "Iprodione",
+    "Iprodion"
+  ],
+  [
+    "soil",
+    "Metam-sodium dihydrate",
+    "Metam-sodium"
+  ],
+  [
+    "soil",
+    "Monosodium acid methanearsonate",
+    "MSMA"
+  ],
+  [
+    "soil",
+    "Oils, biogenic",
+    "Oils, non-fossil"
+  ],
+  [
+    "soil",
+    "Oxydemeton methyl",
+    "Oxydemeton-methyl"
+  ],
+  [
+    "soil",
+    "Parathion, methyl",
+    "Methyl parathion"
+  ],
+  [
+    "soil",
+    "Thiazole, 2-(thiocyanatemethylthio)benzo-",
+    "TCMTB"
+  ],
+  [
+    "soil",
+    "Triallate",
+    "Tri-allate"
+  ],
+  [
+    "water",
+    "1-Butanol",
+    "Butanol"
+  ],
+  [
+    "water",
+    "1-Propanol",
+    "Propanol"
+  ],
+  [
+    "water",
+    "2-Butene, 2-methyl-",
+    "2-Methyl-2-butene"
+  ],
+  [
+    "water",
+    "Acrylate",
+    "Acrylate, ion"
+  ],
+  [
+    "water",
+    "Ammonium",
+    "Ammonium, ion"
+  ],
+  [
+    "water",
+    "Arsenic",
+    "Arsenic, ion"
+  ],
+  [
+    "water",
+    "Benzene, 1,2-dichloro-",
+    "o-Dichlorobenzene"
+  ],
+  [
+    "water",
+    "Benzo(a)anthracene",
+    "Benz(a)anthracene"
+  ],
+  [
+    "water",
+    "Benzo(g,h,i)perylene",
+    "Benzo(ghi)perylene"
+  ],
+  [
+    "water",
+    "Cadmium",
+    "Cadmium, ion"
+  ],
+  [
+    "water",
+    "Calcium",
+    "Calcium, ion"
+  ],
+  [
+    "water",
+    "Carbamic acid, butyl-, 3-iodo-2-propynyl ester",
+    "Butylcarbamate, iodopropynyl"
+  ],
+  [
+    "water",
+    "Carbon",
+    "Elemental carbon"
+  ],
+  [
+    "water",
+    "Chromium",
+    "Chromium, ion"
+  ],
+  [
+    "water",
+    "Copper",
+    "Copper, ion"
+  ],
+  [
+    "water",
+    "Ethane, chloro-",
+    "Monochloroethane"
+  ],
+  [
+    "water",
+    "Ethanol, 2-ethoxy-",
+    "Ethylene glycol monoethyl ether"
+  ],
+  [
+    "water",
+    "Formic acid, thallium(1+) salt",
+    "Formate"
+  ],
+  [
+    "water",
+    "Hydrogen chloride",
+    "Hydrochloric acid"
+  ],
+  [
+    "water",
+    "Iron",
+    "Iron, ion"
+  ],
+  [
+    "water",
+    "Lithium",
+    "Lithium, ion"
+  ],
+  [
+    "water",
+    "Methylamine",
+    "Methyl amine"
+  ],
+  [
+    "water",
+    "Naphthalene",
+    "Naphtalene"
+  ],
+  [
+    "water",
+    "Nickel",
+    "Nickel, ion"
+  ],
+  [
+    "water",
+    "Oils, biogenic",
+    "Oils, non-fossil"
+  ],
+  [
+    "water",
+    "Perchlorate",
+    "Perchlorate, ion"
+  ],
+  [
+    "water",
+    "Potassium",
+    "Potassium, ion"
+  ],
+  [
+    "water",
+    "Silver",
+    "Silver, ion"
+  ],
+  [
+    "water",
+    "Sodium",
+    "Sodium, ion"
+  ],
+  [
+    "water",
+    "Sulphur",
+    "Sulfur"
+  ],
+  [
+    "water",
+    "Thiocyanate",
+    "Thiocyanate, ion"
+  ],
+  [
+    "water",
+    "Tin",
+    "Tin, ion"
+  ],
+  [
+    "water",
+    "Titanium",
+    "Titanium, ion"
+  ],
+  [
+    "water",
+    "Toluene, 2-chloro-",
+    "Toluene, 2-chloro"
+  ],
+  [
+    "water",
+    "Vanadium",
+    "Vanadium, ion"
+  ],
+  [
+    "water",
+    "Zinc",
+    "Zinc, ion"
+  ]
+]

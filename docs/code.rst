@@ -1,19 +1,19 @@
 New Wurst Database
 ==================
 
-.. autoclass:: rmnd_lca.ecoinvent_modification.NewDatabase
+.. autoclass:: premise.ecoinvent_modification.NewDatabase
     :members:
 
 Database Cleaner
 ================
 
-.. autoclass:: rmnd_lca.clean_datasets.DatabaseCleaner
+.. autoclass:: premise.clean_datasets.DatabaseCleaner
     :members:
 
 Inventory Imports
 ================
 
-.. autoclass:: rmnd_lca.inventory_imports.BaseInventoryImport
+.. autoclass:: premise.inventory_imports.BaseInventoryImport
    :members:
 
    .. automethod:: __init__
@@ -21,17 +21,17 @@ Inventory Imports
 Remind Data Collection
 ======================
 
-.. autoclass:: rmnd_lca.data_collection.RemindDataCollection
+.. autoclass:: premise.data_collection.IAMDataCollection
     :members:
 
 Remind to Ecoinvent mapping
 ===========================
 
-.. autoclass:: rmnd_lca.activity_maps.InventorySet
+.. autoclass:: premise.activity_maps.InventorySet
     :members:
 
 Electricity markets modelling
 =============================
 
-.. autoclass:: rmnd_lca.electricity.Electricity
+.. autoclass:: premise.electricity.Electricity
     :members:

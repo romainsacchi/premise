@@ -1,0 +1,48 @@
+remind;Biomass CHP;SE|Electricity|Biomass|CHP|w/o CCS
+remind;Biomass IGCC CCS;SE|Electricity|Biomass|IGCCC|w/ CCS
+remind;Biomass IGCC;SE|Electricity|Biomass|IGCC|w/o CCS
+remind;Coal PC;SE|Electricity|Coal|PC|w/o CCS
+remind;Coal IGCC;SE|Electricity|Coal|IGCC|w/o CCS
+remind;Coal PC CCS;SE|Electricity|Coal|PCC|w/ CCS
+remind;Coal IGCC CCS;SE|Electricity|Coal|IGCCC|w/ CCS
+remind;Coal CHP;SE|Electricity|Coal|CHP|w/o CCS
+remind;Gas OC;SE|Electricity|Gas|GT
+remind;Gas CC;SE|Electricity|Gas|CC|w/o CCS
+remind;Gas CHP;SE|Electricity|Gas|CHP|w/o CCS
+remind;Gas CC CCS;SE|Electricity|Gas|w/ CCS
+remind;Geothermal;SE|Electricity|Geothermal
+remind;Hydro;SE|Electricity|Hydro
+remind;Hydrogen;SE|Electricity|Hydrogen
+remind;Nuclear;SE|Electricity|Nuclear
+remind;Oil ST;SE|Electricity|Oil|w/o CCS
+remind;Solar CSP;SE|Electricity|Solar|CSP
+remind;Solar PV Centralized;SE|Electricity|Solar|PV
+remind;Wind Offshore;SE|Electricity|Wind
+image;Biomass CHP;Secondary Energy|Electricity|Biomass|w/o CCS|3
+image;Biomass CHP CCS;Secondary Energy|Electricity|Biomass|w/ CCS|2
+image;Biomass IGCC CCS;Secondary Energy|Electricity|Biomass|w/ CCS|1
+image;Biomass IGCC;Secondary Energy|Electricity|Biomass|w/o CCS|2
+image;Biomass ST;Secondary Energy|Electricity|Biomass|w/o CCS|1
+image;Coal PC;Secondary Energy|Electricity|Coal|w/o CCS|1
+image;Coal IGCC;Secondary Energy|Electricity|Coal|w/o CCS|2
+image;Coal IGCC CCS;Secondary Energy|Electricity|Coal|w/ CCS|1
+image;Coal CHP;Secondary Energy|Electricity|Coal|w/o CCS|3
+image;Coal CHP CCS;Secondary Energy|Electricity|Coal|w/ CCS|2
+image;Gas OC;Secondary Energy|Electricity|Gas|w/o CCS|1
+image;Gas CC;Secondary Energy|Electricity|Gas|w/o CCS|2
+image;Gas CHP;Secondary Energy|Electricity|Gas|w/o CCS|3
+image;Gas CC CCS;Secondary Energy|Electricity|Gas|w/ CCS|1
+image;Gas CHP CCS;Secondary Energy|Electricity|Gas|w/ CCS|2
+image;Geothermal;Secondary Energy|Electricity|Other
+image;Hydro;Secondary Energy|Electricity|Hydro
+image;Nuclear;Secondary Energy|Electricity|Nuclear
+image;Oil CC CCS;Secondary Energy|Electricity|Oil|w/ CCS|1
+image;Oil CHP CCS;Secondary Energy|Electricity|Oil|w/ CCS|2
+image;Oil ST;Secondary Energy|Electricity|Oil|w/o CCS|1
+image;Oil CC;Secondary Energy|Electricity|Oil|w/o CCS|2
+image;Oil CHP;Secondary Energy|Electricity|Oil|w/o CCS|3
+image;Solar CSP;Secondary Energy|Electricity|Solar|CSP
+image;Solar PV Centralized;Secondary Energy|Electricity|Solar|PV|1
+image;Solar PV Residential;Secondary Energy|Electricity|Solar|PV|2
+image;Wind Onshore;Secondary Energy|Electricity|Wind|1
+image;Wind Offshore;Secondary Energy|Electricity|Wind|2

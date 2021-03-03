@@ -2,16 +2,17 @@ from . import DATA_DIR
 import csv
 import pandas as pd
 
-
 CO2_FUELS = DATA_DIR / "fuel_co2_emission_factor.txt"
 LHV_FUELS = DATA_DIR / "fuels_lower_heating_value.txt"
 CLINKER_RATIO_ECOINVENT_36 = DATA_DIR / "cement" / "clinker_ratio_ecoinvent_36.csv"
 CLINKER_RATIO_ECOINVENT_35 = DATA_DIR / "cement" / "clinker_ratio_ecoinvent_35.csv"
 CLINKER_RATIO_REMIND = DATA_DIR / "cement" / "clinker_ratios.csv"
-REMIND_TO_FUELS = DATA_DIR / "steel" / "remind_fuels_correspondance.txt"
 
-def eidb_label(scenario, year):
-    return "ecoinvent_" + scenario + "_" + str(year)
+REMIND_TO_FUELS = DATA_DIR / "steel" / "remind_fuels_correspondance.txt"
+EFFICIENCY_RATIO_SOLAR_PV = DATA_DIR / "renewables" / "efficiency_solar_PV.csv"
+
+def eidb_label(model, scenario, year):
+    return "ecoinvent_" + model + "_" + scenario + "_" + str(year)
 
 def get_correspondance_remind_to_fuels():
     """
@@ -25,8 +26,6 @@ def get_correspondance_remind_to_fuels():
         for row in r:
             d[row[0]] = {"fuel name": row[1], "activity name": row[2], "reference product": row[3]}
     return d
-
-
 
 def get_fuel_co2_emission_factors():
     """
@@ -58,6 +57,20 @@ def get_lower_heating_values():
         d = dict(filter(None, csv.reader(f, delimiter=";")))
         d = {k: float(v) for k, v in d.items()}
         return d
+
+def get_efficiency_ratio_solar_PV(year, power):
+    """
+    Return a dictionary with years as keys and efficiency ratios as values
+    :return: dict
+    """
+
+    df = pd.read_csv(
+        EFFICIENCY_RATIO_SOLAR_PV)
+
+    return df.groupby(["power", "year"]) \
+        .mean()["value"] \
+        .to_xarray() \
+        .interp(year=year, power=power, kwargs={"fill_value": "extrapolate"})
 
 def get_clinker_ratio_ecoinvent(version):
     """

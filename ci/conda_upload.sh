@@ -1,5 +1,5 @@
 # Only need to change these two variables
-PKG_NAME=rmnd-lca
+PKG_NAME=premise
 USER=romainsacchi
 
 mkdir ~/conda-bld

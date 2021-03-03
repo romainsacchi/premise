@@ -1,18 +1,19 @@
 # content of test_activity_maps.py
 import pytest
-from rmnd_lca.inventory_imports import \
+from premise.inventory_imports import \
     BaseInventoryImport, CarmaCCSInventory,\
     BiofuelInventory, CarculatorInventory
 from pathlib import Path
-from rmnd_lca import INVENTORY_DIR
+from premise import INVENTORY_DIR, DATA_DIR
 
-FILEPATH_CARMA_INVENTORIES = (INVENTORY_DIR / "lci-Carma-CCS.xlsx")
-FILEPATH_BIOFUEL_INVENTORIES = (INVENTORY_DIR / "lci-biofuels.xlsx")
-FILEPATH_BIOGAS_INVENTORIES = (INVENTORY_DIR / "lci-biogas.xlsx")
-FILEPATH_HYDROGEN_INVENTORIES = (INVENTORY_DIR / "lci-hydrogen.xlsx")
-FILEPATH_SYNFUEL_INVENTORIES = (INVENTORY_DIR / "lci-synfuel.xlsx")
-FILEPATH_SYNGAS_INVENTORIES = (INVENTORY_DIR / "lci-syngas.xlsx")
-FILEPATH_HYDROGEN_COAL_GASIFICATION_INVENTORIES = (INVENTORY_DIR / "lci-hydrogen-coal-gasification.xlsx")
+
+FILEPATH_CARMA_INVENTORIES = (INVENTORY_DIR / "lci-Carma-CCS.xls")
+FILEPATH_BIOFUEL_INVENTORIES = (INVENTORY_DIR / "lci-biofuels.xls")
+FILEPATH_BIOGAS_INVENTORIES = (INVENTORY_DIR / "lci-biogas.xls")
+FILEPATH_HYDROGEN_INVENTORIES = (INVENTORY_DIR / "lci-hydrogen.xls")
+FILEPATH_SYNFUEL_INVENTORIES = (INVENTORY_DIR / "lci-synfuel.xls")
+FILEPATH_SYNGAS_INVENTORIES = (INVENTORY_DIR / "lci-syngas.xls")
+FILEPATH_HYDROGEN_COAL_GASIFICATION_INVENTORIES = (INVENTORY_DIR / "lci-hydrogen-coal-gasification.xls")
 
 
 def get_db():
@@ -89,10 +90,24 @@ def test_load_carma():
 def test_load_biofuel():
     db, version = get_db()
     bio = BiofuelInventory(db, version, FILEPATH_BIOFUEL_INVENTORIES)
-    assert len(bio.import_db.data) == 27
+    assert len(bio.import_db.data) == 36
 
 
 def test_load_carculator():
     db, version = get_db()
+<<<<<<< HEAD
     carc = CarculatorInventory(db, 2015, "3.7", ["EUR"])
     assert len(carc.import_db.data) == 335
+=======
+    carc = CarculatorInventory(database=db,
+                               version=3.7,
+                               model="remind",
+                               path=Path(""),
+                               scenario="SSP2-Base",
+                               year=2015,
+                               regions=["EUR"],
+                               vehicles={"source file": (DATA_DIR / "iam_output_files")}
+                               )
+    assert len(carc.import_db.data) >= 335
+
+>>>>>>> fa9f44a36360457b501a363a2bda40e06b058380

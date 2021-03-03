@@ -1,24 +1,10 @@
 from . import DATA_DIR
 import wurst
 from prettytable import PrettyTable
-
-
 from wurst import searching as ws
 from bw2io import ExcelImporter, Migration
-from bw2io.importers.base_lci import LCIImporter
-
-
-from carculator import (
-    CarInputParameters,
-    fill_xarray_from_input_parameters,
-    CarModel,
-    InventoryCalculation,
-    create_fleet_composition_from_REMIND_file,
-    extract_electricity_mix_from_REMIND_file,
-    extract_biofuel_shares_from_REMIND,
-)
-
-
+import carculator
+import carculator_truck
 from pathlib import Path
 import csv
 import uuid
@@ -26,6 +12,150 @@ import numpy as np
 
 
 FILEPATH_BIOSPHERE_FLOWS = DATA_DIR / "dict_biosphere.txt"
+
+EI_37_35_MIGRATION_MAP = {
+                "fields": ["name", "reference product", "location"],
+                "data": [
+                    (
+                        (
+                            "market for water, deionised",
+                            ("water, deionised",),
+                            "Europe without Switzerland",
+                        ),
+                        {
+                            "name": (
+                                "market for water, deionised, from tap water, at user"
+                            ),
+                            "reference product": (
+                                "water, deionised, from tap water, at user"
+                            ),
+                        },
+                    ),
+                    (
+                        ("market for water, deionised", ("water, deionised",), "RoW"),
+                        {
+                            "name": (
+                                "market for water, deionised, from tap water, at user"
+                            ),
+                            "reference product": (
+                                "water, deionised, from tap water, at user"
+                            ),
+                        },
+                    ),
+                    (
+                        ("market for water, deionised", ("water, deionised",), "CH"),
+                        {
+                            "name": (
+                                "market for water, deionised, from tap water, at user"
+                            ),
+                            "reference product": (
+                                "water, deionised, from tap water, at user"
+                            )
+                        },
+                    ),
+                    (
+                        ("market for water, decarbonised", ("water, decarbonised",), "CH"),
+                        {
+                            "name": (
+                                "market for water, decarbonised, at user"
+                            ),
+                            "reference product": (
+                                "water, decarbonised, at user"
+                            )
+                            ,
+                            "location": (
+                                "GLO"
+                            )
+                        },
+                    ),
+                    (
+                        ("water production, deionised", ("water, deionised",), "RoW"),
+                        {
+                            "name": (
+                                "water production, deionised, from tap water, at user"
+                            ),
+                            "reference product": (
+                                "water, deionised, from tap water, at user"
+                            )
+                            ,
+                        },
+                    ),
+                    (
+                        ("water production, deionised", ("water, deionised",), "Europe without Switzerland"),
+                        {
+                            "name": (
+                                "water production, deionised, from tap water, at user"
+                            ),
+                            "reference product": (
+                                "water, deionised, from tap water, at user"
+                            )
+                            ,
+                        },
+                    ),
+                    (
+                        ("market for water, ultrapure", ("water, ultrapure",), "RoW"),
+                        {
+                            "location": "GLO"
+                        },
+                    ),
+(
+                        ("market for water, ultrapure", ("water, ultrapure",), "CA-QC"),
+                        {
+                            "location": "GLO"
+                        },
+                    ),
+                    (
+                        (
+                            "market for aluminium oxide, metallurgical",
+                            ("aluminium oxide, metallurgical",),
+                            "IAI Area, EU27 & EFTA",
+                        ),
+                        {
+                            "name": "market for aluminium oxide",
+                            "reference product": "aluminium oxide",
+                            "location": "GLO",
+                        },
+                    ),
+                    (
+                        (
+                            "market for flat glass, coated",
+                            "flat glass, coated",
+                            "RER",
+                        ),
+                        {"location": "GLO"},
+                    ),
+                    (
+                        (
+                            "market for flat glass, uncoated",
+                            "flat glass, uncoated",
+                            "RER",
+                        ),
+                        {"location": "GLO"},
+                    ),
+
+                    (
+                        (
+                            "market for steam, in chemical industry",
+                            "steam, in chemical industry",
+                            "RER",
+                        ),
+                        {"location": "GLO"},
+                    ),
+                    (
+                        ("market for transport, freight train", ("transport, freight train",), "ZA"),
+                        {
+                            "location": "RoW",
+                        },
+                    ),
+                    (
+                        ("market for transport, freight train", ("transport, freight train",), "IN"),
+                        {
+                            "location": "RoW",
+                        },
+                    ),
+
+                ],
+            }
 
 EI_37_MIGRATION_MAP = {
                 "fields": ["name", "location", "reference product"],
@@ -351,10 +481,6 @@ EI_37_MIGRATION_MAP = {
                 ],
             }
 
-FILEPATH_BIOSPHERE_FLOWS = (DATA_DIR / "dict_biosphere.txt")
-
-
-
 class BaseInventoryImport:
     """
     Base class for inventories that are to be merged with the ecoinvent database.
@@ -364,8 +490,6 @@ class BaseInventoryImport:
     :vartype db: list
     :ivar version: the target Ecoinvent database version
     :vartype version: str
-    :ivar import_db: the database to be merged with ecoinvent
-    :vartype import_db: LCIImporter
     """
 
     def __init__(self, database, version, path):
@@ -386,12 +510,17 @@ class BaseInventoryImport:
         self.version = version
         self.biosphere_dict = self.get_biosphere_code()
 
+
         path = Path(path)
-        if not path.is_file():
-            raise FileNotFoundError(
-                "The inventory file {} could not be found.".format(path)
-            )
-        self.load_inventory(path)
+
+        if path != Path("."):
+            if not path.is_file():
+                raise FileNotFoundError(
+                    "The inventory file {} could not be found.".format(path)
+                )
+
+        self.path = path
+        self.import_db = self.load_inventory(path)
 
     def load_inventory(self, path):
         """Load an inventory from a specified path.
@@ -439,9 +568,9 @@ class BaseInventoryImport:
             print(
                 "The following datasets to import already exist in the source database. They will not be imported"
             )
-            t = PrettyTable(["Name", "Reference product", "Location"])
+            t = PrettyTable(["Name", "Reference product", "Location", "File"])
             for ds in already_exist:
-                t.add_row([ds[0][:40], ds[1][:30], ds[2]])
+                t.add_row([ds[0][:50], ds[1][:30], ds[2], self.path.name])
 
             print(t)
 
@@ -453,7 +582,6 @@ class BaseInventoryImport:
             for x in self.import_db.data
             if (x["name"], x["reference product"], x["location"]) not in self.db_names
         ]
-
 
     def merge_inventory(self):
         """Prepare :attr:`import_db` and merge the inventory to the ecoinvent :attr:`db`.
@@ -635,7 +763,7 @@ class BaseInventoryImport:
                                     )
                                 ],
                             )
-                        except KeyError as e:
+                        except KeyError:
                             if delete_missing:
                                 y["flag_deletion"] = True
                             else:
@@ -653,7 +781,7 @@ class BaseInventoryImport:
                                     )
                                 ],
                             )
-                        except KeyError as e:
+                        except KeyError:
                             if delete_missing:
                                 y["flag_deletion"] = True
                             else:
@@ -683,10 +811,13 @@ class BaseInventoryImport:
                     if "input" in ex:
                         del ex["input"]
 
-
 class CarmaCCSInventory(BaseInventoryImport):
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
         if self.version == 3.7:
@@ -772,6 +903,71 @@ class CarmaCCSInventory(BaseInventoryImport):
         self.add_biosphere_links()
         self.add_product_field_to_exchanges()
 
+        # Check for duplicates
+        self.check_for_duplicates()
+
+class DACInventory(BaseInventoryImport):
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
+    def load_inventory(self, path):
+        return ExcelImporter(path)
+
+    def prepare_inventory(self):
+        if self.version == 3.7:
+            # apply some updates to comply with ei 3.7
+            new_technosphere_data = EI_37_MIGRATION_MAP
+
+            Migration("migration_37").write(
+                new_technosphere_data,
+                description="Change technosphere names due to change from 3.5/3.6 to 3.7",
+            )
+            self.import_db.migrate("migration_37")
+
+        if self.version in (3.6, 3.5):
+            # apply some updates to go from ei3.7 to ei3.6
+            new_technosphere_data = {
+                "fields": ["name", "reference product", "location"],
+                "data": [
+                    (
+                        ("steel production, electric, low-alloyed",
+                         "steel, low-alloyed",
+                         "Europe without Switzerland and Austria"),
+                        {
+                            "location": "RER",
+                        },
+                    ),
+                    (
+                        ("reinforcing steel production",
+                         "reinforcing steel",
+                         "Europe without Austria"),
+                        {
+                            "location": "RER",
+                        },
+                    ),
+                    (
+                        ("smelting of copper concentrate, sulfide ore",
+                         "copper, anode",
+                         "RoW"),
+                        {
+                            "name": "smelting and refining of nickel ore",
+                            "reference product": "copper concentrate, sulfide ore",
+                            "location": "GLO",
+                        },
+                    )
+                ],
+            }
+
+            Migration("migration_36").write(
+                new_technosphere_data,
+                description="Change technosphere names due to change from 3.5 to 3.6",
+            )
+            self.import_db.migrate("migration_36")
+
+        self.add_biosphere_links()
+        self.add_product_field_to_exchanges()
+
         # Add carbon storage for CCS technologies
         print("Add fossil carbon dioxide storage for CCS technologies.")
         self.add_negative_CO2_flows_for_biomass_CCS()
@@ -802,14 +998,17 @@ class CarmaCCSInventory(BaseInventoryImport):
             ):
                 wurst.rescale_exchange(exc, (0.9 / -0.1), remove_uncertainty=True)
 
-
 class BiofuelInventory(BaseInventoryImport):
     """
     Biofuel datasets from the master thesis of Francesco Cozzolino (2018).
     """
 
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
 
@@ -847,13 +1046,13 @@ class BiofuelInventory(BaseInventoryImport):
                     (
                         (
                             "market for water, decarbonised, at user",
-                            ("water, decarbonised, at user",),
+                            "water, decarbonised, at user",
                             "GLO",
                         ),
                         {
-                            "name": ("market for water, decarbonised"),
-                            "reference product": ("water, decarbonised"),
-                            "location": ("DE"),
+                            "name": "market for water, decarbonised",
+                            "reference product": "water, decarbonised",
+                            "location": "DE",
                         },
                     ),
                     (
@@ -865,14 +1064,14 @@ class BiofuelInventory(BaseInventoryImport):
                             "GLO",
                         ),
                         {
-                            "name": ("market for water, completely softened"),
-                            "reference product": ("water, completely softened"),
-                            "location": ("RER"),
+                            "name": "market for water, completely softened",
+                            "reference product": "water, completely softened",
+                            "location": "RER",
                         },
                     ),
                     (
-                        ("market for concrete block", ("concrete block",), "GLO"),
-                        {"location": ("DE"),},
+                        ("market for concrete block", "concrete block", "GLO"),
+                        {"location": "DE"},
                     ),
                 ],
             }
@@ -889,14 +1088,17 @@ class BiofuelInventory(BaseInventoryImport):
         # Check for duplicates
         self.check_for_duplicates()
 
-
 class HydrogenInventory(BaseInventoryImport):
     """
     Hydrogen datasets from the ELEGANCY project (2019).
     """
 
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
         # migration for ei 3.7
@@ -912,57 +1114,7 @@ class HydrogenInventory(BaseInventoryImport):
 
         # Migrations for 3.5
         if self.version == 3.5:
-            migrations = {
-                "fields": ["name", "reference product", "location"],
-                "data": [
-                    (
-                        (
-                            "market for water, deionised",
-                            ("water, deionised",),
-                            "Europe without Switzerland",
-                        ),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        ("market for water, deionised", ("water, deionised",), "RoW"),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        (
-                            "market for aluminium oxide, metallurgical",
-                            ("aluminium oxide, metallurgical",),
-                            "IAI Area, EU27 & EFTA",
-                        ),
-                        {
-                            "name": ("market for aluminium oxide"),
-                            "reference product": ("aluminium oxide"),
-                            "location": ("GLO"),
-                        },
-                    ),
-                    (
-                        (
-                            "market for flat glass, coated",
-                            ("flat glass, coated",),
-                            "RER",
-                        ),
-                        {"location": ("GLO"),},
-                    ),
-                ],
-            }
+            migrations = EI_37_35_MIGRATION_MAP
 
             Migration("hydrogen_ecoinvent_35").write(
                 migrations,
@@ -975,15 +1127,18 @@ class HydrogenInventory(BaseInventoryImport):
 
         # Check for duplicates
         self.check_for_duplicates()
-
 
 class HydrogenBiogasInventory(BaseInventoryImport):
     """
     Hydrogen datasets from the ELEGANCY project (2019).
     """
 
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
         # migration for ei 3.7
@@ -999,57 +1154,7 @@ class HydrogenBiogasInventory(BaseInventoryImport):
 
         # Migrations for 3.5
         if self.version == 3.5:
-            migrations = {
-                "fields": ["name", "reference product", "location"],
-                "data": [
-                    (
-                        (
-                            "market for water, deionised",
-                            ("water, deionised",),
-                            "Europe without Switzerland",
-                        ),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        ("market for water, deionised", ("water, deionised",), "RoW"),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        (
-                            "market for aluminium oxide, metallurgical",
-                            ("aluminium oxide, metallurgical",),
-                            "IAI Area, EU27 & EFTA",
-                        ),
-                        {
-                            "name": ("market for aluminium oxide"),
-                            "reference product": ("aluminium oxide"),
-                            "location": ("GLO"),
-                        },
-                    ),
-                    (
-                        (
-                            "market for flat glass, coated",
-                            ("flat glass, coated",),
-                            "RER",
-                        ),
-                        {"location": ("GLO"),},
-                    ),
-                ],
-            }
+            migrations = EI_37_35_MIGRATION_MAP
 
             Migration("hydrogen_ecoinvent_35").write(
                 migrations,
@@ -1062,102 +1167,18 @@ class HydrogenBiogasInventory(BaseInventoryImport):
 
         # Check for duplicates
         self.check_for_duplicates()
-
-
-class HydrogenWoodyInventory(BaseInventoryImport):
-    """
-    Hydrogen datasets from the ELEGANCY project (2019).
-    """
-
-    def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
-
-    def prepare_inventory(self):
-        # migration for ei 3.7
-        if self.version == 3.7:
-            # apply some updates to comply with ei 3.7
-            new_technosphere_data = EI_37_MIGRATION_MAP
-
-            Migration("migration_37").write(
-                new_technosphere_data,
-                description="Change technosphere names due to change from 3.5/3.6 to 3.7",
-            )
-            self.import_db.migrate("migration_37")
-
-        # Migrations for 3.5
-        if self.version == 3.5:
-            migrations = {
-                "fields": ["name", "reference product", "location"],
-                "data": [
-                    (
-                        (
-                            "market for water, deionised",
-                            ("water, deionised",),
-                            "Europe without Switzerland",
-                        ),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        ("market for water, deionised", ("water, deionised",), "RoW"),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        (
-                            "market for aluminium oxide, metallurgical",
-                            ("aluminium oxide, metallurgical",),
-                            "IAI Area, EU27 & EFTA",
-                        ),
-                        {
-                            "name": ("market for aluminium oxide"),
-                            "reference product": ("aluminium oxide"),
-                            "location": ("GLO"),
-                        },
-                    ),
-                    (
-                        (
-                            "market for flat glass, coated",
-                            ("flat glass, coated",),
-                            "RER",
-                        ),
-                        {"location": ("GLO"),},
-                    ),
-                ],
-            }
-
-            Migration("hydrogen_ecoinvent_35").write(
-                migrations,
-                description="Change technosphere names due to change from 3.5 to 3.6",
-            )
-            self.import_db.migrate("hydrogen_ecoinvent_35")
-
-        self.add_biosphere_links()
-        self.add_product_field_to_exchanges()
-
-        # Check for duplicates
-        self.check_for_duplicates()
-
 
 class BiogasInventory(BaseInventoryImport):
     """
     Biogas datasets from the SCCER project (2019).
     """
 
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
         # migration for ei 3.7
@@ -1173,48 +1194,7 @@ class BiogasInventory(BaseInventoryImport):
 
         # Migrations for 3.5
         if self.version == 3.5:
-            migrations = {
-                "fields": ["name", "reference product", "location"],
-                "data": [
-                    (
-                        ("market for water, deionised", ("water, deionised",), "CH"),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        (
-                            "market for water, deionised",
-                            ("water, deionised",),
-                            "Europe without Switzerland",
-                        ),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        ("market for water, deionised", ("water, deionised",), "RoW"),
-                        {
-                            "name": (
-                                "market for water, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                ],
-            }
+            migrations = EI_37_35_MIGRATION_MAP
 
             Migration("biogas_ecoinvent_35").write(
                 migrations,
@@ -1228,14 +1208,17 @@ class BiogasInventory(BaseInventoryImport):
         # Check for duplicates
         self.check_for_duplicates()
 
-
 class SyngasInventory(BaseInventoryImport):
     """
     Synthetic fuel datasets from the PSI project (2019).
     """
 
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
         # migration for ei 3.7
@@ -1249,43 +1232,30 @@ class SyngasInventory(BaseInventoryImport):
             )
             self.import_db.migrate("migration_37")
 
+        # migration for ei 3.5
+        if self.version == 3.5:
+            migrations = EI_37_35_MIGRATION_MAP
+
+            Migration("syngas_ecoinvent_35").write(
+                migrations,
+                description="Change technosphere names due to change from 3.6 to 3.5",
+            )
+            self.import_db.migrate("syngas_ecoinvent_35")
+
         self.add_biosphere_links()
         self.add_product_field_to_exchanges()
-
 
 class SynfuelInventory(BaseInventoryImport):
     """
     Synthetic fuel datasets from the PSI project (2019).
     """
 
-    def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
-
-    def prepare_inventory(self):
-        # migration for ei 3.7
-        if self.version == 3.7:
-            # apply some updates to comply with ei 3.7
-            new_technosphere_data = EI_37_MIGRATION_MAP
-
-            Migration("migration_37").write(
-                new_technosphere_data,
-                description="Change technosphere names due to change from 3.5/3.6 to 3.7",
-            )
-            self.import_db.migrate("migration_37")
-        self.add_biosphere_links()
-        self.add_product_field_to_exchanges()
-        # Check for duplicates
-        self.check_for_duplicates()
-
-
-class HydrogenCoalInventory(BaseInventoryImport):
-    """
-    Hydrogen production from coal gasification from Wokaun A, Wilhelm E, Schenler W, Simons A, Bauer C, Bond S, et al.
-    Transition to hydrogen - pathways toward clean transportation. New York: Cambridge University Press; 2011
-    """
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
 
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
         # migration for ei 3.7
@@ -1299,75 +1269,31 @@ class HydrogenCoalInventory(BaseInventoryImport):
             )
             self.import_db.migrate("migration_37")
 
-        # Migrations for 3.5
         if self.version == 3.5:
-            migrations = {
-                "fields": ["name", "reference product", "location"],
-                "data": [
-                    (
-                        ("water production, deionised", ("water, deionised",), "RoW"),
-                        {
-                            "name": (
-                                "water production, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        (
-                            "water production, deionised",
-                            ("water, deionised",),
-                            "Europe without Switzerland",
-                        ),
-                        {
-                            "name": (
-                                "water production, deionised, from tap water, at user"
-                            ),
-                            "reference product": (
-                                "water, deionised, from tap water, at user"
-                            ),
-                        },
-                    ),
-                    (
-                        (
-                            "market for transport, freight train",
-                            ("transport, freight train",),
-                            "ZA",
-                        ),
-                        {"location": ("RoW")},
-                    ),
-                    (
-                        (
-                            "market for transport, freight train",
-                            ("transport, freight train",),
-                            "IN",
-                        ),
-                        {"location": ("RoW")},
-                    ),
-                ],
-            }
+            migrations = EI_37_35_MIGRATION_MAP
 
-            Migration("hydrogen_coal_ecoinvent_35").write(
+            Migration("syngas_ecoinvent_35").write(
                 migrations,
-                description="Change technosphere names due to change from 3.5 to 3.6",
+                description="Change technosphere names due to change from 3.6 to 3.5",
             )
-            self.import_db.migrate("hydrogen_coal_ecoinvent_35")
+            self.import_db.migrate("syngas_ecoinvent_35")
 
         self.add_biosphere_links()
         self.add_product_field_to_exchanges()
         # Check for duplicates
         self.check_for_duplicates()
-
 
 class GeothermalInventory(BaseInventoryImport):
     """
     Geothermal heat production, adapted from geothermal power production dataset from ecoinvent 3.6.
     """
 
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
         # migration for ei 3.7
@@ -1384,65 +1310,18 @@ class GeothermalInventory(BaseInventoryImport):
         self.add_product_field_to_exchanges()
         # Check for duplicates
         self.check_for_duplicates()
-
-
-class SyngasCoalInventory(BaseInventoryImport):
-    """
-    Synthetic fuel datasets from the PSI project (2019), with hydrogen from coal gasification.
-    """
-
-    def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
-
-    def prepare_inventory(self):
-        # migration for ei 3.7
-        if self.version == 3.7:
-            # apply some updates to comply with ei 3.7
-            new_technosphere_data = EI_37_MIGRATION_MAP
-
-            Migration("migration_37").write(
-                new_technosphere_data,
-                description="Change technosphere names due to change from 3.5/3.6 to 3.7",
-            )
-            self.import_db.migrate("migration_37")
-        self.add_biosphere_links()
-        self.add_product_field_to_exchanges()
-        # Check for duplicates
-        self.check_for_duplicates()
-
-
-class SynfuelCoalInventory(BaseInventoryImport):
-    """
-    Synthetic fuel datasets from the PSI project (2019), with hydrogen from coal gasification.
-    """
-
-    def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
-
-    def prepare_inventory(self):
-        # migration for ei 3.7
-        if self.version == 3.7:
-            # apply some updates to comply with ei 3.7
-            new_technosphere_data = EI_37_MIGRATION_MAP
-
-            Migration("migration_37").write(
-                new_technosphere_data,
-                description="Change technosphere names due to change from 3.5/3.6 to 3.7",
-            )
-            self.import_db.migrate("migration_37")
-        self.add_biosphere_links()
-        self.add_product_field_to_exchanges()
-        # Check for duplicates
-        self.check_for_duplicates()
-
 
 class LPGInventory(BaseInventoryImport):
     """
     Liquified Petroleum Gas (LPG) from methanol distillation, the PSI project (2020), with hydrogen from electrolysis.
     """
 
+    def __init__(self, database, version, path):
+        super().__init__(database, version, path)
+        self.import_db = self.load_inventory(path)
+
     def load_inventory(self, path):
-        self.import_db = ExcelImporter(path)
+        return ExcelImporter(path)
 
     def prepare_inventory(self):
         # migration for ei 3.7
@@ -1458,31 +1337,7 @@ class LPGInventory(BaseInventoryImport):
 
         # Migrations for 3.5
         if self.version == 3.5:
-            migrations = {
-                "fields": ["name", "reference product", "location"],
-                "data": [
-                    (
-                        (
-                            "market for aluminium oxide, metallurgical",
-                            ("aluminium oxide, metallurgical",),
-                            "IAI Area, EU27 & EFTA",
-                        ),
-                        {
-                            "name": ("market for aluminium oxide"),
-                            "reference product": ("aluminium oxide"),
-                            "location": ("GLO"),
-                        },
-                    ),
-                    (
-                        (
-                            "market for flat glass, uncoated",
-                            ("flat glass, uncoated",),
-                            "RER",
-                        ),
-                        {"location": ("GLO")},
-                    ),
-                ],
-            }
+            migrations = EI_37_35_MIGRATION_MAP
 
             Migration("LPG_ecoinvent_35").write(
                 migrations,
@@ -1495,83 +1350,105 @@ class LPGInventory(BaseInventoryImport):
         # Check for duplicates
         self.check_for_duplicates()
 
-
 class CarculatorInventory(BaseInventoryImport):
     """
     Car models from the carculator project, https://github.com/romainsacchi/carculator
     """
 
-
-    def __init__(self, database, year, version, regions,
-                 vehicles={}, scenario="SSP2-Base"):
-
-        """Create a :class:`BaseInventoryImport` instance.
-
-        :param list database: the target database for the import (the Ecoinvent database),
-                              unpacked to a list of dicts
-        :param float version: the version of the target database
-        :param path: Path to the imported inventory.
-
-        """
-        self.db = database
-        self.db_code = [x["code"] for x in self.db]
-        self.db_names = [
-            (x["name"], x["reference product"], x["location"]) for x in self.db
-        ]
-        self.biosphere_dict = self.get_biosphere_code()
-
+    def __init__(self, database, version, path, model, scenario, year, regions, vehicles):
         self.db_year = year
-        self.version = version
-        self.regions = regions
+        self.model = model
+
+
+        if "region" in vehicles:
+            if vehicles["region"] == "all":
+                self.regions = regions
+            else:
+                if any(i for i in vehicles["region"] if i not in regions):
+                    raise ValueError(
+                        "One or more of the following regions {} for the creation of truck inventories is not valid.\n"
+                        "Regions must be of the following {}".format(vehicles["region"], regions))
+                else:
+                    self.regions = vehicles["region"]
+        else:
+            self.regions = regions
+
         self.fleet_file = (
             Path(vehicles["fleet file"]) if "fleet file" in vehicles else None
         )
 
+        if self.fleet_file:
+            self.filter = ["fleet average"]
+
+        else:
+            self.filter = []
+
+        if "filter" in vehicles:
+            self.filter.extend(vehicles["filter"])
+
+
+        # IAM output file extension differs between REMIND and IMAGE
+        ext = ".mif" if model == "remind" else ".xlsx"
+
         self.source_file = (
-            Path(vehicles["source file"]) / (scenario + ".mif")
+            Path(vehicles["source file"]) / (model + "_" + scenario + ext)
             if "source file" in vehicles
-            else DATA_DIR / "remind_output_files" / (scenario + ".mif")
+            else DATA_DIR / "iam_output_files" / (model + "_" + scenario + ext)
         )
 
-        self.import_db = []
-        self.load_inventory()
+        if not self.source_file.is_file():
+            raise FileNotFoundError("For some reason, the file {} is not accessible.".format(
+                self.source_file
+            ))
 
+        super().__init__(database, version, path)
 
-    def load_inventory(self):
+    def load_inventory(self, path):
         """Create `carculator` fleet average inventories for a given range of years.
         """
 
-        cip = CarInputParameters()
+        cip = carculator.CarInputParameters()
         cip.static()
-        _, array = fill_xarray_from_input_parameters(cip)
+        _, array = carculator.fill_xarray_from_input_parameters(cip)
 
         array = array.interp(
-            year=np.arange(2010, self.db_year + 1), kwargs={"fill_value": "extrapolate"}
+            year=np.arange(1996, self.db_year + 1), kwargs={"fill_value": "extrapolate"}
         )
-        cm = CarModel(array, cycle="WLTC")
+        cm = carculator.CarModel(array, cycle="WLTC 3.4")
         cm.set_all()
 
         for r, region in enumerate(self.regions):
 
             if self.fleet_file:
-                fleet_array = create_fleet_composition_from_REMIND_file(
-                    self.fleet_file, region, fleet_year=self.db_year
-                )
+                if self.model == "remind":
 
-                scope = {
-                    "powertrain": fleet_array.powertrain.values,
-                    "size": fleet_array.coords["size"].values,
-                    "year": fleet_array.coords["vintage_year"].values,
-                    "fu": {"fleet": fleet_array, "unit": "vkm"},
-                }
+                    fleet_array = carculator.create_fleet_composition_from_REMIND_file(
+                        self.fleet_file, region, fleet_year=self.db_year
+                    )
+
+                    scope = {
+                        "powertrain": fleet_array.powertrain.values,
+                        "size": fleet_array.coords["size"].values,
+                        "year": fleet_array.coords["vintage_year"].values,
+                        "fu": {"fleet": fleet_array, "unit": "vkm"},
+                    }
+
+                else:
+                    # If a fleet file is given, but not for REMIND, it
+                    # has to be a filepath to a CSV file
+                    scope = {"fu": {"fleet": self.fleet_file, "unit": "vkm"},
+                             "year": [self.db_year]
+                             }
+
             else:
                 scope = {"year": [self.db_year]}
 
-            mix = extract_electricity_mix_from_REMIND_file(
-                fp=self.source_file, remind_region=region, years=scope["year"]
+            mix = carculator.extract_electricity_mix_from_IAM_file(
+                model=self.model, fp=self.source_file, IAM_region=region, years=scope["year"]
             )
-            fuel_shares = extract_biofuel_shares_from_REMIND(
-                fp=self.source_file, remind_region=region, years=scope["year"],
+
+            fuel_shares = carculator.extract_biofuel_shares_from_IAM(
+                model=self.model, fp=self.source_file, IAM_region=region, years=scope["year"],
                 allocate_all_synfuel=True
             )
 
@@ -1650,37 +1527,219 @@ class CarculatorInventory(BaseInventoryImport):
                 },
             }
 
-            ic = InventoryCalculation(
+            ic = carculator.InventoryCalculation(
                 cm.array, scope=scope, background_configuration=bc
             )
 
             if self.fleet_file:
+
                 i = ic.export_lci_to_bw(presamples=False,
                                         ecoinvent_version=str(self.version),
                                         create_vehicle_datasets=False)
-
-                # filter out regular cars, to keep only fleet averages
-
-                if self.fleet_file:
-                    i.data = [x for x in i.data if "transport, passenger car" not in x["name"]
-                              or "fleet average" in x["name"]]
 
             else:
                 i = ic.export_lci_to_bw(presamples=False,
                                         ecoinvent_version=str(self.version))
 
+            # filter out cars if anything given in `self.filter`
+            if len(self.filter) > 0:
+                i.data = [x for x in i.data if "transport, passenger car" not in x["name"]
+                          or any(y.lower() in x["name"].lower() for y in self.filter)]
+
+            # we need to remove the electricity inputs in the fuel markets
+            # that are typically added when synfuels are part of the blend
+            for x in i.data:
+                if "fuel supply for " in x["name"]:
+                    for e in x["exchanges"]:
+                        if "electricity market for " in e["name"]:
+                            x["exchanges"].remove(e)
+
             if r == 0:
-                self.import_db = i
+                import_db = i
             else:
                 # remove duplicate items if iterating over several regions
                 i.data = [
                     x
                     for x in i.data
                     if (x["name"], x["location"])
-                       not in [(z["name"], z["location"]) for z in self.import_db.data]
+                       not in [(z["name"], z["location"]) for z in import_db.data]
                 ]
-                self.import_db.data.extend(i.data)
+                import_db.data.extend(i.data)
 
+        return import_db
+
+
+    def prepare_inventory(self):
+        self.add_biosphere_links(delete_missing=True)
+        self.add_product_field_to_exchanges()
+        # Check for duplicates
+        self.check_for_duplicates()
+
+class TruckInventory(BaseInventoryImport):
+    """
+    Car models from the carculator project, https://github.com/romainsacchi/carculator
+    """
+
+    def __init__(self, database, version, path, model, scenario, year, regions, vehicles):
+
+        self.db_year = year
+        self.model = model
+
+        if "region" in vehicles:
+            if vehicles["region"] == "all":
+                self.regions = regions
+            else:
+                if any(i for i in vehicles["region"] if i not in regions):
+                    raise ValueError(
+                        "One or more of the following regions {} for the creation of truck inventories is not valid.\n"
+                        "Regions must be of the following {}".format(vehicles["region"], regions))
+                else:
+                    self.regions = vehicles["region"]
+        else:
+            self.regions = regions
+
+        self.fleet_file = (
+            Path(vehicles["fleet file"]) if "fleet file" in vehicles else None
+        )
+
+        if self.fleet_file:
+            self.filter = ["fleet average"]
+
+        else:
+            self.filter = []
+
+        if "filter" in vehicles:
+            self.filter.extend(vehicles["filter"])
+
+        # IAM output file extension differs between REMIND and IMAGE
+        ext = ".mif" if model == "remind" else ".xlsx"
+
+        self.source_file = (
+            Path(vehicles["source file"]) / (model + "_" + scenario + ext)
+            if "source file" in vehicles
+            else DATA_DIR / "iam_output_files" / (model + "_" + scenario + ext)
+        )
+
+        if not self.source_file.is_file():
+            raise FileNotFoundError("For some reason, the file {} is not accessible.".format(
+                self.source_file
+            ))
+
+        super().__init__(database, version, path)
+
+    def load_inventory(self, path):
+        """Create `carculator_truck` fleet average inventories for a given range of years.
+        """
+
+        tip = carculator_truck.TruckInputParameters()
+        tip.static()
+        _, array = carculator_truck.fill_xarray_from_input_parameters(tip)
+
+        array = array.interp(
+            year=[self.db_year], kwargs={"fill_value": "extrapolate"}
+        )
+        tm = carculator_truck.TruckModel(array, cycle="Regional delivery", country="CH")
+        tm.set_all()
+
+        for r, region in enumerate(self.regions):
+
+            scope = {"year": [self.db_year]}
+
+            mix = carculator_truck.extract_electricity_mix_from_IAM_file(
+                model=self.model, fp=self.source_file, IAM_region=region, years=scope["year"]
+            )
+
+            fuel_shares = carculator_truck.extract_biofuel_shares_from_IAM(
+                model=self.model, fp=self.source_file, IAM_region=region, years=scope["year"],
+                allocate_all_synfuel=True
+            )
+
+            bc = {
+                "custom electricity mix": mix,
+                "country": region,
+                "fuel blend": {
+                    "diesel": {
+                        "primary fuel": {
+                            "type": "diesel",
+                            "share": fuel_shares.sel(fuel_type="liquid - fossil").values
+                            if "liquid - fossil" in fuel_shares.fuel_type.values
+                            else [1],
+                        },
+                        "secondary fuel": {
+                            "type": "biodiesel - cooking oil",
+                            "share": fuel_shares.sel(
+                                fuel_type="liquid - biomass"
+                            ).values
+                            if "liquid - biomass" in fuel_shares.fuel_type.values
+                            else [1],
+                        },
+                        "tertiary fuel": {
+                            "type": "synthetic diesel",
+                            "share": fuel_shares.sel(
+                                fuel_type="liquid - synfuel"
+                            ).values
+                            if "liquid - synfuel" in fuel_shares.fuel_type.values
+                            else [0],
+                        }
+                    },
+                    "cng": {
+                        "primary fuel": {
+                            "type": "cng",
+                            "share": fuel_shares.sel(fuel_type="gas - fossil").values
+                            if "gas - fossil" in fuel_shares.fuel_type.values
+                            else [1],
+                        },
+                        "secondary fuel": {
+                            "type": "biogas - biowaste",
+                            "share": fuel_shares.sel(fuel_type="gas - biomass").values
+                            if "gas - biomass" in fuel_shares.fuel_type.values
+                            else [0],
+                        },
+                    },
+                    "hydrogen": {
+                        "primary fuel": {
+                            "type": "electrolysis",
+                            "share": np.ones_like(scope["year"]),
+                        }
+                    },
+                },
+            }
+
+            ic = carculator_truck.InventoryCalculation(tm,
+                                                      scope=scope,
+                                                      background_configuration=bc
+                                                       )
+
+            i = ic.export_lci_to_bw(presamples=False,
+                                    ecoinvent_version=str(self.version)
+                                    )
+
+            # filter out cars if anything given in `self.filter`
+            if len(self.filter) > 0:
+                i.data = [x for x in i.data if "transport, " not in x["name"]
+                          or any(y.lower() in x["name"].lower() for y in self.filter)]
+
+            # we need to remove the electricity inputs in the fuel markets
+            # that are typically added when synfuels are part of the blend
+            for x in i.data:
+                if "fuel supply for " in x["name"]:
+                    for e in x["exchanges"]:
+                        if "electricity market for " in e["name"]:
+                            x["exchanges"].remove(e)
+
+            if r == 0:
+                import_db = i
+            else:
+                # remove duplicate items if iterating over several regions
+                i.data = [
+                    x
+                    for x in i.data
+                    if (x["name"], x["location"])
+                       not in [(z["name"], z["location"]) for z in import_db.data]
+                ]
+                import_db.data.extend(i.data)
+
+        return import_db
 
     def prepare_inventory(self):
         self.add_biosphere_links(delete_missing=True)

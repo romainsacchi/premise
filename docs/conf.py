@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 
-project = 'rmnd-lca'
+project = 'premise'
 copyright = '2020, Potsdam Institute for Climate Impact Research, Paul Scherrer Institut'
 author = 'Alois Dirnaichner, Romain Sacchi, Chris Mutel'
 
@@ -32,7 +32,7 @@ release = '0.1.0'
 extensions = ['sphinx.ext.autodoc']
 
 autoapi_type = 'python'
-autoapi_dirs = ['../rmnd-lca']
+autoapi_dirs = ['../premise']
 
 master_doc = 'index'
 

@@ -1,0 +1,34 @@
+remind;Biomass IGCC CCS;Tech|Electricity|Biomass|IGCCC|w/ CCS|Efficiency
+remind;Biomass CHP;Tech|Electricity|Biomass|CHP|w/o CCS|Efficiency
+remind;Biomass IGCC;Tech|Electricity|Biomass|IGCC|w/o CCS|Efficiency
+remind;Coal IGCC;Tech|Electricity|Coal|IGCC|w/o CCS|Efficiency
+remind;Coal IGCC CCS;Tech|Electricity|Coal|IGCCC|w/ CCS|Efficiency
+remind;Coal PC;Tech|Electricity|Coal|PC|w/o CCS|Efficiency
+remind;Coal PC CCS;Tech|Electricity|Coal|PCC|w/ CCS|Efficiency
+remind;Coal CHP;Tech|Electricity|Coal|CHP|w/o CCS|Efficiency
+remind;Gas OC;Tech|Electricity|Gas|GT|Efficiency
+remind;Gas CC;Tech|Electricity|Gas|CC|w/o CCS|Efficiency
+remind;Gas CHP;Tech|Electricity|Gas|CHP|w/o CCS|Efficiency
+remind;Gas CC CCS;Tech|Electricity|Gas|CCC|w/ CCS|Efficiency
+remind;Oil ST;Tech|Electricity|Oil|DOT|Efficiency
+image;Biomass CHP;Efficiency|Electricity|Biomass|w/o CCS|3
+image;Biomass CHP CCS;Efficiency|Electricity|Biomass|w/ CCS|2
+image;Biomass IGCC CCS;Efficiency|Electricity|Biomass|w/ CCS|1
+image;Biomass IGCC;Efficiency|Electricity|Biomass|w/o CCS|2
+image;Biomass ST;Efficiency|Electricity|Biomass|w/o CCS|1
+image;Coal PC;Efficiency|Electricity|Coal|w/o CCS|1
+image;Coal IGCC;Efficiency|Electricity|Coal|w/o CCS|2
+image;Coal IGCC CCS;Efficiency|Electricity|Coal|w/ CCS|1
+image;Coal CHP;Efficiency|Electricity|Coal|w/o CCS|3
+image;Coal CHP CCS;Efficiency|Electricity|Coal|w/ CCS|2
+image;Gas OC;Efficiency|Electricity|Gas|w/o CCS|1
+image;Gas CC;Efficiency|Electricity|Gas|w/o CCS|2
+image;Gas CC CCS;Efficiency|Electricity|Gas|w/ CCS|1
+image;Gas CHP;Efficiency|Electricity|Gas|w/o CCS|3
+image;Gas CHP CCS;Efficiency|Electricity|Gas|w/ CCS|2
+image;Nuclear;Efficiency|Electricity|Nuclear
+image;Oil CC CCS;Efficiency|Electricity|Oil|w/ CCS|1
+image;Oil CHP CCS;Efficiency|Electricity|Oil|w/ CCS|2
+image;Oil ST;Efficiency|Electricity|Oil|w/o CCS|1
+image;Oil CC;Efficiency|Electricity|Oil|w/o CCS|2
+image;Oil CHP;Efficiency|Electricity|Oil|w/o CCS|3

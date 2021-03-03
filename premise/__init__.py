@@ -1,15 +1,16 @@
 __all__ = (
     "InventorySet",
     "DatabaseCleaner",
-    "RemindDataCollection",
+    "IAMDataCollection",
     "NewDatabase",
     "Electricity",
     "BiofuelInventory",
     "CarmaCCSInventory",
     "Geomap",
-    "DATA_DIR"
+    "DATA_DIR",
+    "INVENTORY_DIR"
 )
-__version__ = (0, 1, 6)
+__version__ = (0, 1, 8)
 
 from pathlib import Path
 
@@ -18,7 +19,7 @@ INVENTORY_DIR = Path(__file__).resolve().parent / "data" / "additional_inventori
 
 from .activity_maps import InventorySet
 from .clean_datasets import DatabaseCleaner
-from .data_collection import RemindDataCollection
+from .data_collection import IAMDataCollection
 from .ecoinvent_modification import NewDatabase
 from .electricity import Electricity
 from .inventory_imports import CarmaCCSInventory, BiofuelInventory

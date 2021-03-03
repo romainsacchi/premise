@@ -1,7 +1,7 @@
 # content of test_activity_maps.py
 from bw2data.database import DatabaseChooser
 import pytest
-from rmnd_lca.clean_datasets import DatabaseCleaner
+from premise.clean_datasets import DatabaseCleaner
 
 
 def get_dict():

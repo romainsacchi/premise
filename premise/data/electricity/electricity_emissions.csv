@@ -1,0 +1,33 @@
+remind;Biomass IGCC CCS;Power_Gen_Bio_Trad
+remind;Biomass IGCC;Power_Gen_Bio_Trad
+remind;Biomass CHP;Power_Gen_Bio_Trad
+remind;Coal IGCC;Power_Gen_Coal
+remind;Coal IGCC CCS;Power_Gen_Coal
+remind;Coal PC;Power_Gen_Coal
+remind;Coal CHP;Power_Gen_Coal
+remind;Coal PC CCS;Power_Gen_Coal
+remind;Gas CC CCS;Power_Gen_NatGas
+remind;Gas OC;Power_Gen_NatGas
+remind;Gas CC;Power_Gen_NatGas
+remind;Gas CHP;Power_Gen_NatGas
+remind;Oil ST;Power_Gen_LLF
+image;Biomass CHP;Power_Gen_Bio_Trad
+image;Biomass CHP CCS;Power_Gen_Bio_Trad
+image;Biomass IGCC CCS;Power_Gen_Bio_Trad
+image;Biomass IGCC;Power_Gen_Bio_Trad
+image;Biomass ST;Power_Gen_Bio_Trad
+image;Coal PC;Power_Gen_Coal
+image;Coal IGCC;Power_Gen_Coal
+image;Coal IGCC CCS;Power_Gen_Coal
+image;Coal CHP;Power_Gen_Coal
+image;Coal CHP CCS;Power_Gen_Coal
+image;Gas OC;Power_Gen_NatGas
+image;Gas CC;Power_Gen_NatGas
+image;Gas CC CCS;Power_Gen_NatGas
+image;Gas CHP;Power_Gen_NatGas
+image;Gas CHP CCS;Power_Gen_NatGas
+image;Oil CC CCS;Power_Gen_LLF
+image;Oil CHP CCS;Power_Gen_LLF
+image;Oil ST;Power_Gen_LLF
+image;Oil CC;Power_Gen_LLF
+image;Oil CHP;Power_Gen_LLF

@@ -3,11 +3,11 @@ from . import DATA_DIR
 from .activity_maps import InventorySet
 from .geomap import Geomap
 from wurst import searching as ws
-from wurst.ecoinvent import filters
 import csv
 import numpy as np
 import uuid
 import wurst
+from .utils import get_lower_heating_values
 from datetime import date
 
 PRODUCTION_PER_TECH = (
@@ -19,37 +19,27 @@ LHV_FUELS = DATA_DIR / "fuels_lower_heating_value.txt"
 
 class Electricity:
     """
-    Class that modifies electricity markets in ecoinvent based on REMIND output data.
+    Class that modifies electricity markets in ecoinvent based on IAM output data.
 
-    :ivar scenario: name of a Remind scenario
+    :ivar scenario: name of an IAM scenario
     :vartype scenario: str
 
     """
 
-    def __init__(self, db, rmd, scenario, year):
+    def __init__(self, db, rmd, model, scenario, year):
         self.db = db
         self.rmd = rmd
-        self.geo = Geomap()
+        self.model = model
+        self.geo = Geomap(model=model)
         self.production_per_tech = self.get_production_per_tech_dict()
         self.losses = self.get_losses_per_country_dict()
         self.scenario = scenario
         self.year = year
-        self.fuels_lhv = self.get_lower_heating_values()
+        self.fuels_lhv = get_lower_heating_values()
         mapping = InventorySet(self.db)
         self.emissions_map = mapping.get_remind_to_ecoinvent_emissions()
         self.powerplant_map = mapping.generate_powerplant_map()
-
-    @staticmethod
-    def get_lower_heating_values():
-        """
-        Loads a csv file into a dictionary. This dictionary contains lower heating values for a number of fuel types.
-        Taken from: https://www.engineeringtoolbox.com/fuels-higher-calorific-values-d_169.html
-
-        :return: dictionary that contains lower heating values
-        :rtype: dict
-        """
-        with open(LHV_FUELS) as f:
-            return dict(filter(None, csv.reader(f, delimiter=";")))
+        self.powerplant_fuels_map = mapping.generate_powerplant_fuels_map()
 
     def get_suppliers_of_a_region(self, ecoinvent_regions, ecoinvent_technologies):
         """
@@ -170,7 +160,7 @@ class Electricity:
         """
 
         # Fetch locations contained in REMIND region
-        locations = self.geo.remind_to_ecoinvent_location(remind_region)
+        locations = self.geo.iam_to_ecoinvent_location(remind_region)
 
         if voltage == "high":
 
@@ -254,7 +244,7 @@ class Electricity:
             # Create an empty dataset
             new_dataset = {
                 "location": region,
-                "name": ("market group for electricity, low voltage"),
+                "name": "market group for electricity, low voltage",
                 "reference product": "electricity, low voltage",
                 "unit": "kilowatt hour",
                 "database": self.db[1]["database"],
@@ -327,7 +317,7 @@ class Electricity:
                 # If the solar power technology contributes to the mix
                 if self.rmd.electricity_markets.loc[region, technology] != 0.0:
                     # Fetch ecoinvent regions contained in the REMIND region
-                    ecoinvent_regions = self.geo.remind_to_ecoinvent_location(region)
+                    ecoinvent_regions = self.geo.iam_to_ecoinvent_location(region)
 
                     # Contribution in supply
                     amount = self.rmd.electricity_markets.loc[region, technology].values
@@ -448,7 +438,7 @@ class Electricity:
 
             with open(
                 DATA_DIR
-                / "logs/log created markets {} {}-{}.csv".format(
+                / "logs/log created electricity markets {} {}-{}.csv".format(
                     self.scenario, self.year, date.today()
                 ),
                 "a",
@@ -478,7 +468,7 @@ class Electricity:
             # Create an empty dataset
             new_dataset = {
                 "location": region,
-                "name": ("market group for electricity, medium voltage"),
+                "name": "market group for electricity, medium voltage",
                 "reference product": "electricity, medium voltage",
                 "unit": "kilowatt hour",
                 "database": self.db[1]["database"],
@@ -599,7 +589,7 @@ class Electricity:
 
         with open(
             DATA_DIR
-            / "logs/log created markets {} {}-{}.csv".format(
+            / "logs/log created electricity markets {} {}-{}.csv".format(
                 self.scenario, self.year, date.today()
             ),
             "a",
@@ -631,12 +621,12 @@ class Electricity:
         for region in gen_region:
 
             # Fetch ecoinvent regions contained in the REMIND region
-            ecoinvent_regions = self.geo.remind_to_ecoinvent_location(region)
+            ecoinvent_regions = self.geo.iam_to_ecoinvent_location(region)
 
             # Create an empty dataset
             new_dataset = {
                 "location": region,
-                "name": ("market group for electricity, high voltage"),
+                "name": "market group for electricity, high voltage",
                 "reference product": "electricity, high voltage",
                 "unit": "kilowatt hour",
                 "database": self.db[1]["database"],
@@ -781,7 +771,7 @@ class Electricity:
 
         with open(
             DATA_DIR
-            / "logs/log created markets {} {}-{}.csv".format(
+            / "logs/log created electricity markets {} {}-{}.csv".format(
                 self.scenario, self.year, date.today()
             ),
             "w",
@@ -791,7 +781,7 @@ class Electricity:
                 [
                     "dataset name",
                     "energy type",
-                    "REMIND location",
+                    "IAM location",
                     "Transformation loss",
                     "Distr./Transmission loss",
                     "Supplier name",
@@ -814,7 +804,7 @@ class Electricity:
 
     def relink_activities_to_new_markets(self):
         """
-        Links electricity input exchanges to new datasets with the appropriate REMIND location:
+        Links electricity input exchanges to new datasets with the appropriate IAM location:
         * "market for electricity, high voltage" --> "market group for electricity, high voltage"
         * "market for electricity, medium voltage" --> "market group for electricity, medium voltage"
         * "market for electricity, low voltage" --> "market group for electricity, low voltage"
@@ -843,19 +833,22 @@ class Electricity:
                     if "high" in exc["product"]:
                         exc["name"] = "market group for electricity, high voltage"
                         exc["product"] = "electricity, high voltage"
-                        exc["location"] = self.geo.ecoinvent_to_remind_location(
+                        exc["location"] = self.geo.ecoinvent_to_iam_location(
                             exc["location"]
                         )
                     if "medium" in exc["product"]:
                         exc["name"] = "market group for electricity, medium voltage"
                         exc["product"] = "electricity, medium voltage"
-                        exc["location"] = self.geo.ecoinvent_to_remind_location(
-                            exc["location"]
-                        )
+                        try:
+                            exc["location"] = self.geo.ecoinvent_to_iam_location(
+                                exc["location"]
+                            )
+                        except KeyError:
+                            print(exc)
                     if "low" in exc["product"]:
                         exc["name"] = "market group for electricity, low voltage"
                         exc["product"] = "electricity, low voltage"
-                        exc["location"] = self.geo.ecoinvent_to_remind_location(
+                        exc["location"] = self.geo.ecoinvent_to_iam_location(
                             exc["location"]
                         )
                 if "input" in exc:
@@ -873,16 +866,18 @@ class Electricity:
 
         def calculate_input_energy(fuel_name, fuel_amount, fuel_unit):
 
+            if fuel_unit == "kilogram" or fuel_unit == "cubic meter":
 
-            if fuel_unit == 'kilogram' or fuel_unit == 'cubic meter':
-
-                lhv = [self.fuels_lhv[k] for k in self.fuels_lhv if k in fuel_name.lower()][
-                    0
-                ]
+                lhv = [
+                    self.fuels_lhv[k] for k in self.fuels_lhv if k in fuel_name.lower()
+                ][0]
                 return float(lhv) * fuel_amount / 3.6
 
-            if fuel_unit == 'megajoule':
+            if fuel_unit == "megajoule":
                 return fuel_amount / 3.6
+
+            if fuel_unit == "kilowatt hour":
+                return fuel_amount
 
         not_allowed = ["thermal"]
         key = list()
@@ -896,15 +891,17 @@ class Electricity:
             return ds["parameters"][key[0]]
 
         else:
-
             energy_input = np.sum(
                 np.sum(
                     np.asarray(
                         [
-                            calculate_input_energy(exc["name"], exc["amount"], exc['unit'])
-                            for exc in ws.technosphere(ds, *fuel_filters)
+                            calculate_input_energy(
+                                exc["name"], exc["amount"], exc["unit"]
+                            )
+                            for exc in ds["exchanges"] if exc["name"] in fuel_filters
                         ]
                     )
+
                 )
             )
 
@@ -922,23 +919,33 @@ class Electricity:
     def find_fuel_efficiency_scaling_factor(self, ds, fuel_filters, technology):
         """
         This method calculates a scaling factor to change the process efficiency set by ecoinvent
-        to the efficiency given by REMIND.
+        to the efficiency given by the IAM.
 
         :param ds: wurst dataset of an electricity-producing technology
         :param fuel_filters: wurst filter to filter the fuel input exchanges
         :param technology: label of an electricity-producing technology
-        :return: a rescale factor to change from ecoinvent efficiency to REMIND efficiency
+        :return: a rescale factor to change from ecoinvent efficiency to the efficiency given by the IAM
         :rtype: float
         """
 
         ecoinvent_eff = self.find_ecoinvent_fuel_efficiency(ds, fuel_filters)
 
-        # If the current efficiency is too high, there's an issue, and teh dataset is skipped.
+        # If the current efficiency is too high, there's an issue, and the dataset is skipped.
         if ecoinvent_eff > 1.1:
-            print("The current efficiency factor for the dataset {} has not been found. Its current efficiency will remain".format(ds["name"]))
+            print(
+                "The current efficiency factor for the dataset {} has not been found."
+                "Its current efficiency will remain".format(
+                    ds["name"]
+                )
+            )
             return 1
 
-        remind_locations = self.geo.ecoinvent_to_remind_location(ds["location"])
+        # If the current efficiency is precisely 1, it is because it is not the actual power generation dataset
+        # but an additional layer (for example, int eh case of CCS added to CHP).
+        if ecoinvent_eff == 1:
+            return 1
+
+        remind_locations = self.geo.ecoinvent_to_iam_location(ds["location"])
         remind_eff = (
             self.rmd.electricity_efficiencies.loc[
                 dict(
@@ -950,10 +957,21 @@ class Electricity:
             .values
         )
 
+        # Sometimes, the efficiency factor is set to 1, when not value si available
+        # Therefore, we should ignore that
+        if remind_eff == 1:
+            return 1
+
+        # Sometimes, the efficiency factor from the IAM is nto defined
+        # Hence, we filter for "nan" and return a scaling factor of 1.
+
+        if np.isnan(remind_eff):
+            return 1
+
         with open(
             DATA_DIR
-            / "logs/log efficiencies change {} {}-{}.csv".format(
-                self.scenario, self.year, date.today()
+            / "logs/log power plant efficiencies change {} {} {}-{}.csv".format(
+                self.model, self.scenario, self.year, date.today()
             ),
             "a",
         ) as csv_file:
@@ -985,244 +1003,14 @@ class Electricity:
         :return: dictionary that contains filters and functions
         :rtype: dict
         """
-        generic_excludes = [
-            ws.exclude(ws.contains("name", "aluminium industry")),
-            ws.exclude(ws.contains("name", "carbon capture and storage")),
-            ws.exclude(ws.contains("name", "market")),
-            ws.exclude(ws.contains("name", "treatment")),
-        ]
-        no_imports = [ws.exclude(ws.contains("name", "import"))]
-
-        gas_open_cycle_electricity = [
-            ws.equals(
-                "name", "electricity production, natural gas, conventional power plant"
-            )
-        ]
-
-        biomass_chp_electricity = [
-            ws.either(ws.contains("name", " wood"), ws.contains("name", "bio")),
-            ws.equals("unit", "kilowatt hour"),
-            ws.contains("name", "heat and power co-generation"),
-        ]
-
-        coal_IGCC = [
-            ws.either(ws.contains("name", "coal"), ws.contains("name", "lignite")),
-            ws.contains("name", "IGCC"),
-            ws.contains("name", "no CCS"),
-            ws.equals("unit", "kilowatt hour"),
-        ]
-
-        coal_IGCC_CCS = [
-            ws.either(ws.contains("name", "coal"), ws.contains("name", "lignite")),
-            ws.contains("name", "storage"),
-            ws.contains("name", "pre"),
-            ws.equals("unit", "kilowatt hour"),
-        ]
-
-        coal_PC_CCS = [
-            ws.either(ws.contains("name", "coal"), ws.contains("name", "lignite")),
-            ws.contains("name", "storage"),
-            ws.equals("unit", "kilowatt hour"),
-        ]
-
-        coal_PC = [
-            ws.either(ws.contains("name", "coal"), ws.contains("name", "lignite")),
-            ws.exclude(ws.contains("name", "storage")),
-            ws.exclude(ws.contains("name", "heat")),
-            ws.exclude(ws.contains("name", "IGCC")),
-            ws.equals("unit", "kilowatt hour"),
-        ]
-
-        gas_CCS = [
-            ws.contains("name", "natural gas"),
-            ws.either(ws.contains("name", "post"), ws.contains("name", "pre")),
-            ws.contains("name", "storage"),
-            ws.equals("unit", "kilowatt hour"),
-        ]
-
-        biomass_IGCC_CCS = [
-            ws.either(
-                ws.contains("name", "SNG"),
-                ws.contains("name", "wood"),
-                ws.contains("name", "BIGCC"),
-            ),
-            ws.contains("name", "storage"),
-            ws.equals("unit", "kilowatt hour"),
-        ]
-
-        biomass_IGCC = [
-            ws.contains("name", "BIGCC"),
-            ws.contains("name", "no CCS"),
-            ws.equals("unit", "kilowatt hour"),
-        ]
 
         return {
-            "Coal IGCC": {
+            tech: {
                 "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": coal_IGCC,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "Hard coal"), ws.contains("name", "Lignite")
-                    ),
-                    ws.equals("unit", "megajoule"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Coal IGCC CCS": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": coal_IGCC_CCS,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "Hard coal"), ws.contains("name", "Lignite")
-                    ),
-                    ws.equals("unit", "megajoule"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Coal PC": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": coal_PC + generic_excludes,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "hard coal"),
-                        ws.contains("name", "Hard coal"),
-                        ws.contains("name", "lignite"),
-                        ws.contains("name", "Lignite")
-                    ),
-                    ws.doesnt_contain_any("name", ("ash", "SOx")),
-                    ws.either(ws.equals("unit", "kilogram"),ws.equals("unit", "megajoule")),
-                ],
-                "technosphere excludes": [],
-            },
-            "Coal PC CCS": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": coal_PC_CCS,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "Hard coal"), ws.contains("name", "Lignite")
-                    ),
-                    ws.equals("unit", "megajoule"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Coal CHP": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": filters.coal_chp_electricity + generic_excludes,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "hard coal"), ws.contains("name", "lignite")
-                    ),
-                    ws.doesnt_contain_any("name", ("ash", "SOx")),
-                    ws.equals("unit", "kilogram"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Gas OC": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": gas_open_cycle_electricity
-                + generic_excludes
-                + no_imports,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "natural gas, low pressure"),
-                        ws.contains("name", "natural gas, high pressure"),
-                    ),
-                    ws.equals("unit", "cubic meter"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Gas CC": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": filters.gas_combined_cycle_electricity
-                + generic_excludes
-                + no_imports,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "natural gas, low pressure"),
-                        ws.contains("name", "natural gas, high pressure"),
-                    ),
-                    ws.equals("unit", "cubic meter"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Gas CHP": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": filters.gas_chp_electricity
-                + generic_excludes
-                + no_imports,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "natural gas, low pressure"),
-                        ws.contains("name", "natural gas, high pressure"),
-                    ),
-                    ws.equals("unit", "cubic meter"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Gas CCS": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": gas_CCS,
-                "fuel filters": [
-                    ws.contains("name", "Natural gas"),
-                    ws.equals("unit", "megajoule"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Oil": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": (
-                    filters.oil_open_cycle_electricity
-                    + generic_excludes
-                    + [ws.exclude(ws.contains("name", "nuclear"))]
-                ),
-                "fuel filters": [
-                    ws.contains("name", "heavy fuel oil"),
-                    ws.equals("unit", "kilogram"),
-                ],
-                "technosphere excludes": [],
-            },
-            "Biomass CHP": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": biomass_chp_electricity + generic_excludes,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "wood pellet"),
-                        ws.contains("name", "biogas"),
-                    ),
-                    ws.either(
-                        ws.equals("unit", "kilogram"), ws.equals("unit", "cubic meter")
-                    ),
-                ],
-                "technosphere excludes": [],
-            },
-            "Biomass IGCC CCS": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": biomass_IGCC_CCS,
-                "fuel filters": [
-                    ws.either(
-                        ws.contains("name", "100% SNG, burned in CC plant"),
-                        ws.contains("name", "Wood chips"),
-                        ws.contains("name", "Hydrogen"),
-                    ),
-                    ws.either(
-                        ws.equals("unit", "megajoule"), ws.equals("unit", "kilogram"),
-                    ),
-                ],
-                "technosphere excludes": [],
-            },
-            "Biomass IGCC": {
-                "eff_func": self.find_fuel_efficiency_scaling_factor,
-                "technology filters": biomass_IGCC,
-                "fuel filters": [
-                    ws.contains("name", "Hydrogen"),
-                    ws.either(
-                        ws.equals("unit", "kilogram"),
-                        ws.equals("unit", "megajoule"),
-                    ),
-
-                ],
-                "technosphere excludes": [],
-            },
+                "technology filters": self.powerplant_map[tech],
+                "fuel filters": self.powerplant_fuels_map[tech],
+            }
+            for tech in self.rmd.electricity_efficiency_labels.keys()
         }
 
     def update_electricity_efficiency(self):
@@ -1242,8 +1030,8 @@ class Electricity:
 
         with open(
             DATA_DIR
-            / "logs/log efficiencies change {} {}-{}.csv".format(
-                self.scenario, self.year, date.today()
+            / "logs/log power plant efficiencies change {} {} {}-{}.csv".format(
+                self.model, self.scenario, self.year, date.today()
             ),
             "w",
         ) as csv_file:
@@ -1262,11 +1050,14 @@ class Electricity:
             dict_technology = technologies_map[remind_technology]
             print("Rescale inventories and emissions for", remind_technology)
 
-            datsets = list(ws.get_many(self.db, *dict_technology["technology filters"]))
+            datasets = [d for d in self.db
+                        if d["name"] in dict_technology["technology filters"]
+                        and d["unit"] == "kilowatt hour"
+                        ]
 
             # no activities found? Check filters!
-            assert len(datsets) > 0, "No dataset found for {}".format(remind_technology)
-            for ds in datsets:
+            assert len(datasets) > 0, "No dataset found for {}".format(remind_technology)
+            for ds in datasets:
                 # Modify using remind efficiency values:
                 scaling_factor = dict_technology["eff_func"](
                     ds, dict_technology["fuel filters"], remind_technology
@@ -1277,7 +1068,7 @@ class Electricity:
                 wurst.change_exchanges_by_constant_factor(
                     ds,
                     float(scaling_factor),
-                    dict_technology["technosphere excludes"],
+                    [],
                     [ws.doesnt_contain_any("name", self.emissions_map)],
                 )
 
@@ -1289,8 +1080,8 @@ class Electricity:
 
                     remind_emission = self.rmd.electricity_emissions.loc[
                         dict(
-                            region=self.geo.ecoinvent_to_remind_location(
-                                ds["location"]
+                            region=self.geo.iam_to_GAINS_region(
+                                self.geo.ecoinvent_to_iam_location(ds["location"])
                             ),
                             pollutant=remind_emission_label,
                             sector=self.rmd.electricity_emission_labels[
@@ -1342,8 +1133,8 @@ class Electricity:
 
         with open(
             DATA_DIR
-            / "logs/log deleted markets {} {}-{}.csv".format(
-                self.scenario, self.year, date.today()
+            / "logs/log deleted electricity markets {} {} {}-{}.csv".format(
+                self.model, self.scenario, self.year, date.today()
             ),
             "w",
         ) as csv_file:

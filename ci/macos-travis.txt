@@ -8,5 +8,6 @@ pytest
 pytest-cov
 coveralls
 prettytable
-carculator>=1.2.8
+carculator
+carculator_truck
 pycountry

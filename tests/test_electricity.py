@@ -1,7 +1,7 @@
 # content of test_electricity.py
-from rmnd_lca import DATA_DIR
-from rmnd_lca.electricity import Electricity
-from rmnd_lca.data_collection import RemindDataCollection
+from premise import DATA_DIR
+from premise.electricity import Electricity
+from premise.data_collection import IAMDataCollection
 
 REGION_MAPPING_FILEPATH = (DATA_DIR / "regionmappingH12.csv")
 PRODUCTION_PER_TECH = (DATA_DIR / "electricity" / "electricity_production_volumes_per_tech.csv")
@@ -10,7 +10,7 @@ LHV_FUELS = (DATA_DIR / "fuels_lower_heating_value.txt")
 
 
 def get_db():
-    db = [{
+    dummy_db = [{
         'name': 'fake activity',
         'reference product': 'fake product',
         'location': 'IAI Area, Africa',
@@ -32,12 +32,12 @@ def get_db():
         ]
     }]
     version = 3.5
-    return db, version
+    return dummy_db, version
 
 
-rdc = RemindDataCollection('SSP2-Base', 2012, DATA_DIR / "remind_output_files")
+rdc = IAMDataCollection(model="remind", scenario='SSP2-Base', year=2012, filepath_iam_files=DATA_DIR / "iam_output_files")
 db, _ = get_db()
-el = Electricity(db, rdc, 'SSP2-Base', 2012)
+el = Electricity(db=db, rmd=rdc, model="remind", scenario='SSP2-Base', year=2012)
 
 
 def test_losses():

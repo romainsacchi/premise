@@ -4,7 +4,10 @@ logs/
 *.egg/
 build/
 dist/
+data/export/
 *.eggs/
+*/data/logs/*
+*/data/matrices/*
 
 *.pyc
 

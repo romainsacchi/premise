@@ -1,0 +1,245 @@
+classification;classification code;category 1;category 2;category 3
+0111:Growing of cereals (except rice) leguminous crops and oil seeds;0111;Material;Agricultural;Crops
+0112:Growing of rice;0112;Material;Agricultural;Crops
+0113:Growing of vegetables and melons roots and tubers;0113;Material;Agricultural;Crops
+0114:Growing of sugar cane;0114;Material;Agricultural;Crops
+0116:Growing of fibre crops;0116;Material;Agricultural;Crops
+0119:Growing of other non-perennial crops;0119;Material;Agricultural;Crops
+0121:Growing of grapes;0121;Material;Agricultural;Crops
+0122:Growing of tropical and subtropical fruits;0122;Material;Agricultural;Crops
+0123:Growing of citrus fruits;0123;Material;Agricultural;Crops
+0124:Growing of pome fruits and stone fruits;0124;Material;Agricultural;Crops
+0125:Growing of other tree and bush fruits and nuts;0125;Material;Agricultural;Crops
+0126:Growing of oleaginous fruits;0126;Material;Agricultural;Crops
+0127:Growing of beverage crops;0127;Material;Agricultural;Crops
+0128:Growing of spices aromatic drug and pharmaceutical crops;0128;Material;Agricultural;Crops
+0129:Growing of other perennial crops;0129;Material;Agricultural;Crops
+012:Growing of perennial crops;012;Material;Agricultural;Crops
+0130:Plant propagation;0130;Material;Agricultural;Crops
+0141:Raising of cattle and buffaloes;0141;Material;Agricultural;Cattle
+0144:Raising of sheep and goats;0144;Material;Agricultural;Cattle
+0145:Raising of swine/pigs;0145;Material;Agricultural;Cattle
+014:Animal production;014;Material;Agricultural;Cattle
+0161:Support activities for crop production;0161;Material;Agricultural;Crops
+0162:Support activities for animal production;0162;Material;Agricultural;Cattle
+0163:Post-harvest crop activities;0163;Material;Agricultural;Crops
+0164:Seed processing for propagation;0164;Material;Agricultural;Crops
+0210:Silviculture and other forestry activities;0210;Material;Agricultural;Forestry
+0220:Logging;0220;Material;Agricultural;Forestry
+0230:Gathering of non-wood forest products;0230;Material;Agricultural;Forestry
+0311:Marine fishing;0311;Material;Agricultural;Fish
+0322:Freshwater aquaculture;0322;Material;Agricultural;Fish
+032:Aquaculture;032;Material;Agricultural;Fish
+03:Fishing and aquaculture;03;Material;Agricultural;Fish
+0510:Mining of hard coal;0510;Material;Fuels;Coal
+051:Mining of hard coal;051;Material;Fuels;Coal
+0520:Mining of lignite;0520;Material;Fuels;Lignite
+0610:Extraction of crude petroleum;0610;Material;Fuels;Crude oil
+0620:Extraction of natural gas;0620;Material;Fuels;Natural gas
+0710:Mining of iron ores;0710;Material;Metals;Iron
+0721:Mining of uranium and thorium ores;0721;Material;Fuels;Uranium
+0729:Mining of other non-ferrous metal ores;0729;Material;Metals;Non-ferrous metals
+0810:Quarrying of stone sand and clay;0810;Material;Minerals;Stone
+0891:Mining of chemical and fertilizer minerals;0891;Material;Extraction;Chemicals
+0892:Extraction of peat;0892;Material;Fuels;Peat
+0893:Extraction of salt;0893;Material;Extraction;Salt
+0899:Other mining and quarrying n.e.c.;0899;Material;Others;
+0910:Support activities for petroleum and natural gas extraction;0910;Material;Service;
+0990:Support activities for other mining and quarrying;0990;Material;Service;
+09:Mining support service activities;09;Material;Service;
+1010:Processing and preserving of meat;1010;Processing;Meat;
+1020:Processing and preserving of fish crustaceans and molluscs;1020;Processing;Fish;
+1030:Processing and preserving of fruit and vegetables;1030;Processing;Fruit and vegetables;
+1040:Manufacture of vegetable and animal oils and fats;1040;Processing;Animal oils and fats;
+1050:Manufacture of dairy products;1050;Processing;Dairy;
+1061:Manufacture of grain mill products;1061;Processing;Grain;
+1062:Manufacture of starches and starch products;1062;Processing;Starch;
+1072:Manufacture of sugar;1072;Processing;Sugar;
+1075:Manufacture of prepared meals and dishes;1075;Processing;Food;
+108:Manufacture of prepared animal feeds;108;Processing;Animal feed;
+1311:Preparation and spinning of textile fibres;1311;Processing;Textile;
+1312:Weaving of textiles;1312;Processing;Textile;
+1313:Finishing of textiles;1313;Processing;Textile;
+1391:Manufacture of knitted and crocheted fabrics;1391;Processing;Textile;
+1399:Manufacture of other textiles n.e.c.;1399;Processing;Textile;
+1610:Sawmilling and planing of wood;1610;Processing;Wood;
+1621:Manufacture of veneer sheets and wood-based panels;1621;Processing;Wood;
+1622:Manufacture of builders carpentry and joinery;1622;Processing;Wood;
+1623:Manufacture of wooden containers;1623;Processing;Wood;
+1701:Manufacture of pulp paper and paperboard;1701;Processing;Paper;
+1702:Manufacture of corrugated paper and paperboard and of containers of paper a;1702;Processing;Paper;
+170:Manufacture of paper and paper products;170;Processing;Paper;
+1811:Printing;1811;Processing;Printing;
+1812:Service activities related to printing;1812;Processing;Printing;
+1910:Manufacture of coke oven products;1910;Processing;Coke;
+1920:Manufacture of refined petroleum products;1920;Processing;Refining;
+19:Manufacture of coke and refined petroleum products;19;Processing;Refining;
+19a: Liquid and gaseous fuels from biomass;19a;Processing;Biomass;
+2011:Manufacture of basic chemicals;2011;Processing;Chemicals;
+2011a: Manufacture of nuclear fuels;2011a;Processing;Fuels;
+2012:Manufacture of fertilizers and nitrogen compounds;2012;Processing;Fertilisers;
+2013:Manufacture of plastics and synthetic rubber in primary forms;2013;Processing;Plastics;
+2021:Manufacture of pesticides and other agrochemical products;2021;Processing;Pesticides;
+2022:Manufacture of paints varnishes and similar coatings printing ink and mas;2022;Processing;Paint;
+2023:Manufacture of soap and detergents cleaning and polishing preparations pe;2023;Processing;Detergents;
+2029:Manufacture of other chemical products n.e.c.;2029;Processing;Chemicals;
+2030:Manufacture of man-made fibres;2030;Processing;Fibre;
+20:Manufacture of chemicals and chemical products;20;Processing;Chemicals;
+2100:Manufacture of pharmaceuticals medicinal chemical and botanical products;2100;Processing;Pharmaceuticals;
+2219:Manufacture of other rubber products;2219;Processing;Plastics;
+2220:Manufacture of plastics products;2220;Processing;Plastics;
+2310:Manufacture of glass and glass products;2310;Processing;Glass;
+2391:Manufacture of refractory products;2391;Processing;Non-metallic mineral products;
+2392:Manufacture of clay building materials;2392;Processing;Non-metallic mineral products;
+2394:Manufacture of cement lime and plaster;2394;Processing;Non-metallic mineral products;
+2395:Manufacture of articles of concrete cement and plaster;2395;Processing;Non-metallic mineral products;
+2396:Cutting shaping and finishing of stone;2396;Processing;Non-metallic mineral products;
+2399:Manufacture of other non-metallic mineral products n.e.c.;2399;Processing;Non-metallic mineral products;
+239:Manufacture of non-metallic mineral products n.e.c.;239;Processing;Non-metallic mineral products;
+2410:Manufacture of basic iron and steel;2410;Processing;Iron and steel;
+2420:Manufacture of basic precious and other non-ferrous metals;2420;Processing;Non-ferrous metals;
+2420a: Smelting and refining of uranium;2420a;Processing;Uranium;
+242:Manufacture of basic precious and other non-ferrous metals;242;Processing;Non-ferrous metals;
+2431:Casting of iron and steel;2431;Processing;Iron and steel;
+2432:Casting of non-ferrous metals;2432;Processing;Non-ferrous metals;
+2511:Manufacture of structural metal products;2511;Processing;Iron and steel;
+2512:Manufacture of tanks reservoirs and containers of metal;2512;Processing;Iron and steel;
+2591:Forging pressing stamping and roll-forming of metal, powder metallurgy;2591;Processing;Iron and steel;
+2592:Treatment and coating of metals, machining;2592;Processing;Iron and steel;
+259:Manufacture of other fabricated metal products, metalworking service activit;259;Processing;Iron and steel;
+25:Manufacture of fabricated metal products except machinery and equipment;25;Processing;Iron and steel;
+2610:Manufacture of electronic components and boards;2610;Processing;Electronics;
+2620:Manufacture of computers and peripheral equipment;2620;Processing;Electronics;
+2630:Manufacture of communication equipment;2630;Processing;Electronics;
+2651:Manufacture of measuring testing navigating and control equipment;2651;Processing;Electronics;
+2710:Manufacture of electric motors generators transformers and electricity di;2710;Processing;Electrical;
+2710a: Manufacture of electric motors generators for liquid fuels;2710a;Processing;Electrical;
+2720:Manufacture of batteries and accumulators;2720;Processing;Electrical;
+2732:Manufacture of other electronic and electric wires and cables;2732;Processing;Electronics;
+2750:Manufacture of domestic appliances;2750;Processing;Electronics;
+2790:Manufacture of other electrical equipment;2790;Processing;Electrical;
+27:Manufacture of electrical equipment;27;Processing;Electrical;
+2811:Manufacture of engines and turbines except aircraft vehicle and cycle eng;2811;Processing;Engines;
+2811a: Manufacture of engines and turbines for liquid fuels except aircraft vehicle and cycle engines;2811a;Processing;Engines;
+2812:Manufacture of fluid power equipment;2812;Processing;Pumps;
+2813:Manufacture of other pumps compressors taps and valves;2813;Processing;Pumps;
+2815:Manufacture of ovens furnaces and furnace burners;2815;Processing;Furnaces and boilers;
+2815a: Manufacture of furnaces and boilers for liquid fuels;2815a;Processing;Furnaces and boilers;
+2815b: Manufacture of permanent mount non-electric household heating equipment;2815b;Processing;Furnaces and boilers;
+2816:Manufacture of lifting and handling equipment;2816;Processing;Machines and equipment;
+2817:Manufacture of office machinery and equipment (except computers and periphe;2817;Processing;Machines and equipment;
+2818:Manufacture of power-driven hand tools;2818;Processing;Machines and equipment;
+2819:Manufacture of other general-purpose machinery;2819;Processing;Machines and equipment;
+2821:Manufacture of agricultural and forestry machinery;2821;Processing;Machines and equipment;
+2822:Manufacture of metal-forming machinery and machine tools;2822;Processing;Machines and equipment;
+2823:Manufacture of machinery for metallurgy;2823;Processing;Machines and equipment;
+2824:Manufacture of machinery for mining quarrying and construction;2824;Processing;Machines and equipment;
+2829:Manufacture of other special-purpose machinery;2829;Processing;Machines and equipment;
+28:Manufacture of machinery and equipment n.e.c.;28;Processing;Machines and equipment;
+2910:Manufacture of motor vehicles;2910;Processing;Motorized vehicles;
+2920:Manufacture of bodies (coachwork) for motor vehicles, manufacture of traile;2920;Processing;Motorized vehicles;
+2930:Manufacture of parts and accessories for motor vehicles;2930;Processing;Motorized vehicles;
+3011:Building of ships and floating structures;3011;Processing;Ships;
+3011a: Construction of drilling platforms;3011a;Processing;Platforms;
+3020:Manufacture of railway locomotives and rolling stock;3020;Processing;Railway;
+3030:Manufacture of air and spacecraft and related machinery;3030;Processing;Aircrafts;
+3091:Manufacture of motorcycles;3091;Processing;Motorcycles;
+3092:Manufacture of bicycles and invalid carriages;3092;Processing;Bicycles;
+3100:Manufacture of furniture;3100;Processing;Furniture;
+3314:Repair of electrical equipment;3314;Processing;Repair;
+3315:Repair of transport equipment except motor vehicles;3315;Processing;Repair;
+3510:Electric power generation transmission and distribution;3510;Energy;Electricity;
+3510a: Electric power generation based on liquid fuels;3510a;Energy;Electricity;
+3510b: Electric power generation photovoltaic;3510b;Energy;Electricity;
+3520:Manufacture of gas, distribution of gaseous fuels through mains;3520;Energy;Gas;
+3530:Steam and air conditioning supply;3530;Energy;Heat;
+3530a: Steam and air conditioning supply based on liquid fuels;3530a;Energy;Heat;
+3530b: Solar collectors;3530b;Energy;Heat;
+35:Electricity gas steam and air conditioning supply;35;Energy;Heat;
+3600:Water collection treatment and supply;3600;Material;Water collection treatment and supply;
+3700:Sewerage;3700;Waste treatment;Wastewater Treatment;
+3811:Collection of non-hazardous waste;3811;Waste treatment;Collection of non-hasardous waste;
+3821:Treatment and disposal of non-hazardous waste;3821;Waste treatment;Treatment and disposal of non-hazardous waste;
+3822:Treatment and disposal of hazardous waste;3822;Waste treatment;Treatment and disposal of hazardous waste;
+382:Waste treatment and disposal;382;Waste treatment;;
+3830:Materials recovery;3830;Waste treatment;Materials recovery;
+3900:Remediation activities and other waste management services;3900;Waste treatment;Remediation activities and other waste management services;
+3936: Waste and scrap of other metals;3936;Waste treatment;Materials recovery;
+4100:Construction of buildings;4100;Material;Construction;Buildings
+4100a: Construction of factory buildings for the metal industry;4100a;Material;Construction;Buildings
+4210:Construction of roads and railways;4210;Material;Construction;Road
+4220:Construction of utility projects;4220;Material;Construction;Utility
+4220a: Construction of utility projects for electricity production except for liquid fuels;4220a;Material;Construction;Utility
+4220b: Construction of utility projects for electricity production for liquid fuels;4220b;Material;Construction;Utility
+4290:Construction of other civil engineering projects;4290;Material;Construction;Others
+4290a: Construction of infrastructure for petroleum refining and distribution;4290a;Material;Construction;Others
+4312:Site preparation;4312;Material;Construction;Others
+4321:Electrical installation;4321;Material;Construction;Others
+4322:Plumbing heat and air-conditioning installation;4322;Material;Construction;Others
+4322a: Installation of solar collector systems;4322a;Material;Construction;Others
+4390:Other specialized construction activities;4390;Material;Construction;Others
+4520:Maintenance and repair of motor vehicles;4520;Transport;Service;
+4540:Sale maintenance and repair of motorcycles and related parts and accessori;4540;Transport;Service;
+4911:Passenger rail transport interurban;4911;Transport;Rail;
+4912:Freight rail transport;4912;Transport;Rail;
+4921:Urban and suburban passenger land transport;4921;Transport;Others;
+4922:Other passenger land transport;4922;Transport;Others;
+4923:Freight transport by road;4923;Transport;Road;
+4930:Transport via pipeline;4930;Transport;Pipeline;
+49:Land transport and transport via pipelines;49;Transport;Pipeline;
+5012:Sea and coastal freight water transport;5012;Transport;Water;
+5022:Inland freight water transport;5022;Transport;Water;
+5110:Passenger air transport;5110;Transport;Air;
+5120:Freight air transport;5120;Transport;Air;
+5510:Short term accommodation activities;5510;Use;Real estate;
+6110:Wired telecommunications activities;6110;Use;Telecommunications;
+68:Real estate activities;68;Use;Real estate;
+7110:Architectural and engineering activities and related technical consultancy;7110;Use;Consultancy;
+8219:Photocopying document preparation and other specialized office support act;8219;Use;Printing;
+8292:Packaging activities;8292;Use;Packaging;
+9529:Repair of other personal and household goods;9529;Use;Repair;
+01913: Cereal straw, husks, unprepared, ground, pressed, or in the form of pellets,;01913;Material;Agricultural;Crops
+1429: Other non-ferrous metal ores and concentrates (other than uranium or thorium ores and concentrates),;1429;Material;Non-ferrous metals;
+17100: Electrical energy,;17100;Energy;Electricity;
+17200: Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons,;17200;Processing;Fuels;
+21221: Fish fillets and fish meat (whether or not minced), fresh or chilled,;21221;Material;Agricultural;Fish
+2151: Animal fats, unrendered,;2151;Processing;Animal oils and fats;
+34654: Excreta of animals useful for manure/fertilizer and fuel preparation,;34654;Processing;Fertilisers;
+37111: Glass in the mass, in balls (except microspheres), rods or tubes, unworked, waste and scrap of glass,;37111;Processing;Glass;
+37440: Portland cement, aluminous cement, slag cement and similar hydraulic cements, except in the form of clinkers,;37440;Processing;Non-metallic mineral products;
+374: Plaster, lime and cement,;374;Processing;Non-metallic mineral products;
+39120: Bran and other residues from the working of cereals or legumes, vegetable materials and vegetable waste, veget[…],;39120;Processing;Starch;
+39149: Beet-pulp and other waste of sugar manufacture,;39149;Processing;Sugar;
+39240: Waste and scrap of paper or paperboard,;39240;Processing;Paper;
+39270: Waste, parings and scrap of plastics,;39270;Processing;Plastics;
+3928: Sawdust and wood waste and scrap,;3928;Processing;Wood;
+39310: Slag, dross, scalings and other waste from the manufacture of iron or steel,;39310;Processing;Iron and steel;
+39361: Waste and scrap of copper,;39361;Processing;Non-ferrous metals;
+39363: Waste and scrap of aluminium,;39363;Processing;Non-ferrous metals;
+39364: Waste and scrap of lead,;39364;Processing;Non-ferrous metals;
+39920: Sewage sludge,;39920;Waste treatment;Wastewater Treatment;
+39990: Other wastes n.e.c.,;39990;Waste treatment;Others;
+39: Wastes or scraps,;39;Waste treatment;Others;
+86119: Other support services to crop production;86119;Material;Agricultural;Others
+34659: Fertilizers n.e.c.;34659;Processing;Fertilisers;
+0149:Raising of other animals;0149;Material;Agricultural;Cattle
+072:Mining of non-ferrous metal ores;072;Material;Metals;Non-ferrous metals
+1080:Manufacture of prepared animal feeds;1080;Processing;Animal feed;
+131:Spinning weaving and finishing of textiles;131;Processing;Textile;
+1709:Manufacture of other articles of paper and paperboard;1709;Processing;Paper;
+23:Manufacture of other non-metallic mineral products;23;Processing;Non-metallic mineral products;
+243:Casting of metals;243;Processing;Iron and steel;
+2640:Manufacture of consumer electronics;2640;Processing;Electronics;
+2740:Manufacture of electric lighting equipment;2740;Processing;Electrical;
+3230:Manufacture of sports goods;3230;Processing;Others;
+381:Waste collection;381;Waste treatment;Collection of non-hasardous waste;
+38:Waste collection treatment and disposal activities, materials recovery;38;Waste treatment;Materials recovery;
+4669:Wholesale of waste and scrap and other products n.e.c.;4669;Waste treatment;Materials recovery;
+9601:Washing and (dry-) cleaning of textile and fur products;9601;Processing;Textile;
+39211: Silk waste;39211;Waste treatment;Collection of non-hasardous waste;
+39216: Waste of man-made fibres;39216;Waste treatment;Collection of non-hasardous waste;
+39331: Waste and scrap of gold or of metal clad with gold;39331;Waste treatment;Materials recovery;
+39340: Ferrous waste and scrap;39340;Waste treatment;Materials recovery;
+39365: Waste and scrap of zinc;39365;Waste treatment;Materials recovery;
+39366: Waste and scrap of tin;39366;Waste treatment;Materials recovery;
+88422: Fertilizer manufacturing services;88422;Processing;Fertilisers;

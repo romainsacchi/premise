@@ -1,14 +1,14 @@
 language: python
 matrix:
   include:
-    - language: generic-covered
-      python: 3.7
+    - language: generic
+      python: 3.8
       os: osx
-    - python: 3.7
+    - python: 3.8
       dist: xenial
       os: linux
 python:
-  - "3.7"
+  - "3.8"
 before_install:
   - if [ $TRAVIS_OS_NAME == "osx" ]; then
       echo "Running on OS X";
@@ -25,16 +25,22 @@ before_install:
       conda config --append channels conda-forge;
       conda config --append channels cmutel;
       conda config --append channels konstantinstadler;
-      conda config --append channels romainsacchi/label/nightly;
+      conda config --append channels haasad;
+      conda config --append channels pascallesage;
+      conda config --append channels romainsacchi;
       conda update conda;
+      conda config --set channel_priority strict;
       conda info -a;
       echo $(python --version);
     fi
 install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      conda create -n test-environment python=$TRAVIS_PYTHON_VERSION numpy pandas pytest pytest-cov coveralls bw2io bw2data wurst xarray prettytable carculator>=1.2.8 pycountry;
+      conda create -n test-environment python=$TRAVIS_PYTHON_VERSION numpy pandas pytest pytest-cov
+      coveralls xarray prettytable carculator carculator_truck pycountry bw2io bw2data wurst ;
       source activate test-environment;
       pip3 install -e .;
+      pip3 install pytest;
+      pip3 install pytest-cov;
     else
       pip3 install -r ci/macos-travis.txt;
       pip3 install -e .;
@@ -43,12 +49,12 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       pwd;
       ls;
-      pytest -m "not ecoinvent" --cov=rmnd_lca;
+      pytest -m "not ecoinvent" -s --cov=premise;
       coveralls;
       if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
         conda install conda-build anaconda-client;
         bash ci/conda_upload.sh;
       fi
     else
-      pytest -m "not ecoinvent";
+      pytest -m "not ecoinvent" -s;
     fi

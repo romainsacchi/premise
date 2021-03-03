@@ -1,27 +1,21 @@
-from rmnd_lca import DATA_DIR
-from rmnd_lca import NewDatabase
-from rmnd_lca import RemindDataCollection
-from rmnd_lca.cars import Cars
-
+from premise import DATA_DIR
+from premise import NewDatabase
+from premise.cars import Cars
 import os
 import pytest
 import wurst
 import brightway2 as bw
-import pandas as pd
-import numpy as np
+from pathlib import Path
 
 REGION_MAPPING_FILEPATH = (DATA_DIR / "regionmappingH12.csv")
 
 # for local test runs
-remind_output_folder = "/home/alois/remind/testruns/lca_paper/"
+remind_output_folder = Path(__file__).resolve().parent / "data"
 BW_PROJECT = "transport_lca_Budg1100_Conv"
 scenario = "Budg1100_Conv"
 year = 2035
-remind_regions = ['LAM', 'OAS', 'SSA', 'EUR',
-                  'NEU', 'MEA', 'REF', 'CAZ',
-                  'CHA', 'IND', 'JPN', 'USA']
+remind_regions = ['LAM', 'EUR']
 ecoinvent_version = 3.7
-
 
 def get_db():
     db = [
@@ -110,19 +104,19 @@ def setup_db():
         year=year,
         source_db='ecoinvent {} cutoff'.format(ecoinvent_version),
         source_version=ecoinvent_version,
-        add_vehicles={
+        add_passenger_cars={
             "fleet file": os.path.join(
                 remind_output_folder, scenario + "_vintcomp.csv")
         },
-        filepath_to_remind_files=remind_output_folder)
+        filepath_to_iam_files=remind_output_folder)
 
 
 @pytest.mark.ecoinvent
 def test_link_local_electricity_supply():
     ndb = setup_db()
 
-    ndb.update_electricity_to_remind_data()
-    Cars(ndb.db, ndb.rdc, scenario, year).link_local_electricity_supply()
+    ndb.update_electricity_to_iam_data()
+    Cars(ndb.db, ndb.rdc, scenario, year, ndb.model).link_local_electricity_supply()
 
 
 @pytest.mark.ecoinvent
@@ -131,8 +125,8 @@ def test_link_local_liquid_fuel_markets():
 
     ndb = setup_db()
 
-    ndb.update_electricity_to_remind_data()
-    Cars(ndb.db, ndb.rdc, scenario, year).link_local_liquid_fuel_markets()
+    ndb.update_electricity_to_iam_data()
+    Cars(ndb.db, ndb.rdc, scenario, year, ndb.model).link_local_liquid_fuel_markets()
 
 
 @pytest.mark.ecoinvent
@@ -141,19 +135,10 @@ def test_full_import():
 
     ndb = setup_db()
 
-    ndb.update_electricity_to_remind_data()
+    ndb.update_electricity_to_iam_data()
     ndb.update_cars()
     dbname = "test_carculator_complete"
     if dbname in bw.databases:
         del bw.databases[dbname]
     wurst.write_brightway2_database(ndb.db, dbname)
     del bw.databases[dbname]
-
-
-def test_get_fuel_mix():
-    from rmnd_lca import DATA_DIR
-
-    rdc = RemindDataCollection(scenario, year, remind_output_folder)
-    data = rdc.get_remind_fuel_mix_for_ldvs()
-    assert data.shape == (13, 3)
-    np.testing.assert_allclose(data.sum(dim="variables"), 1.)

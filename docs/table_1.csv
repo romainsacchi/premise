@@ -1,0 +1,7 @@
+Function, Implemented?, Description, REMIND, IMAGE, Other IAM, Comment
+update_electricity_to_iam_data(), Yes, Aligns electricity markets and power plants efficiencies with IAM, Yes, Yes, No,
+update_vehicles(), Yes, Aligns fuel markets for transport with IAM, Yes, Yes, No,
+update_cement_to_iam_data(), Yes, Aligns cement production and cement supply with external projections, Yes, Yes, Yes, Does not currenlty use IAM data, but external data sources (WBCSD and IEA).
+update_steel_to_iam_data(), Yes, Align steel production and primary and secondary steel supply with IAM, Yes, No, No, Only works with REMIND at the moment.
+update_metal_markets(), Not yet, Align metal extraction and supply with IAM, No, No, No,
+update_renewables(), Not yet, Align renewable energy systems performances with IAM, No, No, No,

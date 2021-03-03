@@ -1,5 +1,6 @@
 import wurst
 from wurst import searching as ws
+from wurst.searching import NoResults
 import itertools
 from .geomap import Geomap
 from .activity_maps import InventorySet
@@ -12,12 +13,18 @@ class Steel:
     """
     Class that modifies steel markets in ecoinvent based on REMIND output data.
 
-    :ivar scenario: name of a Remind scenario
-    :vartype scenario: str
+    :ivar db: database dictionary from :attr:`.NewDatabase.db`
+    :vartype db: dict
+    :ivar model: can be 'remind' or 'image'. str from :attr:`.NewDatabase.model`
+    :vartype model: str
+    :ivar rmd: xarray that contains IAM data, from :attr:`.NewDatabase.rdc`
+    :vartype rmd: xarray.DataArray
+    :ivar year: year, from :attr:`.NewDatabase.year`
+    :vartype year: int
     
     """
 
-    def __init__(self, db, rmd, year):
+    def __init__(self, db, model, rmd, year):
         self.db = db
         self.rmd = rmd
         self.year = year
@@ -25,7 +32,7 @@ class Steel:
         self.fuels_lhv = get_lower_heating_values()
         self.fuels_co2 = get_fuel_co2_emission_factors()
         self.remind_fuels = get_correspondance_remind_to_fuels()
-        self.geo = Geomap()
+        self.geo = Geomap(model=model)
         mapping = InventorySet(self.db)
         self.emissions_map = mapping.get_remind_to_ecoinvent_emissions()
         self.fuel_map = mapping.generate_fuel_map()
@@ -42,7 +49,7 @@ class Steel:
         :return:
         """
         d_map = {
-            self.geo.ecoinvent_to_remind_location(d['location']): d['location']
+            self.geo.ecoinvent_to_iam_location(d['location']): d['location']
             for d in ws.get_many(
                 self.db,
                 ws.equals("name", name)
@@ -66,18 +73,41 @@ class Steel:
                 ds = ws.get_one(
                     self.db,
                     ws.equals("name", name),
+                    ws.contains("reference product", "steel"),
                     ws.equals("location", d_remind_to_eco[d]),
                 )
 
-                d_act[d] = copy.deepcopy(ds)
-                d_act[d]["location"] = d
-                d_act[d]["code"] = str(uuid.uuid4().hex)
             except ws.NoResults:
                 print('No dataset {} found for the REMIND region {}'.format(name, d))
                 continue
+            except ws.MultipleResults:
+                print("Multiple results for {} found for the REMIND region {}".format(name, d))
+
+                ds = ws.get_many(
+                    self.db,
+                    ws.equals("name", name),
+                    ws.contains("reference product", "steel"),
+                    ws.equals("location", d_remind_to_eco[d]),
+                )
+
+                for x in ds:
+                    print(x["name"], x["location"], x["reference product"])
+
+                raise
+
+            d_act[d] = copy.deepcopy(ds)
+            d_act[d]["location"] = d
+            d_act[d]["code"] = str(uuid.uuid4().hex)
+
+            if "input" in d_act[d]:
+                d_act[d].pop("input")
+
 
             for prod in ws.production(d_act[d]):
                 prod['location'] = d
+
+                if "input" in prod:
+                    prod.pop("input")
 
         deleted_markets = [
             (act['name'], act['reference product'], act['location']) for act in self.db
@@ -136,14 +166,14 @@ class Steel:
         return dict_act
 
     def get_suppliers_of_a_region(
-            self, remind_regions, ecoinvent_technologies, reference_product
+            self, iam_regions, ecoinvent_technologies, reference_product
     ):
         """
         Return a list of datasets which location and name correspond to the region, name and reference product given,
         respectively.
 
-        :param remind_region: list of REMIND regions
-        :type remind_region: list
+        :param iam_regions: list of REMIND regions
+        :type iam_regions: list
         :param ecoinvent_technologies: list of names of ecoinvent dataset
         :type ecoinvent_technologies: list
         :param reference_product: reference product
@@ -151,8 +181,8 @@ class Steel:
         :return: list of wurst datasets
         :rtype: list
         """
-        list_regions = [self.geo.remind_to_ecoinvent_location(region)
-                        for region in remind_regions]
+        list_regions = [self.geo.iam_to_ecoinvent_location(region)
+                        for region in iam_regions]
         list_regions = [x for y in list_regions for x in y]
 
         return ws.get_many(
@@ -191,14 +221,17 @@ class Steel:
             for exc in act['exchanges']:
                 try:
                     exc["name"]
-                except:
+                except KeyError:
                     print(exc)
                 if (exc['name'], exc.get('product')) == (name, ref_product) and exc['type'] == 'technosphere':
                     if act['location'] not in list_remind_regions:
                         if act['location'] == "North America without Quebec":
                             exc['location'] = 'USA'
                         else:
-                            exc['location'] = self.geo.ecoinvent_to_remind_location(act['location'])
+                            try:
+                                exc['location'] = self.geo.ecoinvent_to_iam_location(act['location'])
+                            except:
+                                print("cannot find for {}".format(act["location"]))
                     else:
                         exc['location'] = act['location']
 
@@ -259,25 +292,31 @@ class Steel:
             primary_share = (self.steel_data.sel(region=remind_region, variables='Production|Industry|Steel|Primary') / total_production_volume).values
             secondary_share = 1 - primary_share
 
-            ds = ws.get_one(self.db,
-                       ws.equals('reference product', act['reference product']),
-                       ws.contains('name', 'steel production'),
-                       ws.contains('name', 'converter'),
-                        ws.contains('location', 'RoW'))
+            print(d, act["name"], act["location"])
 
-            act['exchanges'].append(
-                {
-                    "uncertainty type": 0,
-                    "loc": 1,
-                    "amount": primary_share,
-                    "type": "technosphere",
-                    "production volume": 1,
-                    "product": ds['reference product'],
-                    "name": ds['name'],
-                    "unit": ds['unit'],
-                    "location": remind_region,
-                }
-            )
+
+            try:
+                ds = ws.get_one(self.db,
+                           ws.equals('reference product', act['reference product']),
+                           ws.contains('name', 'steel production'),
+                           ws.contains('name', 'converter'),
+                            ws.contains('location', 'RoW'))
+
+                act['exchanges'].append(
+                    {
+                        "uncertainty type": 0,
+                        "loc": 1,
+                        "amount": primary_share,
+                        "type": "technosphere",
+                        "production volume": 1,
+                        "product": ds['reference product'],
+                        "name": ds['name'],
+                        "unit": ds['unit'],
+                        "location": remind_region,
+                    }
+                )
+            except NoResults:
+                secondary_share = 1
 
             ds = ws.get_one(self.db,
                        ws.equals('reference product', act['reference product']),
@@ -327,7 +366,7 @@ class Steel:
 
 
         print('Create steel markets for differention regions')
-        print('Adjust primary and secondary steel supply shares in  steel markets')
+        print('Adjust primary and secondary steel supply shares in steel markets')
 
         created_datasets = list()
         for i in (
@@ -397,6 +436,34 @@ class Steel:
         list_second_fuels = sorted(list(set(['|'.join(x) for x in l_SE if len(x) == 3 for y in l_FE if y[2] in x])))
         list_second_fuels = [list(g) for _, g in itertools.groupby(list_second_fuels, lambda x: x.split('|')[1])]
 
+        d_fuel_types = {
+            'SE|Gases|Biomass': 'biogas',
+            'SE|Gases|Coal': 'gas from coal',
+            'SE|Gases|Hydrogen': 'hydrogen',
+            'SE|Gases|Natural Gas': 'natural gas',
+            'SE|Gases|Non-Biomass': 'natural gas',
+            'SE|Gases|Waste': 'biogas',
+            #'SE|Heat|Biomass': 'heat from biomass',
+            #'SE|Heat|CHP': 'heat from CHP',
+            #'SE|Heat|Coal': 'heat from coal',
+            #'SE|Heat|Gas': 'heat from gas',
+            #'SE|Heat|Geothermal': 'heat from geothermal',
+            'SE|Hydrogen|Biomass': 'hydrogen from biomass',
+            'SE|Hydrogen|Coal': 'hydrogen from coal',
+            'SE|Hydrogen|Gas': 'hydrogen from natural gas',
+            'SE|Liquids|Biomass': 'bioethanol',
+            'SE|Liquids|Coal': 'synthetic diesel from coal',
+            'SE|Liquids|Gas': 'synthetic fuel from natural gas',
+            'SE|Liquids|Hydrogen': 'syntehtic fuel from natural gas',
+            'SE|Liquids|Oil': 'light fuel oil',
+            'SE|Solids|Biomass': 'waste',
+            'SE|Solids|Coal': 'hard coal',
+            'SE|Solids|Traditional Biomass': 'wood pellet'
+        }
+
+        print("list_second_fuels", list_second_fuels)
+        print("REMIND fuels", self.remind_fuels)
+
         # Loop through primary steel technologies
         for d in d_act_steel:
 
@@ -410,7 +477,7 @@ class Steel:
 
                     # Amount of specific fuel, for a specific region
                     fuel_amount = self.steel_data.sel(variables=fuel_type, region=k)\
-                          * (self.steel_data.sel(variables=list_second_fuels[count], region=k)\
+                          * (self.steel_data.sel(variables=list_second_fuels[count], region=k)
                              / self.steel_data.sel(variables=list_second_fuels[count], region=k).sum(dim='variables'))
 
                     # Divide the amount of fuel by steel production, to get unitary efficiency
@@ -499,14 +566,14 @@ class Steel:
                 # Convert to obtain kWh/kg steel
                 if d in self.material_map['steel, primary']:
 
-                    electricity = (self.steel_data.sel(region=k, variables = 'FE|Industry|Electricity|Steel|Primary').values\
+                    electricity = (self.steel_data.sel(region=k, variables = 'FE|Industry|Electricity|Steel|Primary').values
                                                             / self.steel_data.sel(region=k,
                                                                                   variables='Production|Industry|Steel|Primary').values)\
                                 * 1000 / 3.6
 
                 else:
 
-                    electricity = (self.steel_data.sel(region=k, variables = 'FE|Industry|Electricity|Steel|Secondary').values\
+                    electricity = (self.steel_data.sel(region=k, variables = 'FE|Industry|Electricity|Steel|Secondary').values
                                                             / self.steel_data.sel(region=k,
                                                                                   variables='Production|Industry|Steel|Secondary').values)\
                                 * 1000 / 3.6

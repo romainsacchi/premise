@@ -1,7 +1,0 @@
-Biomass IGCC CCS;Power_Gen_Bio_Trad
-Biomass CHP;Heat_Gen_Bio_Trad
-Biomass;Heat_Gen_Bio_Trad
-Coal CHP;Heat_Gen_Coal
-Coal;Heat_Gen_Coal
-Gas CHP;Heat_Gen_Gas
-Gas;Heat_Gen_Gas
